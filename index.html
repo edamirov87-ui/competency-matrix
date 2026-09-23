@@ -557,7 +557,7 @@ input[type=file]{width:100%;background:var(--bg-raised);border:1px dashed var(--
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
   import {
-    getFirestore, doc, getDoc, setDoc, deleteDoc
+    getFirestore, doc, getDoc, setDoc, deleteDoc, runTransaction
   } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -575,7 +575,7 @@ input[type=file]{width:100%;background:var(--bg-raised);border:1px dashed var(--
 
   window.__fbResolve({
     db: dbInst,
-    doc, getDoc, setDoc, deleteDoc,
+    doc, getDoc, setDoc, deleteDoc, runTransaction,
   });
 </script>
 <!-- ===== Firebase inteqrasiyası sonu ===== -->
@@ -1118,10 +1118,36 @@ async function dbGetList(path){
     return (data && Array.isArray(data.list)) ? data.list : null;
   }catch(e){ return null; }
 }
+// Lokal yazı izləyicisi: canlı sinxronizasiya yazı gedərkən (və ya ondan əvvəl başlamış oxunuşla)
+// yaddaşdakı məlumatı köhnə nüsxə ilə əvəz etməsin deyə.
+let localWriteSeq = 0, localWritesInFlight = 0;
+function beginLocalWrite(){ localWriteSeq++; localWritesInFlight++; }
+function endLocalWrite(){ localWritesInFlight = Math.max(0, localWritesInFlight-1); localWriteSeq++; }
 async function dbSetList(path, arr){
   const db = await getDb();
   if(!db) return false;
+  beginLocalWrite();
   try{ await db.doc(path).set({list: arr}); return true; }catch(e){ return false; }
+  finally{ endLocalWrite(); }
+}
+// Bir neçə siyahı sənədini serverdəki ƏN SON vəziyyət üzərində atomik dəyişir (Firestore transaction).
+// mutator(list1, list2, ...) siyahıları yerində dəyişir; {write:false} qaytararsa heç nə yazılmır.
+async function dbTransactLists(paths, mutator){
+  const fb = await window.__fbReadyPromise;
+  if(!fb || !fb.runTransaction) throw new Error('no-db');
+  beginLocalWrite();
+  try{
+    return await fb.runTransaction(fb.db, async (tx)=>{
+      const refs = paths.map(p=> fb.doc(fb.db, p));
+      const snaps = [];
+      for(const r of refs) snaps.push(await tx.get(r));
+      const lists = snaps.map(sn=>{ const d = sn.exists() ? sn.data() : null; return (d && Array.isArray(d.list)) ? d.list : []; });
+      const res = mutator(...lists) || {};
+      if(res.write === false) return { ...res, lists };
+      refs.forEach((r,i)=> tx.set(r, { list: lists[i] }));
+      return { ...res, lists };
+    });
+  } finally { endLocalWrite(); }
 }
 async function dbGetMap(path){
   const db = await getDb();
@@ -1136,7 +1162,9 @@ async function dbGetMap(path){
 async function dbSetMap(path, obj){
   const db = await getDb();
   if(!db) return false;
+  beginLocalWrite();
   try{ await db.doc(path).set({map: obj}); return true; }catch(e){ return false; }
+  finally{ endLocalWrite(); }
 }
 function isAdminUser(){ return currentUser && currentUser.badge === ADMIN_BADGE; }
 
@@ -1376,7 +1404,14 @@ async function reconcileScoresFromExamRequests(){
   // Self-heal: any 'done' + pass record (ICC-correct, or an admin historical entry) whose employee
   // score/lastResult never got persisted (e.g. from a since-fixed bug) gets its credit restored here.
   let changed = false;
+  // yalnız hər işçi+mövzu üzrə ƏN SON tamamlanmış cəhd nəzərə alınır — köhnə "Keçdi" geri qayıtmasın
+  const latest = {};
   examRequests.forEach(r=>{
+    if(r.status!=='done' || !r.topicId) return;
+    const k = r.badge+'|'+r.topicId;
+    if(!latest[k] || new Date(r.evaluatedAt||0) > new Date(latest[k].evaluatedAt||0)) latest[k] = r;
+  });
+  Object.values(latest).forEach(r=>{
     const qualifies = r.status==='done' && r.result==='pass' && r.topicId && (r.iccCorrect==='yes' || r.isHistoricalEntry);
     if(qualifies){
       const emp = employees.find(e=>e.badge===r.badge);
@@ -1393,7 +1428,9 @@ async function reconcileScoresFromExamRequests(){
 let syncInFlight = false;
 async function refreshSharedData(silent){
   if(syncInFlight) return;
+  if(localWritesInFlight>0 || _confirmResolve) return; // yazı gedir və ya təsdiq pəncərəsi açıqdır
   syncInFlight = true;
+  const seqAtStart = localWriteSeq;
   try{
     const [erList, empList, docList, histList, credMap, taskList, asrList] = await Promise.all([
       dbGetList('data/examRequests'),
@@ -1404,6 +1441,7 @@ async function refreshSharedData(silent){
       dbGetList('data/tasks'),
       dbGetList('data/assessors'),
     ]);
+    if(localWriteSeq!==seqAtStart || localWritesInFlight>0){ syncInFlight = false; return; } // bu arada lokal yazı oldu — oxunan nüsxə köhnədir
     if(erList) examRequests = erList;
     if(empList) employees = empList;
     if(docList) documents = docList;
@@ -1744,7 +1782,7 @@ function renderModalBody(){
       const submitLabel = editing ? 'Yenilə' : 'Keçdi kimi qəbul et';
       const submitAction = editing ? `adminUpdateHistoricalEntry('${emp.id}')` : `adminGrantHistoricalPass('${emp.id}')`;
       const cancelBtn = editing ? `<button class="logout-btn" style="margin-left:8px;" onclick="adminCancelHistoricalEdit('${emp.id}')">Ləğv et</button>` : '';
-      const myHistorical = examRequests.filter(r=> r.badge===emp.badge && r.isHistoricalEntry).sort((a,b)=> new Date(b.evaluatedAt||0) - new Date(a.evaluatedAt||0));
+      const myHistorical = examRequests.filter(r=> r.badge===emp.badge && r.isHistoricalEntry && r.status==='done').sort((a,b)=> new Date(b.evaluatedAt||0) - new Date(a.evaluatedAt||0));
       const listHtml = myHistorical.length ? myHistorical.map(r=>`
         <div class="doc-row">
           <div><div class="doc-name">${escapeHtml(r.topicLabel)}</div><div class="doc-meta">${escapeHtml(r.topicCat||'')}${r.comments?(' · '+escapeHtml(r.comments)):''}</div></div>
@@ -2768,35 +2806,70 @@ function renderAssessLog(){
     </div>`;
   }).join('');
 }
+function applyTopicStateFromRequests(emp, topicId, topicCat, reqList){
+  // Matris vəziyyətini həmin mövzu üzrə qalan ƏN SON tamamlanmış cəhdə görə yenidən qurur
+  if(!emp.scores) emp.scores = {};
+  if(!emp.lastResult) emp.lastResult = {};
+  const last = reqList
+    .filter(r=> r.badge===emp.badge && r.topicId===topicId && r.status==='done')
+    .sort((a,b)=> new Date(b.evaluatedAt||0) - new Date(a.evaluatedAt||0))[0];
+  if(!last){ delete emp.scores[topicId]; delete emp.lastResult[topicId]; return; }
+  emp.lastResult[topicId] = last.result;
+  if(last.result==='pass' && (last.iccCorrect==='yes' || last.isHistoricalEntry)) emp.scores[topicId] = passScoreFor(emp, last.topicCat||topicCat);
+  else delete emp.scores[topicId];
+}
 async function reopenEvaluation(reqId){
   if(!currentUser || currentUser.role!=='assessor') return;
-  const req = examRequests.find(r=>r.id===reqId);
-  if(!req || req.status!=='done') return;
-  if(!(await appConfirm(`"${req.topicLabel}" mövzusu üzrə "${req.result==='pass'?'Keçdi':'Keçmədi'}" nəticəsini geri götürüb yenidən qiymətləndirmək istədiyinizə əminsiniz?`))) return;
-  if(!req.correctionHistory) req.correctionHistory = [];
-  req.correctionHistory.push({
-    previousResult: req.result, previousAssessorName: req.assessorName, previousAssessorBadge: req.assessorBadge,
-    previousEvaluatedAt: req.evaluatedAt, previousComments: req.comments, previousItemNotes: req.itemNotes,
-    correctedBy: currentUser.name, correctedAt: new Date().toISOString()
-  });
-  // undo the matrix score bump if the mistaken result was a pass
-  if(req.result==='pass'){
-    const emp = employees.find(e=>e.badge===req.badge);
-    if(emp && emp.scores && req.topicId && emp.scores[req.topicId]===4){
-      delete emp.scores[req.topicId];
-      await snapshotEmpProgress(emp);
-      await saveEmployees();
-    }
+  const preview = examRequests.find(r=>r.id===reqId);
+  if(!preview || preview.status!=='done') return;
+  const resLabel = preview.result==='pass'?'Keçdi':'Keçmədi';
+  const msg = preview.isHistoricalEntry
+    ? `"${preview.topicLabel}" mövzusu üzrə tarixi "${resLabel}" qeydini geri götürmək istədiyinizə əminsiniz? Qeyd silinəcək və mövzu işçi üçün yenidən açıq olacaq.`
+    : `"${preview.topicLabel}" mövzusu üzrə "${resLabel}" nəticəsini geri götürüb yenidən qiymətləndirmək istədiyinizə əminsiniz?`;
+  if(!(await appConfirm(msg))) return;
+  const actor = { name: currentUser.name, badge: currentUser.badge, at: new Date().toISOString() };
+  let out;
+  try{
+    // Serverdəki ən son məlumat üzərində atomik: son verilən əmr qalib gəlir, köhnə nüsxə üstünə yazıla bilməz
+    out = await dbTransactLists(['data/examRequests','data/employees'], (erList, empList)=>{
+      const req = erList.find(r=>r.id===reqId);
+      if(!req || req.status!=='done') return { write:false, reason:'already' };
+      const historical = !!req.isHistoricalEntry;
+      if(historical){
+        const idx = erList.indexOf(req);
+        erList.splice(idx, 1);
+      } else {
+        if(!req.correctionHistory) req.correctionHistory = [];
+        req.correctionHistory.push({
+          previousResult: req.result, previousAssessorName: req.assessorName, previousAssessorBadge: req.assessorBadge,
+          previousEvaluatedAt: req.evaluatedAt, previousComments: req.comments, previousItemNotes: req.itemNotes,
+          correctedBy: actor.name, correctedByBadge: actor.badge, correctedAt: actor.at
+        });
+        req.status = 'approved';
+        req.result = null;
+      }
+      const emp = empList.find(e=>e.badge===req.badge);
+      if(emp && req.topicId) applyTopicStateFromRequests(emp, req.topicId, req.topicCat, erList);
+      return { write:true, historical, badge: req.badge };
+    });
+  }catch(e){
+    showToast('Yadda saxlama xətası — nəticə dəyişdirilmədi, yenidən cəhd edin');
+    return;
   }
-  req.status = 'approved';
-  req.result = null;
-  await saveExamRequests();
+  examRequests = out.lists[0];
+  employees = out.lists[1];
+  if(out.write===false){
+    showToast('Bu nəticə artıq geri götürülüb');
+  } else {
+    const emp = employees.find(e=>e.badge===out.badge);
+    if(emp){ await snapshotEmpProgress(emp); await saveEmployees(); }
+    showToast(out.historical ? 'Tarixi qeyd geri götürüldü — mövzu yenidən açıqdır.' : 'Nəticə geri götürüldü — mövzu yenidən qiymətləndirmə üçün açıqdır.');
+  }
   delete pendingResults[reqId];
   renderAssessLog();
   renderPendingList();
   renderMatrixList();
   renderOverview();
-  showToast('Nəticə geri götürüldü — mövzu yenidən qiymətləndirmə üçün açıqdır.');
 }
 
 // ---------- DOCS ----------
