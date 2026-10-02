@@ -315,6 +315,9 @@ body.own-report .panel[data-feat="supReport"]{display:none!important;}   /* iş�
 .bk-table tr.sel td{background:var(--red-dim);}
 .bk-del{color:var(--red)!important;}
 .bk-del:hover:not(:disabled){border-color:var(--red)!important;}
+.bk-row .ann-head input[type=checkbox]{accent-color:var(--red);width:15px;height:15px;cursor:pointer;flex:none;}
+.bk-when{font-size:11.5px;white-space:nowrap;}
+.bk-row.bk-sel{border-color:var(--red);background:var(--red-dim);}
 .bk-status{margin-bottom:10px;padding:9px 12px;border-radius:6px;font-size:12.5px;line-height:1.55;border:1px solid var(--border);background:var(--bg-raised);}
 .bk-status:empty{display:none!important;}
 .bk-status.ok{border-color:var(--green);background:var(--green-dim);}
@@ -421,6 +424,29 @@ input[type=email]{width:100%;background:var(--bg-raised);border:1px solid var(--
 .ann-badge{font-family:var(--font-mono);font-size:9.5px;padding:1px 7px;border-radius:8px;background:var(--green-dim);color:var(--green);margin-left:6px;}
 .ann-acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
 .ann-acts label{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--text-secondary);cursor:pointer;margin-right:4px;text-transform:none;letter-spacing:0;font-family:var(--font-body);}
+.ann-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;}
+.ann-toggle{display:flex;align-items:center;gap:8px;background:var(--bg-raised);border:1px solid var(--border);border-radius:7px;padding:8px 12px;cursor:pointer;color:var(--text-primary);font-family:var(--font-body);font-size:12.5px;font-weight:600;}
+.ann-toggle:hover,.ann-toggle.open{border-color:var(--amber);}
+.ann-count{font-family:var(--font-mono);font-size:10.5px;padding:1px 7px;border-radius:9px;background:var(--amber);color:var(--on-amber);}
+.ann-caret{color:var(--text-dim);font-size:11px;}
+.ann-panel{border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--bg-panel);margin-bottom:6px;}
+.ann-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+.ann-tools input{flex:1;min-width:180px;max-width:320px;padding:6px 10px;font-size:12.5px;}
+.ann-chips{display:flex;gap:4px;flex-wrap:wrap;}
+.ann-chip{font-family:var(--font-mono);font-size:10.5px;padding:4px 9px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;}
+.ann-chip span{opacity:.7;margin-left:2px;}
+.ann-chip.active{background:var(--amber);border-color:var(--amber);color:var(--on-amber);}
+.ann-scroll{max-height:300px;overflow:auto;display:flex;flex-direction:column;gap:4px;padding-right:2px;}
+.ann-row{border:1px solid var(--border-soft);border-radius:6px;background:var(--bg-raised);}
+.ann-row.live{border-color:var(--green);box-shadow:inset 3px 0 0 var(--green);}
+.ann-row.out{opacity:.55;}
+.ann-row.open{border-color:var(--amber);}
+.ann-head{display:flex;align-items:center;gap:8px;padding:7px 10px;cursor:pointer;min-width:0;}
+.ann-head:hover{background:var(--bg-raised-2);}
+.ann-line{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;}
+.ann-date{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);white-space:nowrap;}
+.ann-badge.off{background:var(--bg-raised-2);color:var(--text-dim);}
+.ann-body{padding:2px 12px 10px 30px;}
 .cfg-dirty{font-family:var(--font-mono);font-size:11px;color:var(--amber);align-self:center;}
 </style>
 </head>
@@ -837,7 +863,7 @@ input[type=email]{width:100%;background:var(--bg-raised);border:1px solid var(--
 
 <script type="application/json" id="tasks-data">[{"id": "t15", "label": "Unit 1930 Raw Materials & BL: Ethylene, Hydrogen, Isobutane, Comonomer Feed Stock", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t16", "label": "Unit 1050 Nitrogen Purification Unit.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t17", "label": "Unit 1100 Cocatalyst System - Injection.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t18", "label": "Unit 1100 Cocatalyst drums replacement & seal pot filling", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t19", "label": "Unit 1100 Cocatalyst system preparation for maintenance", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t20", "label": "Unit 1200 Ethylene Treatment package", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t21", "label": "Unit 1200 Ethylene Compression package", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t22", "label": "Unit 1310 Catalyst Feed System. Catalyst Unloading", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t23", "label": "Unit 1310 Catalyst Batch preparation, Injection into reactor", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t24", "label": "Unit 1310 Dumping & Cleaning of Catalyst Slurry Tank D-1319/ Day Tank D-1315", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t25", "label": "Unit 1310 Dumping of Waste Catalyst Transfer Filter F-1313 & Empty & filling of K.O.Pot D-1316", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t26", "label": "Unit 1320 Reactor cooling system.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t27", "label": "Unit 1330 IMT System & IMT Kill system", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t28", "label": "Unit 1350 Slurry Heater, Hydrocyclone, Dump Tank.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t29", "label": "Unit 1400 High Pressure Separator and Discharge Vessels", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t30", "label": "Unit 1400 Powder Degassing, Sample Flasher & Gas Chromotographs.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t31", "label": "Unit 1320 Starting cold-run in Polymerisation Unit (filling of system with Isobutane except reactors)", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t32", "label": "Unit 1400 Powder Conveying and Powder Feed Silos.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t33", "label": "Unit 1410 Overhead Cyclone and high pressure separator overhead filters.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t34", "label": "Unit 1410 LSR Recovery, LSR Treater & LIR Column.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t35", "label": "Unit 1420 Refrigeration package and Lube Oil System.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t36", "label": "Unit 1420 LPSR Blower, LPSR Condensation and Enrichment.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t37", "label": "Unit 1420 Raw Material Handling - Isobutane & Comonomer treatment, Solvent Recovery & Heavies Column.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t38", "label": "Unit 1320 Reactors preparation before/after maintenance; Reactor filling with isobutane and establish cold-run.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t39", "label": "Unit 1320 Polymerisation Start-up, Shutdown and KILL systems.", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t40", "label": "Unit 1320 Reactors Controls & Quality Control: Reactor monomer/comonomer control; Hydrogen/Ethylene concentration ratio; Reactor Hexane concentration; Production rate & Block ratio control; Reactor Pressure & Temperature Control etc.", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t41", "label": "Unit 1550 & 1650 Extrusion Feed System,", "weight": 2, "cat": "Ekstruziya"}, {"id": "t42", "label": "Unit 1500 & 1600 Barring unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t43", "label": "Unit 1500 & 1600 Mixer unit", "weight": 2, "cat": "Ekstruziya"}, {"id": "t44", "label": "Unit 1500 & 1600 Gear pump", "weight": 2, "cat": "Ekstruziya"}, {"id": "t45", "label": "Unit 1500 & 1600 Screen Changer", "weight": 1, "cat": "Ekstruziya"}, {"id": "t46", "label": "Unit 1500 & 1600 Pelletizer unit", "weight": 2, "cat": "Ekstruziya"}, {"id": "t47", "label": "Unit 1500 & 1600 BCW unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t48", "label": "Unit 1500 & 1600 Main Lube Oil unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t49", "label": "Unit 1500 & 1600 Hot Oil unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t50", "label": "Unit 1500 & 1600 Hydraulic unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t51", "label": "Unit 1500 & 1600 PCW System", "weight": 1, "cat": "Ekstruziya"}, {"id": "t52", "label": "Unit 1500 & 1600 Start up & Shut Down of Extruders", "weight": 3, "cat": "Ekstruziya"}, {"id": "t53", "label": "Unit 1500 & 1600 Drying unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t54", "label": "Unit 1500 & 1600 Mass flowmeter", "weight": 1, "cat": "Ekstruziya"}, {"id": "t55", "label": "Unit 1700 Pellet conveying to blenders", "weight": 1, "cat": "Ekstruziya"}, {"id": "t56", "label": "Unit 1800 Blending", "weight": 1, "cat": "Ekstruziya"}, {"id": "t57", "label": "Unit 1850 Pellet conveying to bagging ,Elutriation", "weight": 1, "cat": "Ekstruziya"}, {"id": "t58", "label": "Unit 1730 RTO package", "weight": 2, "cat": "Ekstruziya"}, {"id": "t59", "label": "Unit 1730 Organoleptic Treatment", "weight": 2, "cat": "Ekstruziya"}, {"id": "t60", "label": "Unit 1500 &1600 Extrusion Unit Quality Troubleshooting", "weight": 3, "cat": "Ekstruziya"}, {"id": "t61", "label": "Unit 1900 Demin Water Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t62", "label": "Unit 1900 Cooling Water Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t63", "label": "Unit 1900 Low Pressure Steam Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t64", "label": "Unit 1900 Low Pressure Nitrogen, LLN and VLN Nitrogen Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t65", "label": "Unit 1900 Flare Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t66", "label": "Unit 1900 Primary Aqeous System, Air Network and Fuel Gas Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t67", "label": "Unit 3950 Isobutane Unloading to Isobutane Sphere D-3952A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t68", "label": "Unit 3950 Hexene Unloading to Hexene Storage Tank TK-3951A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t69", "label": "Unit 3950 Isobutane Transfer from Sphere D-3952A/B to HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t70", "label": "Unit 3950 Hexene Transfer from Storage Tank TK-3951A/B to HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t71", "label": "Unit 3950 Closed Blowdown System of Offsite Area.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t72", "label": "Unit 3950 Impounding Basin for Isobutane Storage Of HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t73", "label": "Unit 3950 Isobutane Storage Sphere D-3952A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t74", "label": "Unit 3950 Hexene-1 Storage Tank TK-3951A /B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t75", "label": "Unit 1020 Chromium Activation Unit", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t76", "label": "Unit 3950 Emergency cases: During Unloading operation, Storage areas (Isobutane + Hexene)", "weight": 3, "cat": "Offsite & Aktivasiya"}]</script>
 <script type="application/json" id="roster-data">[{"name": "Javid Huseynov", "pos": "Shift Supervisor", "shift": "A", "badge": "10874", "scores": {}}, {"name": "Samir Mursalov", "pos": "Polymerization DCS Operator", "shift": "A", "badge": "10950", "scores": {}}, {"name": "Haji Hajizade", "pos": "Polymerization DCS Operator", "shift": "A", "badge": "10854", "scores": {}}, {"name": "Sarkhan Jabbarzade", "pos": "HDPE Field  Process Operator", "shift": "A", "badge": "11299", "scores": {}}, {"name": "Famil Aghayev", "pos": "Polymerization Compressor Operator", "shift": "A", "badge": "10746", "scores": {}}, {"name": "Maharram Akbarov", "pos": "Polymerization Pump Operator", "shift": "A", "badge": "11528", "scores": {}}, {"name": "Elnur Mammadov", "pos": "Extruder DCS Operator", "shift": "A", "badge": "11042", "scores": {}}, {"name": "Bahram Aliyev", "pos": "Extruder Field Operator", "shift": "A", "badge": "11162", "scores": {}}, {"name": "Vusal Eldarov", "pos": "Extruder Field Operator", "shift": "A", "badge": "10994", "scores": {}}, {"name": "Jeyhun Ahmadov", "pos": "Utility & Offsite Operator", "shift": "A", "badge": "11046", "scores": {}}, {"name": "Ruslan Iskandarov", "pos": "Utility & Offsite Operator", "shift": "A", "badge": "11399", "scores": {}}, {"name": "Aziz Hajiyev", "pos": "Shift Supervisor", "shift": "B", "badge": "10517", "scores": {}}, {"name": "Elchin Isayev", "pos": "Polymerization DCS Operator", "shift": "B", "badge": "10403", "scores": {}}, {"name": "Elchin Janmirzayev", "pos": "Polymerization DCS Operator", "shift": "B", "badge": "11145", "scores": {}}, {"name": "Mubariz Mammadov", "pos": "Polymerization Lead Operator", "shift": "B", "badge": "10740", "scores": {}}, {"name": "Mikayil Mikayilov", "pos": "Polymerization Compressor Operator", "shift": "B", "badge": "11390", "scores": {}}, {"name": "Farhad Hajiyev", "pos": "Polymerization Pump Operator", "shift": "B", "badge": "10718", "scores": {}}, {"name": "Mirxan Huseynli", "pos": "Polymerization General Field Operator", "shift": "B", "badge": "11400", "scores": {}}, {"name": "Bakir Iskandarov", "pos": "Extruder DCS Operator", "shift": "B", "badge": "10429", "scores": {}}, {"name": "Ramazan Hasanov", "pos": "Extruder Field Operator", "shift": "B", "badge": "11533", "scores": {}}, {"name": "Ilkin Abbasov", "pos": "Utility & Offsite Operator", "shift": "B", "badge": "10869", "scores": {}}, {"name": "Elvin Aliyev", "pos": "Utility & Offsite Operator", "shift": "B", "badge": "11270", "scores": {}}, {"name": "Eltun Mammadov", "pos": "Shift Supervisor", "shift": "C", "badge": "10500", "scores": {}}, {"name": "Ragif Alishov", "pos": "Polymerization DCS Operator", "shift": "C", "badge": "10450", "scores": {}}, {"name": "Araz Ahmadov", "pos": "Polymerization DCS Operator", "shift": "C", "badge": "10684", "scores": {}}, {"name": "Azer Aliyev", "pos": "Polymerization Lead Operator", "shift": "C", "badge": "10957", "scores": {}}, {"name": "Ahadov Ahad", "pos": "HDPE Field  Process Operator", "shift": "C", "badge": "11298", "scores": {}}, {"name": "Musa Isayev", "pos": "Polymerization Compressor Operator", "shift": "C", "badge": "11044", "scores": {}}, {"name": "Faig Aghayev", "pos": "Polymerization Pump Operator", "shift": "C", "badge": "10393", "scores": {}}, {"name": "Rovshan Yusifov", "pos": "Extruder DCS Operator", "shift": "C", "badge": "10472", "scores": {}}, {"name": "Sahib Garayev", "pos": "Extruder Field Operator", "shift": "C", "badge": "11031", "scores": {}}, {"name": "Shamil Garayev", "pos": "Extruder Field Operator", "shift": "C", "badge": "11144", "scores": {}}, {"name": "Zaur Jafarov", "pos": "Utility & Offsite Operator", "shift": "C", "badge": "10936", "scores": {}}, {"name": "Vusal Mikayilov", "pos": "Utility & Offsite Operator", "shift": "C", "badge": "11403", "scores": {}}, {"name": "Eldar Huseynov", "pos": "Shift Supervisor", "shift": "D", "badge": "10410", "scores": {}}, {"name": "Khudaverdi Almuradov", "pos": "Polymerization DCS Operator", "shift": "D", "badge": "10465", "scores": {}}, {"name": "Tofig Mahmudov", "pos": "Polymerization DCS Operator", "shift": "D", "badge": "10731", "scores": {}}, {"name": "Vugar Seyidov", "pos": "Polymerization Lead Operator", "shift": "D", "badge": "11037", "scores": {}}, {"name": "Umid Karimov", "pos": "HDPE Field  Process Operator", "shift": "D", "badge": "11236", "scores": {}}, {"name": "Elnur Fazilov", "pos": "Polymerization Compressor Operator", "shift": "D", "badge": "11398", "scores": {}}, {"name": "Ramil Abdullayev", "pos": "Polymerization General Field Operator", "shift": "D", "badge": "11479", "scores": {}}, {"name": "Anvar Abdullayev", "pos": "Extruder DCS Operator", "shift": "D", "badge": "10493", "scores": {}}, {"name": "Baylar Safarli", "pos": "Extruder Field Operator", "shift": "D", "badge": "11462", "scores": {}}, {"name": "Galamshah Gahramanov", "pos": "Extruder Field Operator", "shift": "D", "badge": "11485", "scores": {}}, {"name": "Vadim Ismayilov", "pos": "Utility & Offsite Operator", "shift": "D", "badge": "10790", "scores": {}}, {"name": "Aykhan Adigozalov", "pos": "Utility & Offsite Operator", "shift": "D", "badge": "10549", "scores": {}}]</script>
-<script type="application/json" id="assessors-data">[{"name": "Vugar Nuraddin", "badge": "10474", "role": "Senior Shift Supervisor / İmtahan Götürən"}, {"name": "Elvin Gayibov", "badge": "10350", "role": "Polymerization Team Lead"}, {"name": "Emin Damirov", "badge": "10467", "role": "Production Director"}, {"name": "Rahman Zamanov", "badge": "10165", "role": "Qiymətləndirici"}, {"name": "Karam Karimov", "badge": "10518", "role": "Qiymətləndirici"}, {"name": "Ali Aladdinov", "badge": "10912", "role": "Senior Process Engineer"}, {"name": "Nabi Eyvazov", "badge": "10256", "role": "Offsite and Activation Team Lead"}]</script>
+<script type="application/json" id="assessors-data">[{"name": "Vugar Nuraddin", "badge": "10474", "role": "Senior Shift Supervisor / İmtahan Götürən"}, {"name": "Elvin Gayibov", "badge": "10350", "role": "Polymerization Team Lead"}, {"name": "Emin Damirov", "badge": "10467", "role": "Production Director"}, {"name": "Rahman Zamanov", "badge": "10165", "role": "Extrusion Team Lead"}, {"name": "Karam Karimov", "badge": "10518", "role": "Extruder Specialist"}, {"name": "Ali Aladdinov", "badge": "10912", "role": "Senior Process Engineer"}, {"name": "Nabi Eyvazov", "badge": "10256", "role": "Offsite and Activation Team Lead"}]</script>
 <!-- ===== Firebase inteqrasiyası: yalnız Firestore (Storage/Blaze lazım deyil) ===== -->
 <script>
   window.__fbReadyPromise = new Promise((resolve) => { window.__fbResolve = resolve; });
@@ -1750,6 +1776,7 @@ async function loadAll(){
   if(taskList) TASKS = taskList;
   const asrList = await dbGetList('data/assessors');
   if(asrList) ASSESSORS_SEED = asrList;
+  if(applyAssessorRoleFixes(ASSESSORS_SEED) && asrList) saveAssessors();   // Firestore-dakı köhnə vəzifə adlarını bir dəfəlik yenilə
   const RENAME_MAP = {
     'araz-ahmadov-back-up-dcs-': 'araz-ahmadov',
     'tofig-mahmudov-back-up-dcs-': 'tofig-mahmudov',
@@ -1884,7 +1911,7 @@ async function refreshSharedData(silent){
       }
     }catch(e){}
     if(taskList) TASKS = taskList;
-    if(asrList) ASSESSORS_SEED = asrList;
+    if(asrList){ ASSESSORS_SEED = asrList; applyAssessorRoleFixes(ASSESSORS_SEED); }
     if(erList || empList) await reconcileScoresFromExamRequests();
   }catch(e){ /* stay on last known data */ }
   syncInFlight = false;
@@ -1913,6 +1940,16 @@ async function saveHistory(){ if(!(await dbSetList('data/history', history))) sh
 async function saveExamRequests(){ if(!(await dbSetList('data/examRequests', examRequests))) showToast('Yadda saxlama xətası'); }
 async function saveCredentials(){ if(!(await dbSetMap('data/credentials', credentials))) showToast('Yadda saxlama xətası'); }
 async function saveTasks(){ if(!(await dbSetList('data/tasks', TASKS))) showToast('Yadda saxlama xətası'); }
+// Vəzifə düzəlişləri: ümumi "Qiymətləndirici" yazılmış hesablara dəqiq vəzifə verilir (admin sonradan başqa ad qoyubsa — toxunulmur)
+const ASSESSOR_ROLE_FIXES = { '10518':'Extruder Specialist', '10165':'Extrusion Team Lead' };
+function applyAssessorRoleFixes(list){
+  let changed = false;
+  (list||[]).forEach(a=>{
+    const to = ASSESSOR_ROLE_FIXES[a.badge];
+    if(to && (!a.role || a.role.trim()==='Qiymətləndirici')){ a.role = to; changed = true; }
+  });
+  return changed;
+}
 async function saveAssessors(){ if(!(await dbSetList('data/assessors', ASSESSORS_SEED))) showToast('Yadda saxlama xətası'); }
 async function updateTaskWeight(taskId, val){
   if(!isAdminUser()) return;
@@ -2815,7 +2852,7 @@ function renderCandHistory(){
   }).join('');
 }
 
-const ICC_TASK_GRANTER_BADGES = ['10518', '10165', '10912', ADMIN_BADGE]; // Karam Karimov (Extruder specialist), Rahman Zamanov, Ali Aladdinov (Senior Process Engineer), Emin Damirov (Əməliyyat Direktoru)
+const ICC_TASK_GRANTER_BADGES = ['10518', '10165', '10912', ADMIN_BADGE]; // Karam Karimov (Extruder Specialist), Rahman Zamanov (Extrusion Team Lead), Ali Aladdinov (Senior Process Engineer), Emin Damirov (Əməliyyat Direktoru)
 function canGrantIccTask(){
   if(!currentUser) return false;
   if(ICC_TASK_GRANTER_BADGES.includes(currentUser.badge)) return true;
@@ -3782,13 +3819,15 @@ async function pruneBackups(){
   for(const fid of purge) await dbDeleteFileChunked(fid);
 }
 let bkSelected = new Set();
-async function renderBackupList(){
+// Bərpa nöqtələri — elan siyahısı kimi yığcam: düymə ilə açılır, axtarış + növ filtri, sətrə klik — ətraflı və əməliyyatlar
+const bkUi = { open:false, q:'', filter:'all', openId:null };
+async function renderBackupList(noFetch){
   const el = document.getElementById('backup-list');
   if(!el || !isAdminUser()) return;
-  try{ backupIndexCache = (await dbGetList('data/backupIndex')) || []; }catch(e){ backupIndexCache = []; }
+  if(!noFetch){ try{ backupIndexCache = (await dbGetList('data/backupIndex')) || []; }catch(e){ backupIndexCache = []; } }
   const ok = backupIndexCache.filter(b=>b.status==='ok').slice().reverse();
   bkSelected = new Set([...bkSelected].filter(id=> ok.some(b=>b.id===id)));   // artıq olmayanları seçimdən çıxart
-  renderDtp();
+  if(!noFetch) renderDtp();
   const last = document.getElementById('gl-last');
   if(last) last.textContent = goLiveInfo ? `Son sıfırlama: ${fmtDateTime(goLiveInfo.at)} — ${goLiveInfo.by}` : '';
   const fails = backupIndexCache.filter(b=>b.status==='failed');
@@ -3796,33 +3835,69 @@ async function renderBackupList(){
   const failNote = lastFail ? `<div class="doc-meta" style="color:var(--red);margin-bottom:8px;">Son uğursuz cəhd: ${fmtDateTime(lastFail.createdAt)} · ${escapeHtml(lastFail.error||'')}
       · <a href="#" style="color:inherit;" onclick="event.preventDefault();deleteBackupsAsk(${escapeHtml(JSON.stringify(fails.map(f=>f.id)))})">uğursuz cəhdləri (${fails.length}) təmizlə</a></div>` : '';
   if(!ok.length){ el.innerHTML = failNote + '<div class="empty-state">Hələ bərpa nöqtəsi yoxdur. İlk avtomatik nöqtə bir neçə dəqiqəyə yaranacaq, və ya "İndi bərpa nöqtəsi yarat" basın.</div>'; return; }
-  const shown = ok.slice(0,60);
-  const allShownSel = shown.length && shown.every(b=>bkSelected.has(b.id));
+  const counts = { all: ok.length, auto:0, manual:0, 'pre-reset':0, 'pre-restore':0 };
+  ok.forEach(b=>{ if(counts[b.kind]!==undefined) counts[b.kind]++; });
+  const chip = (k,label)=> `<button type="button" class="ann-chip ${bkUi.filter===k?'active':''}" onclick="bkUi.filter='${k}';renderBackupList(true)">${label} <span>${counts[k]??0}</span></button>`;
+  const visible = ok.filter(b=> bkUi.filter==='all' || b.kind===bkUi.filter);
+  const allVisSel = visible.length && visible.every(b=>bkSelected.has(b.id));
   const toolbar = bkSelected.size ? `<div class="bk-toolbar"><strong>${bkSelected.size} nöqtə seçilib</strong>
       <button class="logout-btn bk-del" style="padding:5px 12px;" onclick="deleteBackupsAsk([...bkSelected])">🗑 Seçilmişləri sil</button>
-      <button class="logout-btn" style="padding:5px 12px;" onclick="bkSelected.clear();renderBackupList()">Seçimi ləğv et</button></div>` : '';
-  el.innerHTML = failNote + toolbar + `<div style="overflow-x:auto;"><table class="bk-table"><thead><tr>
-      <th style="width:28px;"><input type="checkbox" title="Görünənlərin hamısını seç" ${allShownSel?'checked':''} onchange="bkToggleAll(this.checked)"></th>
-      <th>Tarix</th><th>Növ</th><th>Yaradan</th><th>Məzmun</th><th></th></tr></thead><tbody>
-    ${shown.map(b=>`<tr class="${bkSelected.has(b.id)?'sel':''}">
-      <td><input type="checkbox" ${bkSelected.has(b.id)?'checked':''} onchange="bkToggle('${b.id}',this.checked)" aria-label="Seç"></td>
-      <td class="mono" style="white-space:nowrap;">${fmtDateTime(b.createdAt)}</td>
-      <td><span class="bk-kind ${b.kind}">${BK_KIND_LABEL[b.kind]||b.kind}</span></td>
-      <td>${escapeHtml(b.createdBy||'')}${b.reason && b.kind!=='auto'?`<div class="doc-meta">${escapeHtml(b.reason)}</div>`:''}</td>
-      <td class="doc-meta">${b.counts?`${b.counts.exams} sorğu · ${b.counts.done} nəticə · ${b.counts.icc} ICC · ${b.counts.creds} password`:''}</td>
-      <td style="text-align:right;white-space:nowrap;">
-        <button class="logout-btn" style="padding:4px 10px;font-size:11px;" onclick="restoreStep1('${b.id}')">Bərpa et</button>
-        <button class="logout-btn bk-del" style="padding:4px 10px;font-size:11px;" title="Bu bərpa nöqtəsini sil" onclick="deleteBackupsAsk(['${b.id}'])">🗑 Sil</button></td>
-    </tr>`).join('')}
-  </tbody></table></div>${ok.length>60?`<div class="doc-meta" style="margin-top:6px;">Ən son 60 nöqtə göstərilir (cəmi ${ok.length}).</div>`:''}
+      <button class="logout-btn" style="padding:5px 12px;" onclick="bkSelected.clear();renderBackupList(true)">Seçimi ləğv et</button></div>` : '';
+  const rows = visible.map(b=>{
+    const open = bkUi.openId===b.id;
+    const sel = bkSelected.has(b.id);
+    const sum = b.counts ? `${b.counts.exams} sorğu · ${b.counts.done} nəticə · ${b.counts.icc} ICC` : '';
+    const q = azFold([fmtDateTime(b.createdAt), BK_KIND_LABEL[b.kind]||b.kind, b.createdBy||'', b.reason||''].join(' '));
+    return `<div class="ann-row bk-row ${open?'open':''} ${sel?'bk-sel':''}" data-q="${escapeHtml(q)}">
+      <div class="ann-head" onclick="if(event.target.closest('input,button'))return;bkUi.openId=bkUi.openId==='${b.id}'?null:'${b.id}';renderBackupList(true)" title="Klikləyin — ətraflı və əməliyyatlar">
+        <input type="checkbox" ${sel?'checked':''} onchange="bkToggle('${b.id}',this.checked)" aria-label="Seç">
+        <span class="mono bk-when">${fmtDateTime(b.createdAt)}</span>
+        <span class="bk-kind ${b.kind}">${BK_KIND_LABEL[b.kind]||b.kind}</span>
+        <span class="ann-line doc-meta">${escapeHtml(b.createdBy||'')}${sum?' · '+sum:''}</span>
+        <button type="button" class="logout-btn" style="padding:3px 9px;font-size:10.5px;" onclick="restoreStep1('${b.id}')">Bərpa et</button>
+        <span class="ann-caret">${open?'▴':'▾'}</span></div>
+      ${open ? `<div class="ann-body">
+        <div class="ann-meta" style="font-size:11.5px;line-height:1.7;">
+          Yaradılıb: <strong>${fmtDateTime(b.createdAt)}</strong> — ${escapeHtml(b.createdBy||'')}${b.reason?`<br>Səbəb: ${escapeHtml(b.reason)}`:''}
+          ${b.counts?`<br>Məzmun: ${b.counts.employees} işçi · ${b.counts.exams} sorğu · ${b.counts.done} tamamlanmış nəticə · ${b.counts.icc} ICC faylı · ${b.counts.creds} password`:''}</div>
+        <div class="ann-acts" style="justify-content:flex-start;margin-top:8px;">
+          <button class="btn violet" style="padding:6px 12px;font-size:11px;" onclick="restoreStep1('${b.id}')">↩ Bu tarixə bərpa et</button>
+          <button class="logout-btn bk-del" style="padding:5px 10px;font-size:11px;" onclick="deleteBackupsAsk(['${b.id}'])">🗑 Sil</button></div></div>` : ''}
+    </div>`;
+  }).join('');
+  el.innerHTML = failNote + `
+    <div class="ann-bar">
+      <button type="button" class="ann-toggle ${bkUi.open?'open':''}" onclick="bkUi.open=!bkUi.open;renderBackupList(true)" aria-expanded="${bkUi.open}">
+        🗂 Bərpa nöqtələri siyahısı <span class="ann-count">${ok.length}</span> <span class="ann-caret">${bkUi.open?'▴':'▾'}</span></button>
+      <span class="doc-meta">Ən son: <strong>${fmtDateTime(ok[0].createdAt)}</strong> · ${BK_KIND_LABEL[ok[0].kind]||ok[0].kind}</span>
+    </div>
+    ${bkUi.open ? `<div class="ann-panel">
+      <div class="ann-tools">
+        <input type="text" id="bk-search" placeholder="🔍 Tarix, ad və ya səbəb üzrə axtar…" value="${escapeHtml(bkUi.q)}" oninput="bkUi.q=this.value;bkApplySearch()">
+        <div class="ann-chips">${chip('all','Hamısı')}${chip('auto','Avtomatik')}${chip('manual','Əl ilə')}${chip('pre-reset','Sıfırlamadan əvvəl')}${chip('pre-restore','Bərpadan əvvəl')}</div>
+        <label class="doc-meta" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;margin-left:auto;text-transform:none;width:auto;flex:none;"><input type="checkbox" style="margin:0;width:15px;height:15px;flex:none;" ${allVisSel?'checked':''} onchange="bkToggleAll(this.checked)">görünənlərin hamısını seç</label>
+      </div>
+      ${toolbar}
+      <div class="ann-scroll">${rows || '<div class="empty-state">Bu növdə bərpa nöqtəsi yoxdur.</div>'}
+        <div class="empty-state" id="bk-nomatch" style="display:none;">Uyğun bərpa nöqtəsi tapılmadı.</div></div>
+    </div>` : (bkSelected.size ? toolbar : '')}
   ${bkLastDeletion?`<div class="doc-meta" style="margin-top:6px;">Son silmə: ${fmtDateTime(bkLastDeletion.at)} — ${escapeHtml(bkLastDeletion.by)}, ${bkLastDeletion.count} nöqtə</div>`:''}`;
+  if(bkUi.open) bkApplySearch();
+}
+function bkApplySearch(){
+  const q = azFold(bkUi.q||''); let shown = 0;
+  document.querySelectorAll('#backup-list .bk-row').forEach(r=>{ const okQ = !q || r.dataset.q.includes(q); r.style.display = okQ ? '' : 'none'; if(okQ) shown++; });
+  const nm = document.getElementById('bk-nomatch'); if(nm) nm.style.display = (shown || !document.querySelector('#backup-list .bk-row')) ? 'none' : '';
 }
 let bkLastDeletion = null;
-function bkToggle(id, on){ if(on) bkSelected.add(id); else bkSelected.delete(id); renderBackupList(); }
+function bkToggle(id, on){ if(on) bkSelected.add(id); else bkSelected.delete(id); renderBackupList(true); }
 function bkToggleAll(on){
-  const shown = backupIndexCache.filter(b=>b.status==='ok').slice().reverse().slice(0,60);
+  // yalnız hazırda görünənlər (növ filtri + axtarış nəzərə alınır)
+  const q = azFold(bkUi.q||'');
+  const shown = backupIndexCache.filter(b=>b.status==='ok' && (bkUi.filter==='all' || b.kind===bkUi.filter))
+    .filter(b=> !q || azFold([fmtDateTime(b.createdAt), BK_KIND_LABEL[b.kind]||b.kind, b.createdBy||'', b.reason||''].join(' ')).includes(q));
   shown.forEach(b=> on ? bkSelected.add(b.id) : bkSelected.delete(b.id));
-  renderBackupList();
+  renderBackupList(true);
 }
 
 // ---------- bərpa nöqtələrinin silinməsi (yalnız Admin) ----------
@@ -4265,9 +4340,10 @@ async function restoreStep1(id){
       <tr><th>Tamamlanmış nəticə</th><td>${cur.done} → <strong>${b.counts?.done??'?'}</strong></td></tr>
       <tr><th>ICC faylı</th><td>${cur.icc} → <strong>${b.counts?.icc??'?'}</strong></td></tr>
       <tr><th>İşçi siyahısı</th><td><strong>dəyişmir</strong> (${employees.length} nəfər qalır)</td></tr>
+      <tr><th>Qiymətləndiricilər</th><td><strong>dəyişmir</strong> (${ASSESSORS_SEED.length} nəfər qalır)</td></tr>
       <tr><th>Password</th><td><strong>dəyişmir</strong></td></tr>
     </tbody></table>
-    <div class="hint" style="margin-bottom:12px;">Bu nöqtədən sonra daxil edilən nəticələr, təsdiqlər və ICC yükləmələri qüvvədən düşəcək, işçilərin balları həmin tarixə qayıdacaq. İşçi siyahısı (sonradan əlavə olunanlar da), passwordlar, görünüş tənzimləmələri və elanlar dəyişmir. Bərpadan əvvəl indiki vəziyyət də ayrıca saxlanılacaq — fikrinizi dəyişsəniz, ona qayıda bilərsiniz.</div>
+    <div class="hint" style="margin-bottom:12px;">Bu nöqtədən sonra daxil edilən nəticələr, təsdiqlər və ICC yükləmələri qüvvədən düşəcək, işçilərin balları həmin tarixə qayıdacaq. İşçi və qiymətləndirici siyahıları (sonradan əlavə, redaktə və silinənlər də), passwordlar, görünüş tənzimləmələri və elanlar dəyişmir. Bərpadan əvvəl indiki vəziyyət də ayrıca saxlanılacaq — fikrinizi dəyişsəniz, ona qayıda bilərsiniz.</div>
     <div class="field"><label>Davam etmək üçün <strong style="color:var(--violet);">BƏRPA</strong> yazın</label><input type="text" id="rs-phrase" autocomplete="off" oninput="document.getElementById('rs-next').disabled = this.value.trim().toLocaleUpperCase('az')!=='BƏRPA'"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
       <button class="logout-btn" onclick="glCloseModal()">Ləğv et</button>
@@ -4304,6 +4380,8 @@ async function restoreExecute(){
     //  • İşçilərin İRƏLİLƏYİŞİ (ballar, son nəticələr, checklist, faiz tarixçəsi) — bərpa nöqtəsinə qayıdır
     //  • İmtahan sorğuları/nəticələr, tarixi məlumat, rüblük sənəd qeydləri — bərpa nöqtəsinə qayıdır
     //  • Passwordlar — DƏYİŞMİR
+    //  • Qiymətləndiricilər siyahısı (data/assessors) — bərpa nöqtəsinə daxil deyil, heç vaxt yazılmır → DƏYİŞMİR
+    //  • İşçi/qiymətləndirici əlavə et · redaktə · sil — "standart" sayılır: bərpa və "Standart görünüşə qaytar" onlara toxunmur
     const current = await readBackupSets();
     const merged = mergeEmployeesForRestore(current.employees, data.employees || []);
     const writes = [
@@ -5243,6 +5321,7 @@ function renderSiteCfgPanel(){
     </div>
     ${siteConfig.updatedBy?`<div class="doc-meta" style="margin-top:8px;">Son dəyişiklik: ${escapeHtml(siteConfig.updatedBy)}, ${fmtDateTime(siteConfig.updatedAt)}</div>`:''}`;
   initSortables();
+  annApplyFilter();
 }
 
 async function cfgUploadLogo(input){
@@ -5746,44 +5825,82 @@ function annPanelHtml(c){
          Növbəti (${fmtD(nextDate)}-dən): «${escapeHtml(nxt ? nxt.text.slice(0,80) : '—')}${nxt && nxt.text.length>80?'…':''}» · dövriyyədə ${annRotation(c, now).pool.length} elan`
       : 'Avtomatik rejim seçilib, amma dövriyyədə elan yoxdur — siyahıda "Dövriyyədə" qutucuğunu işarələyin.';
   }
-  const items = a.items.map((x,i)=>{
+  // ---- yığcam siyahı: hər elan bir sətir; klikləyəndə açılır (akkordeon) ----
+  const rot = (a.mode==='weekly'||a.mode==='monthly');
+  const shortDate = iso=> iso ? fmtD(new Date(iso)) : '';
+  const rows = a.items.map((x,i)=>{
     const live = cur && cur.id===x.id;
-    const out = (a.mode==='weekly'||a.mode==='monthly') && x.inRotation===false;
+    const out = rot && x.inRotation===false;
+    const open = annUi.openId===x.id || annEditing===x.id;
+    const head = `<div class="ann-head" onclick="annToggleRow('${x.id}')" title="Klikləyin — tam mətn və əməliyyatlar">
+        <span class="ann-dot ${x.style}" title="${ANN_STYLES[x.style]}"></span>
+        <span class="ann-line">${escapeHtml(x.text)}</span>
+        ${live?'<span class="ann-badge">● Göstərilir</span>':''}${out?'<span class="ann-badge off">dövriyyədən kənar</span>':''}
+        <span class="ann-date">${shortDate(x.updatedAt||x.createdAt)}</span>
+        <span class="ann-caret">${open?'▴':'▾'}</span></div>`;
+    let body = '';
     if(annEditing===x.id){
-      return `<div class="ann-item ${live?'live':''}"><span class="ann-dot ${x.style}"></span>
-        <div><textarea id="ann-edit-text" maxlength="500" style="width:100%;min-height:60px;">${escapeHtml(x.text)}</textarea>
-          <select id="ann-edit-style" style="margin-top:6px;max-width:200px;">${Object.entries(ANN_STYLES).map(([k,v])=>`<option value="${k}" ${x.style===k?'selected':''}>${v}</option>`).join('')}</select></div>
-        <div class="ann-acts"><button class="btn teal" style="padding:5px 10px;font-size:11px;" onclick="annEditSave('${x.id}')">Saxla</button>
+      body = `<div class="ann-body"><textarea id="ann-edit-text" maxlength="500" style="width:100%;min-height:60px;">${escapeHtml(x.text)}</textarea>
+        <div class="ann-acts" style="justify-content:flex-start;margin-top:6px;">
+          <select id="ann-edit-style" style="max-width:200px;">${Object.entries(ANN_STYLES).map(([k,v])=>`<option value="${k}" ${x.style===k?'selected':''}>${v}</option>`).join('')}</select>
+          <button class="btn teal" style="padding:5px 10px;font-size:11px;" onclick="annEditSave('${x.id}')">Saxla</button>
           <button class="logout-btn" style="padding:5px 10px;font-size:11px;" onclick="annEditing=null;renderSiteCfgPanel()">Ləğv et</button></div></div>`;
+    } else if(open){
+      body = `<div class="ann-body"><div class="ann-text">${escapeHtml(x.text)}</div>
+        <div class="ann-meta">${ANN_STYLES[x.style]}${x.createdAt?` · əlavə: ${fmtDateTime(x.createdAt)}${x.createdBy?' — '+escapeHtml(x.createdBy):''}`:''}${x.updatedAt?` · dəyişdirilib: ${fmtDateTime(x.updatedAt)}`:''}</div>
+        <div class="ann-acts" style="justify-content:flex-start;margin-top:8px;">
+          ${rot ? `<label title="Avtomatik dövriyyəyə daxildir"><input type="checkbox" ${x.inRotation!==false?'checked':''} onchange="annToggleRot('${x.id}',this.checked)">Dövriyyədə</label>` : ''}
+          ${!rot && !live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" onclick="annPublish('${x.id}')">📢 Yayımla</button>` : ''}
+          ${a.mode==='manual' && live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" onclick="annUnpublish()">⏸ Dayandır</button>` : ''}
+          <button class="sort-btn" title="Yuxarı" ${i===0?'disabled':''} onclick="annMove('${x.id}',-1)">↑</button>
+          <button class="sort-btn" title="Aşağı" ${i===a.items.length-1?'disabled':''} onclick="annMove('${x.id}',1)">↓</button>
+          <button class="logout-btn" style="padding:4px 9px;font-size:11px;" onclick="annEditing='${x.id}';renderSiteCfgPanel()">✎ Redaktə</button>
+          <button class="logout-btn" style="padding:4px 9px;font-size:11px;color:var(--red);" onclick="annDelete('${x.id}')">🗑 Sil</button></div></div>`;
     }
-    return `<div class="ann-item ${live?'live':''} ${out?'out':''}">
-      <span class="ann-dot ${x.style}" title="${ANN_STYLES[x.style]}"></span>
-      <div><div class="ann-text">${escapeHtml(x.text)}${live?'<span class="ann-badge">● Hazırda göstərilir</span>':''}</div>
-        <div class="ann-meta">${ANN_STYLES[x.style]}${x.createdAt?` · əlavə: ${fmtDateTime(x.createdAt)}${x.createdBy?' — '+escapeHtml(x.createdBy):''}`:''}${x.updatedAt?` · dəyişdirilib: ${fmtDateTime(x.updatedAt)}`:''}</div></div>
-      <div class="ann-acts">
-        ${(a.mode==='weekly'||a.mode==='monthly') ? `<label title="Avtomatik dövriyyəyə daxildir"><input type="checkbox" ${x.inRotation!==false?'checked':''} onchange="annToggleRot('${x.id}',this.checked)">Dövriyyədə</label>` : ''}
-        ${a.mode!=='weekly' && a.mode!=='monthly' && !live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" title="Bu elanı indi göstər" onclick="annPublish('${x.id}')">📢 Yayımla</button>` : ''}
-        ${a.mode==='manual' && live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" title="Yayımı dayandır" onclick="annUnpublish()">⏸ Dayandır</button>` : ''}
-        <button class="sort-btn" title="Yuxarı" ${i===0?'disabled':''} onclick="annMove('${x.id}',-1)">↑</button>
-        <button class="sort-btn" title="Aşağı" ${i===a.items.length-1?'disabled':''} onclick="annMove('${x.id}',1)">↓</button>
-        <button class="sort-btn" title="Redaktə et" onclick="annEditing='${x.id}';renderSiteCfgPanel()">✎</button>
-        <button class="sort-btn" title="Sil" style="color:var(--red);" onclick="annDelete('${x.id}')">🗑</button>
-      </div></div>`;
+    return `<div class="ann-row ${live?'live':''} ${out?'out':''} ${open?'open':''}" data-style="${x.style}" data-live="${live?1:0}" data-rot="${x.inRotation!==false?1:0}" data-q="${escapeHtml(azFold(x.text))}">${head}${body}</div>`;
   }).join('');
+  const counts = { all:a.items.length, live: cur?1:0, info:0, warn:0, alert:0 };
+  a.items.forEach(x=> counts[x.style]++);
+  const chip = (k,label)=> `<button type="button" class="ann-chip ${annUi.filter===k?'active':''}" onclick="annSetFilter('${k}')">${label} <span>${counts[k]??''}</span></button>`;
   return `
-    <div class="hint" style="margin-bottom:8px;">Yazdığınız hər elan aşağıdakı siyahıda saxlanılır — yeni elan əlavə etdikdə köhnələr silinmir. Yayım rejimini seçin: elanı əl ilə yayımlayın və ya sistem onları <strong>hər həftə</strong> / <strong>hər ay</strong> avtomatik növbə ilə göstərsin. <strong>Elanlar dərhal yadda saxlanılır və hamıya tətbiq olunur</strong> — "Standart görünüşə qaytar", "Dəyişiklikləri ləğv et" və bərpa nöqtəsinə qayıtma onlara toxunmur.</div>
+    <div class="hint" style="margin-bottom:8px;">Elanlar dərhal yadda saxlanılır və hamıya tətbiq olunur; "Standart görünüşə qaytar", "Dəyişiklikləri ləğv et" və bərpa nöqtəsi onlara toxunmur.</div>
     <div class="ann-modes">${Object.entries(ANN_MODES).map(([k,m])=>`<button type="button" class="ann-mode ${a.mode===k?'active':''}" onclick="annSetMode('${k}')"><b>${m.label}</b><small>${m.note}</small></button>`).join('')}</div>
     <div class="ann-now">${nowBox}</div>
-    <div class="ann-compose">
+    <div class="ann-bar">
+      <button type="button" class="ann-toggle ${annUi.open?'open':''}" onclick="annUi.open=!annUi.open;renderSiteCfgPanel()" aria-expanded="${annUi.open}">
+        📋 Elanlar siyahısı <span class="ann-count">${a.items.length}</span> <span class="ann-caret">${annUi.open?'▴':'▾'}</span></button>
+      <button type="button" class="btn teal" style="padding:7px 12px;font-size:11px;" onclick="annUi.composing=!annUi.composing;renderSiteCfgPanel();setTimeout(()=>document.getElementById('ann-new-text')?.focus(),30)">${annUi.composing?'✕ Bağla':'+ Yeni elan'}</button>
+    </div>
+    ${annUi.composing ? `<div class="ann-compose">
       <textarea id="ann-new-text" maxlength="500" placeholder="Yeni elanın mətni… Məs: Rüblük qiymətləndirmələr 25 dekabra qədər tamamlanmalıdır."></textarea>
       <div style="display:flex;flex-direction:column;gap:6px;">
         <select id="ann-new-style">${Object.entries(ANN_STYLES).map(([k,v])=>`<option value="${k}">${v} (${k==='info'?'yaşılımtıl':k==='warn'?'sarı':'qırmızı'})</option>`).join('')}</select>
         <button class="btn teal" style="padding:7px 10px;font-size:11px;" onclick="annAdd(false)">+ Siyahıya əlavə et</button>
-        ${a.mode==='weekly'||a.mode==='monthly' ? '' : `<button class="btn" style="padding:7px 10px;font-size:11px;" onclick="annAdd(true)">📢 Əlavə et və yayımla</button>`}
+        ${rot ? '' : `<button class="btn" style="padding:7px 10px;font-size:11px;" onclick="annAdd(true)">📢 Əlavə et və yayımla</button>`}
+      </div></div>` : ''}
+    ${annUi.open ? `<div class="ann-panel">
+      <div class="ann-tools">
+        <input type="text" id="ann-search" placeholder="🔍 Elanlarda axtar…" value="${escapeHtml(annUi.q)}" oninput="annUi.q=this.value;annApplyFilter()">
+        <div class="ann-chips">${chip('all','Hamısı')}${chip('live','Göstərilən')}${chip('info','Məlumat')}${chip('warn','Diqqət')}${chip('alert','Vacib')}</div>
       </div>
-    </div>
-    <div class="ann-list">${items || '<div class="empty-state">Hələ elan yoxdur.</div>'}</div>
-    ${(a.mode==='weekly'||a.mode==='monthly') ? '<div class="doc-meta" style="margin-top:6px;">Dövriyyə siyahıdakı sıra ilə gedir (↑↓ ilə dəyişin). Söndürülmüş ("Dövriyyədə" işarələnməyən) elanlar keçilir.</div>' : ''}`;
+      <div class="ann-scroll">${rows || '<div class="empty-state">Hələ elan yoxdur — "+ Yeni elan" basın.</div>'}
+        <div class="empty-state" id="ann-nomatch" style="display:none;">Uyğun elan tapılmadı.</div></div>
+      ${rot ? '<div class="doc-meta" style="margin-top:6px;">Dövriyyə siyahıdakı sıra ilə gedir (sətri açıb ↑↓ ilə dəyişin).</div>' : ''}
+    </div>` : ''}`;
+}
+// yığcam siyahının vəziyyəti (yalnız bu brauzerdə)
+const annUi = { open:false, composing:false, q:'', filter:'all', openId:null };
+function annToggleRow(id){ annUi.openId = annUi.openId===id ? null : id; if(annEditing && annEditing!==id) annEditing=null; renderSiteCfgPanel(); }
+function annSetFilter(k){ annUi.filter = k; renderSiteCfgPanel(); }
+function annApplyFilter(){
+  const q = azFold(annUi.q||''); let shown = 0;
+  document.querySelectorAll('.ann-scroll .ann-row').forEach(r=>{
+    const f = annUi.filter;
+    const okF = f==='all' || (f==='live' ? r.dataset.live==='1' : r.dataset.style===f);
+    const okQ = !q || r.dataset.q.includes(q);
+    r.style.display = (okF && okQ) ? '' : 'none'; if(okF && okQ) shown++;
+  });
+  const nm = document.getElementById('ann-nomatch'); if(nm) nm.style.display = (shown || !document.querySelector('.ann-scroll .ann-row')) ? 'none' : '';
 }
 // Elanlar ümumi önizləmə qaralamasından (draft) asılı deyil: hər dəyişiklik dərhal Firestore-a yazılır.
 // Ona görə "Standart görünüşə qaytar", "Dəyişiklikləri ləğv et" və bərpa nöqtəsi onları silə bilməz.
@@ -5817,6 +5934,7 @@ function annAdd(publish){
   const item = { id: uid(), text: t.slice(0,500), style: document.getElementById('ann-new-style').value, inRotation:true,
                  createdAt: new Date().toISOString(), createdBy: currentUser.name, updatedAt:null, updatedBy:'' };
   a.items.unshift(item);                                       // ən yeni — siyahının başında
+  annUi.open = true; annUi.composing = false; annUi.openId = null;
   if(publish){ a.mode = 'manual'; a.activeId = item.id; }
   annCommit();
   showToast(publish ? 'Elan yayımlandı və hamıya tətbiq olundu' : 'Elan siyahıya əlavə olundu və yadda saxlanıldı');
@@ -5891,7 +6009,7 @@ function discardSiteCfgDraft(){
 }
 async function resetSiteConfigToDefault(){
   if(!isAdminUser()) return;
-  if(!(await appConfirm('Bütün görünüş və funksiya tənzimləmələri standart vəziyyətə qaytarılsın? Bu, hamıya tətbiq olunacaq. (Sizin əlavə etdiyiniz bölmə və funksiyalar, elanlar, həmçinin e-mail qəbul edənlər siyahısı dəyişmir.)'))) return;
+  if(!(await appConfirm('Bütün görünüş və funksiya tənzimləmələri standart vəziyyətə qaytarılsın? Bu, hamıya tətbiq olunacaq. (Sizin əlavə etdiyiniz bölmə və funksiyalar, elanlar, e-mail qəbul edənlər, həmçinin işçi və qiymətləndirici siyahıları dəyişmir.)'))) return;
   const def = normalizeSiteConfig(null);
   // Admin-in yaratdığı məzmun "standart"ın bir hissəsidir — yalnız açıq "Sil" / "Redaktə" əmri ilə dəyişir
   def.emailRecipients = siteConfig.emailRecipients || null;                                     // e-mail qəbul edənlər
