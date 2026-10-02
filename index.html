@@ -16,6 +16,7 @@
   --green:#4fb87e; --green-dim:#1e3d2c;
   --red:#e2584c; --red-dim:#4a231f;
   --violet:#9b8cf0; --violet-dim:#332c5c;
+  --on-amber:#1a1305; --on-teal:#08201d; --on-violet:#18122f;   /* vurğu fonunda yazı rəngi (tema ilə dəyişir) */
   --font-display:'Space Grotesk',sans-serif; --font-body:'IBM Plex Sans',sans-serif; --font-mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -33,7 +34,7 @@ body{
 .brand-logo.plate{background:#fff;padding:5px 9px;border-radius:6px;box-sizing:content-box;}
 .logo-preview{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px;background:var(--bg-raised);border:1px dashed var(--border);border-radius:6px;}
 .logo-preview img{height:48px;max-width:220px;object-fit:contain;}
-.brand-mark{width:44px;height:44px;border-radius:6px;background:linear-gradient(135deg,var(--amber),color-mix(in srgb,var(--amber) 72%,#000));display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:600;color:#12100a;font-size:13px;flex-shrink:0;}
+.brand-mark{width:44px;height:44px;border-radius:6px;background:linear-gradient(135deg,var(--amber),color-mix(in srgb,var(--amber) 72%,#000));display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:600;color:var(--on-amber);font-size:13px;flex-shrink:0;}
 .brand h1{font-family:var(--font-display);font-size:18px;font-weight:600;}
 .brand p{font-family:var(--font-mono);font-size:10.5px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;}
 .header-status{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);text-align:right;}
@@ -65,7 +66,7 @@ body{
 
 .shift-filter{display:flex;gap:6px;flex-wrap:wrap;}
 .shift-chip{font-family:var(--font-mono);font-size:11px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-raised);color:var(--text-secondary);cursor:pointer;transition:all .15s;}
-.shift-chip:hover{color:var(--text-primary);} .shift-chip.active{background:var(--amber);color:#1a1305;border-color:var(--amber);font-weight:600;}
+.shift-chip:hover{color:var(--text-primary);} .shift-chip.active{background:var(--amber);color:var(--on-amber);border-color:var(--amber);font-weight:600;}
 
 .emp-table{width:100%;border-collapse:collapse;font-size:12.5px;}
 .emp-table th{font-family:var(--font-mono);font-size:10px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.4px;text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);}
@@ -152,12 +153,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--amber);}
 input[type=file]{width:100%;background:var(--bg-raised);border:1px dashed var(--border);border-radius:5px;color:var(--text-secondary);padding:14px 10px;font-family:var(--font-mono);font-size:11.5px;}
 .field{margin-bottom:0;} textarea{resize:vertical;min-height:56px;}
 
-.btn{font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.3px;font-weight:500;padding:10px 16px;border-radius:5px;border:1px solid var(--amber);background:var(--amber);color:#1a1305;cursor:pointer;transition:all .15s;text-transform:uppercase;}
-.btn:hover{background:#f6bb5f;}
+.btn{font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.3px;font-weight:500;padding:10px 16px;border-radius:5px;border:1px solid var(--amber);background:var(--amber);color:var(--on-amber);cursor:pointer;transition:all .15s;text-transform:uppercase;}
+.btn:hover{background:color-mix(in srgb,var(--amber) 85%,#fff);}
 .btn.secondary{background:transparent;color:var(--text-secondary);border-color:var(--border);}
 .btn.secondary:hover{color:var(--text-primary);border-color:var(--text-secondary);}
-.btn.teal{border-color:var(--teal);background:var(--teal);color:#08201d;} .btn.teal:hover{background:#59d2c5;}
-.btn.violet{border-color:var(--violet);background:var(--violet);color:#18122f;} .btn.violet:hover{background:#b3a6f7;}
+.btn.teal{border-color:var(--teal);background:var(--teal);color:var(--on-teal);} .btn.teal:hover{background:color-mix(in srgb,var(--teal) 85%,#fff);}
+.btn.violet{border-color:var(--violet);background:var(--violet);color:var(--on-violet);} .btn.violet:hover{background:color-mix(in srgb,var(--violet) 85%,#fff);}
 
 .doc-row{display:grid;grid-template-columns:1fr 100px 130px 100px 30px;gap:10px;padding:10px 4px;border-bottom:1px solid var(--border-soft);align-items:center;font-size:12.5px;}
 .pw-admin-row{display:grid;grid-template-columns:1.4fr 1.2fr 1fr 1fr auto;gap:14px;padding:12px 14px;border-bottom:1px solid var(--border-soft);align-items:center;font-size:13px;}
@@ -175,10 +176,27 @@ input[type=file]{width:100%;background:var(--bg-raised);border:1px dashed var(--
 .hist-label{font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);width:90px;flex-shrink:0;}
 .hist-track{flex:1;height:20px;background:var(--bg-raised);border-radius:4px;overflow:hidden;border:1px solid var(--border);}
 .hist-fill{height:100%;background:linear-gradient(90deg,var(--teal-dim),var(--teal));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;}
-.hist-fill span{font-family:var(--font-mono);font-size:10px;color:#08201d;font-weight:600;}
+.hist-fill span{font-family:var(--font-mono);font-size:10px;color:var(--on-teal);font-weight:600;}
 
 .report-doc{background:var(--bg-raised);border:1px solid var(--border);border-radius:6px;padding:20px;font-family:var(--font-mono);font-size:12px;line-height:1.85;white-space:pre-wrap;color:var(--text-primary);max-height:440px;overflow-y:auto;}
 .empty-state{text-align:center;padding:32px 20px;color:var(--text-dim);font-family:var(--font-mono);font-size:12px;}
+/* Tarix sahələri: vurğu rəngində görünən təqvim işarəsi (tema ilə dəyişir); bütün sahəyə klik təqvimi açır */
+input[type=date],input[type=datetime-local]{cursor:pointer;padding-right:42px!important;background-image:var(--cal-icon);background-repeat:no-repeat;
+  background-position:right 12px center;background-size:20px 20px;transition:border-color .15s,box-shadow .15s;}
+input[type=date]:hover,input[type=datetime-local]:hover{border-color:var(--amber);}
+input[type=date]:focus,input[type=datetime-local]:focus{border-color:var(--amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--amber) 22%,transparent);outline:none;}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=datetime-local]::-webkit-calendar-picker-indicator{
+  opacity:0;cursor:pointer;width:34px;height:100%;position:absolute;right:0;top:0;margin:0;padding:0;}
+input[type=date],input[type=datetime-local]{position:relative;}
+.scroll-nav{position:fixed;right:22px;bottom:84px;display:flex;flex-direction:column;gap:8px;z-index:140;}
+.scroll-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:color-mix(in srgb,var(--bg-raised-2) 92%,transparent);color:var(--text-primary);
+  font-size:18px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .2s,transform .2s,border-color .15s,color .15s;}
+.scroll-btn.show{opacity:.9;transform:scale(1);pointer-events:auto;}
+.scroll-btn:hover{opacity:1;border-color:var(--amber);color:var(--amber);}
+.scroll-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+@media (max-width:600px){.scroll-nav{right:12px;bottom:76px;}.scroll-btn{width:38px;height:38px;font-size:16px;}}
+@media print{.scroll-nav{display:none;}}
 .toast{position:fixed;bottom:22px;right:22px;background:var(--bg-raised-2);border:1px solid var(--teal);color:var(--text-primary);padding:12px 18px;border-radius:6px;font-family:var(--font-mono);font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:150;}
 .toast.show{opacity:1;transform:translateY(0);}
 .hint{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);margin-top:10px;line-height:1.6;}
@@ -231,6 +249,7 @@ body.no-grid{background-image:none;}
 .site-announce.warn{background:var(--amber-dim);border-color:var(--amber);color:var(--text-primary);}
 .site-announce.alert{background:var(--red-dim);border-color:var(--red);color:var(--text-primary);}
 .feat-off,.tab.cfg-hidden{display:none!important;}
+body.own-report .panel[data-feat="supReport"]{display:none!important;}   /* işçi digərlərinin qərar statistikasını görmür */
 .tab.feat-disabled{opacity:.4;}
 .tab.feat-disabled::after{content:' ⦸';color:var(--red);}
 .cfg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 16px;}
@@ -259,12 +278,12 @@ body.no-grid{background-image:none;}
 .dtp-day:hover:not(:disabled){border-color:var(--border);background:var(--bg-panel);}
 .dtp-day.other{color:var(--text-dim);opacity:.45;}
 .dtp-day.today{border-color:var(--text-dim);}
-.dtp-day.sel{background:var(--amber);color:#111;font-weight:600;border-color:var(--amber);}
+.dtp-day.sel{background:var(--amber);color:var(--on-amber);font-weight:600;border-color:var(--amber);}
 .dtp-day:disabled{opacity:.2;cursor:not-allowed;}
 .dtp-day .dots{position:absolute;left:0;right:0;bottom:3px;display:flex;justify-content:center;gap:2px;}
 .dtp-day .dots i{width:4px;height:4px;border-radius:50%;background:var(--teal);display:block;}
 .dtp-day .dots i.pre-reset{background:var(--red);} .dtp-day .dots i.pre-restore{background:var(--violet);} .dtp-day .dots i.manual{background:var(--green);}
-.dtp-day.sel .dots i{background:#111;}
+.dtp-day.sel .dots i{background:var(--on-amber);}
 .dtp-clock{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
 .dtp-digits{display:flex;align-items:center;gap:4px;background:var(--bg-deep);border:1px solid var(--border);border-radius:8px;padding:6px 10px;}
 .dtp-unit{display:flex;flex-direction:column;align-items:center;}
@@ -291,6 +310,11 @@ body.no-grid{background-image:none;}
 .dtp-result.ok{border-color:var(--teal);} .dtp-result.none{border-color:var(--red);color:var(--red);}
 .dtp-legend{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-top:8px;}
 .dtp-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle;}
+.bk-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;margin-bottom:8px;border:1px solid var(--red);border-radius:6px;background:var(--red-dim);font-size:12.5px;}
+.bk-table input[type=checkbox]{accent-color:var(--red);width:15px;height:15px;cursor:pointer;}
+.bk-table tr.sel td{background:var(--red-dim);}
+.bk-del{color:var(--red)!important;}
+.bk-del:hover:not(:disabled){border-color:var(--red)!important;}
 .bk-status{margin-bottom:10px;padding:9px 12px;border-radius:6px;font-size:12.5px;line-height:1.55;border:1px solid var(--border);background:var(--bg-raised);}
 .bk-status:empty{display:none!important;}
 .bk-status.ok{border-color:var(--green);background:var(--green-dim);}
@@ -309,6 +333,94 @@ body.no-grid{background-image:none;}
 .gl-box.restore{border-color:var(--violet);} .gl-box.restore h3{color:var(--violet);}
 .gl-steps{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-bottom:12px;}
 .gl-list{margin:8px 0 14px;padding-left:18px;font-size:13px;line-height:1.7;}
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;}
+.theme-card{text-align:left;background:var(--bg-raised);border:2px solid var(--border);border-radius:9px;padding:8px;cursor:pointer;color:var(--text-primary);font-family:var(--font-body);transition:border-color .15s,transform .15s;}
+.theme-card:hover{border-color:var(--text-secondary);transform:translateY(-1px);}
+.theme-card.active{border-color:var(--amber);box-shadow:0 0 0 2px color-mix(in srgb,var(--amber) 30%,transparent);}
+.theme-prev{border:1px solid;border-radius:6px;padding:8px;height:78px;}
+.tp-panel{border:1px solid;border-radius:5px;padding:7px;height:100%;display:flex;flex-direction:column;gap:5px;}
+.tp-line{height:5px;border-radius:3px;}
+.tp-row{display:flex;gap:4px;align-items:center;margin-top:auto;}
+.tp-btn{font-family:var(--font-mono);font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;}
+.tp-pill{font-family:var(--font-mono);font-size:8.5px;padding:2px 5px;border-radius:7px;}
+.tc-name{font-size:12.5px;font-weight:600;margin-top:7px;}
+.tc-check{color:var(--amber);}
+.tc-note{font-size:10.5px;color:var(--text-dim);margin-top:2px;line-height:1.35;}
+.sort-list{display:flex;flex-direction:column;gap:6px;margin-bottom:6px;}
+.sort-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg-raised);border:1px solid var(--border);border-radius:6px;font-size:12.5px;user-select:none;}
+.sort-item.dragging{border-color:var(--amber);box-shadow:0 6px 18px rgba(0,0,0,.25);background:var(--bg-raised-2);position:relative;z-index:2;}
+.sort-item.off{opacity:.55;}
+.sort-handle{cursor:grab;color:var(--text-dim);font-size:15px;line-height:1;padding:4px 2px;touch-action:none;letter-spacing:-2px;}
+.sort-handle:hover{color:var(--amber);}
+.sort-item.dragging .sort-handle{cursor:grabbing;}
+.sort-no{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);min-width:20px;}
+.sort-name{flex:1;min-width:0;}
+.sort-name b{font-weight:600;}
+.sort-name small{display:block;color:var(--text-dim);font-size:10.5px;margin-top:1px;}
+.sort-name input{width:100%;max-width:340px;font-size:12.5px;padding:5px 8px;}
+.sort-tag{font-family:var(--font-mono);font-size:9.5px;padding:1px 6px;border-radius:8px;background:var(--violet-dim);color:var(--violet);margin-left:6px;vertical-align:middle;}
+.sort-btn{background:transparent;border:1px solid transparent;color:var(--text-secondary);border-radius:4px;cursor:pointer;font-size:12px;padding:3px 6px;}
+.sort-btn:hover:not(:disabled){border-color:var(--border);color:var(--text-primary);}
+.sort-btn:disabled{opacity:.25;cursor:default;}
+.sort-item input[type=checkbox]{accent-color:var(--amber);width:15px;height:15px;cursor:pointer;}
+body.sorting, body.sorting *{cursor:grabbing!important;}
+.rf-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;}
+.rf-mode{text-align:left;background:var(--bg-raised);border:2px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;color:var(--text-primary);font-family:var(--font-body);}
+.rf-mode b{display:block;font-size:13px;} .rf-mode small{display:block;font-size:11px;color:var(--text-dim);margin-top:2px;}
+.rf-mode:hover{border-color:var(--text-secondary);}
+.rf-mode.active{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,var(--bg-raised));}
+.rf-box{margin-top:12px;padding:12px;border:1px solid var(--amber);border-radius:8px;background:var(--bg-raised);}
+.rf-box label.t{display:block;font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:6px;}
+.rf-shifts{display:flex;gap:8px;flex-wrap:wrap;}
+.rf-shift{min-width:110px;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg-panel);color:var(--text-primary);cursor:pointer;font-family:var(--font-mono);font-size:12px;text-align:left;}
+.rf-shift small{display:block;color:var(--text-dim);font-size:10.5px;margin-top:2px;}
+.rf-shift.active{border-color:var(--amber);background:var(--amber);color:var(--on-amber);} .rf-shift.active small{color:var(--on-amber);opacity:.85;}
+.rf-search{position:relative;max-width:520px;}
+.rf-search input{width:100%;}
+.rf-sugg{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--bg-panel);border:1px solid var(--border);border-radius:7px;box-shadow:0 10px 24px rgba(0,0,0,.25);max-height:280px;overflow:auto;z-index:20;}
+.rf-sugg button{display:flex;justify-content:space-between;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--border-soft);padding:8px 12px;cursor:pointer;color:var(--text-primary);font-size:12.5px;}
+.rf-sugg button:hover,.rf-sugg button.hl{background:var(--bg-raised-2);}
+.rf-sugg button span{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
+.rf-chosen{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding:7px 12px;border-radius:7px;background:var(--bg-panel);border:1px solid var(--amber);border-left-width:4px;font-size:12.5px;}
+.rf-chosen .doc-meta{color:var(--text-secondary);}
+.rf-chosen button{background:transparent;border:0;color:var(--text-secondary);cursor:pointer;font-size:13px;}
+.sort-item[ondblclick]{cursor:default;}
+.sort-item[ondblclick]:hover{border-color:var(--text-dim);}
+.tx-box{max-width:760px!important;border-color:var(--amber)!important;}
+.tx-box h3{color:var(--text-primary)!important;}
+.tx-rows{display:flex;flex-direction:column;gap:10px;max-height:56vh;overflow:auto;padding-right:4px;margin:10px 0;}
+.tx-row{display:grid;grid-template-columns:110px 1fr auto;gap:8px;align-items:start;}
+.tx-kind{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;color:var(--text-dim);padding-top:9px;}
+.tx-row input,.tx-row textarea{width:100%;font-size:12.5px;}
+.tx-row textarea{min-height:56px;resize:vertical;}
+.tx-row.changed input,.tx-row.changed textarea{border-color:var(--amber);}
+.tx-orig{grid-column:2/3;font-size:10.5px;color:var(--text-dim);margin-top:-4px;}
+.tx-sep{font-family:var(--font-mono);font-size:10.5px;color:var(--amber);text-transform:uppercase;margin-top:6px;border-bottom:1px solid var(--border);padding-bottom:3px;}
+.mr-box{margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-raised);}
+.mr-list{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.mr-row{display:grid;grid-template-columns:1fr 1.4fr auto;gap:6px;align-items:center;}
+.mr-row input.mr-name,.mr-row input.mr-email{font-size:12.5px;padding:7px 9px;width:100%;}
+.mr-row input.bad{border-color:var(--red)!important;background:var(--red-dim);}
+input[type=email]{width:100%;background:var(--bg-raised);border:1px solid var(--border);border-radius:5px;color:var(--text-primary);padding:9px 10px;font-family:var(--font-body);}
+.ann-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-bottom:10px;}
+.ann-mode{text-align:left;background:var(--bg-raised);border:2px solid var(--border);border-radius:7px;padding:8px 10px;cursor:pointer;color:var(--text-primary);font-family:var(--font-body);}
+.ann-mode b{display:block;font-size:12.5px;} .ann-mode small{display:block;font-size:10.5px;color:var(--text-dim);margin-top:2px;}
+.ann-mode.active{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,var(--bg-raised));}
+.ann-now{padding:10px 12px;border-radius:7px;border:1px dashed var(--border);margin-bottom:12px;font-size:12.5px;line-height:1.6;}
+.ann-compose{display:grid;grid-template-columns:1fr 170px;gap:8px;align-items:start;margin-bottom:12px;}
+@media (max-width:700px){.ann-compose{grid-template-columns:1fr;}}
+.ann-compose textarea{min-height:64px;}
+.ann-list{display:flex;flex-direction:column;gap:6px;}
+.ann-item{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:9px 10px;border:1px solid var(--border);border-radius:7px;background:var(--bg-raised);}
+.ann-item.live{border-color:var(--green);box-shadow:inset 3px 0 0 var(--green);}
+.ann-item.out{opacity:.55;}
+.ann-dot{width:12px;height:12px;border-radius:50%;margin-top:4px;}
+.ann-dot.info{background:var(--teal);} .ann-dot.warn{background:var(--amber);} .ann-dot.alert{background:var(--red);}
+.ann-text{font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+.ann-meta{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);margin-top:3px;}
+.ann-badge{font-family:var(--font-mono);font-size:9.5px;padding:1px 7px;border-radius:8px;background:var(--green-dim);color:var(--green);margin-left:6px;}
+.ann-acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
+.ann-acts label{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--text-secondary);cursor:pointer;margin-right:4px;text-transform:none;letter-spacing:0;font-family:var(--font-body);}
 .cfg-dirty{font-family:var(--font-mono);font-size:11px;color:var(--amber);align-self:center;}
 </style>
 </head>
@@ -320,8 +432,8 @@ body.no-grid{background-image:none;}
       <div class="brand-mark" id="login-mark">SP</div>
       <div><h1 id="login-title">Kompetensiya Matrisi — HDPE OPS</h1><p>Daxil olmaq üçün ad, soyad və badge nömrənizi daxil edin</p></div>
     </div>
-    <div class="field" style="margin-bottom:12px;"><label>Ad Soyad</label><input type="text" id="login-name" placeholder="Məs: Ragif Alishov" onkeydown="if(event.key==='Enter')attemptLogin()"></div>
-    <div class="field" style="margin-bottom:12px;"><label>Badge nömrəsi <span style="font-weight:400;color:var(--text-dim);">(passwordunuz varsa məcburi deyil)</span></label><input type="text" id="login-badge" placeholder="Məs: 10450" onkeydown="if(event.key==='Enter')attemptLogin()"></div>
+    <div class="field" style="margin-bottom:12px;"><label>Ad Soyad</label><input type="text" id="login-name" placeholder="" onkeydown="if(event.key==='Enter')attemptLogin()"></div>
+    <div class="field" style="margin-bottom:12px;"><label>Badge nömrəsi <span style="font-weight:400;color:var(--text-dim);">(passwordunuz varsa məcburi deyil)</span></label><input type="text" id="login-badge" placeholder="" onkeydown="if(event.key==='Enter')attemptLogin()"></div>
     <div class="field" style="margin-bottom:16px;"><label>Password</label><input type="password" id="login-password" placeholder="Password təyin etməmisinizsə boş buraxın" onkeydown="if(event.key==='Enter')attemptLogin()"></div>
     <button class="btn" style="width:100%;" id="login-btn" onclick="attemptLogin()" disabled>Yüklənir...</button>
     <div class="login-error" id="login-error"></div>
@@ -346,7 +458,7 @@ body.no-grid{background-image:none;}
       <div><h1 id="brand-title">Kompetensiya Matrisi — HDPE OPS</h1><p id="brand-sub">SOCAR Polymer · Innovene S · Bilik &amp; Bacarıq İzləmə Sistemi</p></div>
     </div>
     <div class="header-right">
-      <div class="header-status" data-feat="headerStatus"><span class="dot"></span>Sistem aktivdir · <span id="clock"></span></div>
+      <div class="header-status" data-feat="headerStatus"><span class="dot"></span><span id="hs-text">Sistem aktivdir</span> · <span id="clock"></span></div>
       <div class="header-signature" id="header-signature">byEmin.D</div>
     </div>
   </div>
@@ -537,19 +649,43 @@ body.no-grid{background-image:none;}
       <div id="hist-list"></div>
       <div class="hint">Hər rüb üçün bir anlıq görüntü yazın ki, proqres zamanla izlənsin.</div>
     </div>
+
+    <div class="panel" id="archive-panel" style="display:none;">
+      <div class="panel-head"><div><div class="eyebrow" id="arch-eyebrow">Kompüterə yüklənir</div><h2>Arxiv: nəticələr və ICC faylları</h2></div></div>
+      <div class="hint" style="margin-bottom:10px;">Bütün ICC faylları işçi qovluqlarına bölünərək bir ZIP faylına yığılır. Hər faylın adında yükləmə tarixi və mövzu olur; <strong>Hesabat.xlsx</strong> faylının "ICC Reyestr" vərəqində isə kim hazırlayıb yükləyib, nə vaxt, faylın SHA-256 barmaq izi və qiymətləndirmə nəticəsi göstərilir.</div>
+      <div class="form-grid" style="margin-bottom:12px;">
+        <div class="field"><label>Növbə</label><div id="arch-shift-fixed" class="doc-meta" style="display:none;padding:9px 0;font-size:13px;color:var(--text-primary);"></div><select id="arch-shift"><option value="">Hamısı</option><option value="A">Növbə 1</option><option value="B">Növbə 2</option><option value="C">Növbə 3</option><option value="D">Növbə 4</option></select></div>
+        <label class="cfg-check" style="align-self:end;margin-bottom:0;"><input type="checkbox" id="arch-files" checked><span>ICC fayllarının özünü də daxil et<small>söndürsəniz, yalnız cədvəllər (sürətli)</small></span></label>
+        <div class="field"><label>Yükləmə tarixi — başlanğıc</label><input type="date" id="arch-from"></div>
+        <div class="field"><label>Yükləmə tarixi — son</label><input type="date" id="arch-to"></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn violet" id="arch-btn" onclick="adminExportArchive()">📦 ZIP arxivini yüklə</button>
+        <span class="doc-meta" id="arch-progress"></span>
+      </div>
+    </div>
   </div>
 
   <!-- REPORT -->
   <div class="view" id="view-report">
+    <div class="panel rf-panel" id="report-filter-panel" style="display:none;">
+      <div class="panel-head"><div><div class="eyebrow">Filtr</div><h2>Hansı hesabatı görmək istəyirsiniz?</h2></div></div>
+      <div class="rf-modes" role="radiogroup" aria-label="Hesabat növü">
+        <button type="button" class="rf-mode" data-mode="shift" onclick="rfSetMode('shift')"><b>1 · Növbənin Hesabatı</b><small>Seçilən növbənin bütün işçiləri</small></button>
+        <button type="button" class="rf-mode" data-mode="emp" onclick="rfSetMode('emp')"><b>2 · İşçinin Rüblük Hesabatı</b><small>Ad və soyadla bir işçi</small></button>
+        <button type="button" class="rf-mode" data-mode="all" onclick="rfSetMode('all')"><b>3 · Hamısı</b><small>Bütün növbələrdəki işçilər</small></button>
+      </div>
+      <div id="rf-extra"></div>
+    </div>
     <div class="panel" data-feat="perfOverview">
       <div class="panel-head">
-        <div><div class="eyebrow">Bütün operatorlar</div><h2>Performance Overview</h2></div>
+        <div><div class="eyebrow" id="perf-eyebrow">Bütün operatorlar</div><h2>Performance Overview</h2></div>
         <div style="display:flex;gap:8px;">
           <button class="btn secondary" data-feat="csvExport" onclick="exportPerformanceOverviewCsv()">⬇ Excel-ə çıxar (.xlsx)</button>
           <button class="btn secondary" id="backup-btn" style="display:none;" onclick="exportFullBackupJson()">⬇ Tam ehtiyat nüsxə (.json)</button>
         </div>
       </div>
-      <div class="hint" style="margin-bottom:10px;">Hər operatorun ad-soyadı, vəzifəsi və son 6 ay üzrə topladığı kompetensiya faizi. Cari ay hələ tamamlanmayıb, "canlı" rəqəm göstərilir.</div>
+      <div class="hint" style="margin-bottom:10px;" id="perf-hint">Hər operatorun ad-soyadı, vəzifəsi və son 6 ay üzrə topladığı kompetensiya faizi. Cari ay hələ tamamlanmayıb, "canlı" rəqəm göstərilir.</div>
       <div style="overflow-x:auto;">
         <table id="perf-overview-table" style="width:100%;border-collapse:collapse;font-size:12.5px;"></table>
       </div>
@@ -564,7 +700,7 @@ body.no-grid{background-image:none;}
     </div>
     <div class="panel" data-feat="quarterReport">
       <div class="panel-head">
-        <div><div class="eyebrow">Avtomatik toplanır</div><h2>Rüblük hesabat</h2></div>
+        <div><div class="eyebrow" id="qrep-eyebrow">Avtomatik toplanır</div><h2>Rüblük hesabat</h2></div>
         <div style="display:flex;gap:8px;"><button class="btn secondary" onclick="generateReport()">Hesabatı yenilə</button><button class="btn" data-feat="emailSend" onclick="sendReport()">E-poçtla göndər</button></div>
       </div>
       <div class="form-grid" style="margin-bottom:16px;">
@@ -589,21 +725,6 @@ body.no-grid{background-image:none;}
 
   <!-- EMPLOYEE MANAGEMENT (Admin only) -->
   <div class="view" id="view-empmgmt">
-    <div class="panel">
-      <div class="panel-head"><div><div class="eyebrow">Yalnız Admin · kompüterə yüklənir</div><h2>Arxiv: nəticələr və ICC faylları</h2></div></div>
-      <div class="hint" style="margin-bottom:10px;">Bütün ICC faylları işçi qovluqlarına bölünərək bir ZIP faylına yığılır. Hər faylın adında yükləmə tarixi və mövzu olur; <strong>Hesabat.xlsx</strong> faylının "ICC Reyestr" vərəqində isə kim hazırlayıb yükləyib, nə vaxt, faylın SHA-256 barmaq izi və qiymətləndirmə nəticəsi göstərilir.</div>
-      <div class="form-grid" style="margin-bottom:12px;">
-        <div class="field"><label>Növbə</label><select id="arch-shift"><option value="">Hamısı</option><option value="A">Növbə 1</option><option value="B">Növbə 2</option><option value="C">Növbə 3</option><option value="D">Növbə 4</option></select></div>
-        <div class="field"><label>Yükləmə tarixi — başlanğıc</label><input type="date" id="arch-from"></div>
-        <div class="field"><label>Yükləmə tarixi — son</label><input type="date" id="arch-to"></div>
-        <label class="cfg-check" style="align-self:end;"><input type="checkbox" id="arch-files" checked><span>ICC fayllarının özünü də daxil et<small>söndürsəniz, yalnız cədvəllər (sürətli)</small></span></label>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-        <button class="btn violet" id="arch-btn" onclick="adminExportArchive()">📦 ZIP arxivini yüklə</button>
-        <span class="doc-meta" id="arch-progress"></span>
-      </div>
-    </div>
-
     <div class="panel">
       <div class="panel-head"><div><div class="eyebrow">Yalnız Admin · avtomatik saatlıq</div><h2>Bərpa nöqtələri</h2></div>
         <button class="btn teal" style="padding:6px 12px;font-size:11px;" onclick="manualBackupNow()">+ İndi bərpa nöqtəsi yarat</button></div>
@@ -709,6 +830,10 @@ body.no-grid{background-image:none;}
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="scroll-nav" id="scroll-nav" aria-label="Səhifədə sürətli keçid">
+  <button type="button" id="scroll-top" class="scroll-btn" title="Ən yuxarı (Home)" aria-label="Səhifənin ən yuxarısına" onclick="scrollToEdge('top')">↑</button>
+  <button type="button" id="scroll-bottom" class="scroll-btn" title="Ən aşağı (End)" aria-label="Səhifənin ən aşağısına" onclick="scrollToEdge('bottom')">↓</button>
+</div>
 
 <script type="application/json" id="tasks-data">[{"id": "t15", "label": "Unit 1930 Raw Materials & BL: Ethylene, Hydrogen, Isobutane, Comonomer Feed Stock", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t16", "label": "Unit 1050 Nitrogen Purification Unit.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t17", "label": "Unit 1100 Cocatalyst System - Injection.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t18", "label": "Unit 1100 Cocatalyst drums replacement & seal pot filling", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t19", "label": "Unit 1100 Cocatalyst system preparation for maintenance", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t20", "label": "Unit 1200 Ethylene Treatment package", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t21", "label": "Unit 1200 Ethylene Compression package", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t22", "label": "Unit 1310 Catalyst Feed System. Catalyst Unloading", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t23", "label": "Unit 1310 Catalyst Batch preparation, Injection into reactor", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t24", "label": "Unit 1310 Dumping & Cleaning of Catalyst Slurry Tank D-1319/ Day Tank D-1315", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t25", "label": "Unit 1310 Dumping of Waste Catalyst Transfer Filter F-1313 & Empty & filling of K.O.Pot D-1316", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t26", "label": "Unit 1320 Reactor cooling system.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t27", "label": "Unit 1330 IMT System & IMT Kill system", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t28", "label": "Unit 1350 Slurry Heater, Hydrocyclone, Dump Tank.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t29", "label": "Unit 1400 High Pressure Separator and Discharge Vessels", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t30", "label": "Unit 1400 Powder Degassing, Sample Flasher & Gas Chromotographs.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t31", "label": "Unit 1320 Starting cold-run in Polymerisation Unit (filling of system with Isobutane except reactors)", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t32", "label": "Unit 1400 Powder Conveying and Powder Feed Silos.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t33", "label": "Unit 1410 Overhead Cyclone and high pressure separator overhead filters.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t34", "label": "Unit 1410 LSR Recovery, LSR Treater & LIR Column.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t35", "label": "Unit 1420 Refrigeration package and Lube Oil System.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t36", "label": "Unit 1420 LPSR Blower, LPSR Condensation and Enrichment.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t37", "label": "Unit 1420 Raw Material Handling - Isobutane & Comonomer treatment, Solvent Recovery & Heavies Column.", "weight": 1, "cat": "Polimerləşdirmə"}, {"id": "t38", "label": "Unit 1320 Reactors preparation before/after maintenance; Reactor filling with isobutane and establish cold-run.", "weight": 2, "cat": "Polimerləşdirmə"}, {"id": "t39", "label": "Unit 1320 Polymerisation Start-up, Shutdown and KILL systems.", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t40", "label": "Unit 1320 Reactors Controls & Quality Control: Reactor monomer/comonomer control; Hydrogen/Ethylene concentration ratio; Reactor Hexane concentration; Production rate & Block ratio control; Reactor Pressure & Temperature Control etc.", "weight": 3, "cat": "Polimerləşdirmə"}, {"id": "t41", "label": "Unit 1550 & 1650 Extrusion Feed System,", "weight": 2, "cat": "Ekstruziya"}, {"id": "t42", "label": "Unit 1500 & 1600 Barring unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t43", "label": "Unit 1500 & 1600 Mixer unit", "weight": 2, "cat": "Ekstruziya"}, {"id": "t44", "label": "Unit 1500 & 1600 Gear pump", "weight": 2, "cat": "Ekstruziya"}, {"id": "t45", "label": "Unit 1500 & 1600 Screen Changer", "weight": 1, "cat": "Ekstruziya"}, {"id": "t46", "label": "Unit 1500 & 1600 Pelletizer unit", "weight": 2, "cat": "Ekstruziya"}, {"id": "t47", "label": "Unit 1500 & 1600 BCW unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t48", "label": "Unit 1500 & 1600 Main Lube Oil unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t49", "label": "Unit 1500 & 1600 Hot Oil unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t50", "label": "Unit 1500 & 1600 Hydraulic unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t51", "label": "Unit 1500 & 1600 PCW System", "weight": 1, "cat": "Ekstruziya"}, {"id": "t52", "label": "Unit 1500 & 1600 Start up & Shut Down of Extruders", "weight": 3, "cat": "Ekstruziya"}, {"id": "t53", "label": "Unit 1500 & 1600 Drying unit", "weight": 1, "cat": "Ekstruziya"}, {"id": "t54", "label": "Unit 1500 & 1600 Mass flowmeter", "weight": 1, "cat": "Ekstruziya"}, {"id": "t55", "label": "Unit 1700 Pellet conveying to blenders", "weight": 1, "cat": "Ekstruziya"}, {"id": "t56", "label": "Unit 1800 Blending", "weight": 1, "cat": "Ekstruziya"}, {"id": "t57", "label": "Unit 1850 Pellet conveying to bagging ,Elutriation", "weight": 1, "cat": "Ekstruziya"}, {"id": "t58", "label": "Unit 1730 RTO package", "weight": 2, "cat": "Ekstruziya"}, {"id": "t59", "label": "Unit 1730 Organoleptic Treatment", "weight": 2, "cat": "Ekstruziya"}, {"id": "t60", "label": "Unit 1500 &1600 Extrusion Unit Quality Troubleshooting", "weight": 3, "cat": "Ekstruziya"}, {"id": "t61", "label": "Unit 1900 Demin Water Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t62", "label": "Unit 1900 Cooling Water Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t63", "label": "Unit 1900 Low Pressure Steam Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t64", "label": "Unit 1900 Low Pressure Nitrogen, LLN and VLN Nitrogen Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t65", "label": "Unit 1900 Flare Network.", "weight": 2, "cat": "Utility (HDPE Zavodu)"}, {"id": "t66", "label": "Unit 1900 Primary Aqeous System, Air Network and Fuel Gas Network.", "weight": 1, "cat": "Utility (HDPE Zavodu)"}, {"id": "t67", "label": "Unit 3950 Isobutane Unloading to Isobutane Sphere D-3952A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t68", "label": "Unit 3950 Hexene Unloading to Hexene Storage Tank TK-3951A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t69", "label": "Unit 3950 Isobutane Transfer from Sphere D-3952A/B to HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t70", "label": "Unit 3950 Hexene Transfer from Storage Tank TK-3951A/B to HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t71", "label": "Unit 3950 Closed Blowdown System of Offsite Area.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t72", "label": "Unit 3950 Impounding Basin for Isobutane Storage Of HDPE Plant.", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t73", "label": "Unit 3950 Isobutane Storage Sphere D-3952A/B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t74", "label": "Unit 3950 Hexene-1 Storage Tank TK-3951A /B.", "weight": 2, "cat": "Offsite & Aktivasiya"}, {"id": "t75", "label": "Unit 1020 Chromium Activation Unit", "weight": 1, "cat": "Offsite & Aktivasiya"}, {"id": "t76", "label": "Unit 3950 Emergency cases: During Unloading operation, Storage areas (Isobutane + Hexene)", "weight": 3, "cat": "Offsite & Aktivasiya"}]</script>
 <script type="application/json" id="roster-data">[{"name": "Javid Huseynov", "pos": "Shift Supervisor", "shift": "A", "badge": "10874", "scores": {}}, {"name": "Samir Mursalov", "pos": "Polymerization DCS Operator", "shift": "A", "badge": "10950", "scores": {}}, {"name": "Haji Hajizade", "pos": "Polymerization DCS Operator", "shift": "A", "badge": "10854", "scores": {}}, {"name": "Sarkhan Jabbarzade", "pos": "HDPE Field  Process Operator", "shift": "A", "badge": "11299", "scores": {}}, {"name": "Famil Aghayev", "pos": "Polymerization Compressor Operator", "shift": "A", "badge": "10746", "scores": {}}, {"name": "Maharram Akbarov", "pos": "Polymerization Pump Operator", "shift": "A", "badge": "11528", "scores": {}}, {"name": "Elnur Mammadov", "pos": "Extruder DCS Operator", "shift": "A", "badge": "11042", "scores": {}}, {"name": "Bahram Aliyev", "pos": "Extruder Field Operator", "shift": "A", "badge": "11162", "scores": {}}, {"name": "Vusal Eldarov", "pos": "Extruder Field Operator", "shift": "A", "badge": "10994", "scores": {}}, {"name": "Jeyhun Ahmadov", "pos": "Utility & Offsite Operator", "shift": "A", "badge": "11046", "scores": {}}, {"name": "Ruslan Iskandarov", "pos": "Utility & Offsite Operator", "shift": "A", "badge": "11399", "scores": {}}, {"name": "Aziz Hajiyev", "pos": "Shift Supervisor", "shift": "B", "badge": "10517", "scores": {}}, {"name": "Elchin Isayev", "pos": "Polymerization DCS Operator", "shift": "B", "badge": "10403", "scores": {}}, {"name": "Elchin Janmirzayev", "pos": "Polymerization DCS Operator", "shift": "B", "badge": "11145", "scores": {}}, {"name": "Mubariz Mammadov", "pos": "Polymerization Lead Operator", "shift": "B", "badge": "10740", "scores": {}}, {"name": "Mikayil Mikayilov", "pos": "Polymerization Compressor Operator", "shift": "B", "badge": "11390", "scores": {}}, {"name": "Farhad Hajiyev", "pos": "Polymerization Pump Operator", "shift": "B", "badge": "10718", "scores": {}}, {"name": "Mirxan Huseynli", "pos": "Polymerization General Field Operator", "shift": "B", "badge": "11400", "scores": {}}, {"name": "Bakir Iskandarov", "pos": "Extruder DCS Operator", "shift": "B", "badge": "10429", "scores": {}}, {"name": "Ramazan Hasanov", "pos": "Extruder Field Operator", "shift": "B", "badge": "11533", "scores": {}}, {"name": "Ilkin Abbasov", "pos": "Utility & Offsite Operator", "shift": "B", "badge": "10869", "scores": {}}, {"name": "Elvin Aliyev", "pos": "Utility & Offsite Operator", "shift": "B", "badge": "11270", "scores": {}}, {"name": "Eltun Mammadov", "pos": "Shift Supervisor", "shift": "C", "badge": "10500", "scores": {}}, {"name": "Ragif Alishov", "pos": "Polymerization DCS Operator", "shift": "C", "badge": "10450", "scores": {}}, {"name": "Araz Ahmadov", "pos": "Polymerization DCS Operator", "shift": "C", "badge": "10684", "scores": {}}, {"name": "Azer Aliyev", "pos": "Polymerization Lead Operator", "shift": "C", "badge": "10957", "scores": {}}, {"name": "Ahadov Ahad", "pos": "HDPE Field  Process Operator", "shift": "C", "badge": "11298", "scores": {}}, {"name": "Musa Isayev", "pos": "Polymerization Compressor Operator", "shift": "C", "badge": "11044", "scores": {}}, {"name": "Faig Aghayev", "pos": "Polymerization Pump Operator", "shift": "C", "badge": "10393", "scores": {}}, {"name": "Rovshan Yusifov", "pos": "Extruder DCS Operator", "shift": "C", "badge": "10472", "scores": {}}, {"name": "Sahib Garayev", "pos": "Extruder Field Operator", "shift": "C", "badge": "11031", "scores": {}}, {"name": "Shamil Garayev", "pos": "Extruder Field Operator", "shift": "C", "badge": "11144", "scores": {}}, {"name": "Zaur Jafarov", "pos": "Utility & Offsite Operator", "shift": "C", "badge": "10936", "scores": {}}, {"name": "Vusal Mikayilov", "pos": "Utility & Offsite Operator", "shift": "C", "badge": "11403", "scores": {}}, {"name": "Eldar Huseynov", "pos": "Shift Supervisor", "shift": "D", "badge": "10410", "scores": {}}, {"name": "Khudaverdi Almuradov", "pos": "Polymerization DCS Operator", "shift": "D", "badge": "10465", "scores": {}}, {"name": "Tofig Mahmudov", "pos": "Polymerization DCS Operator", "shift": "D", "badge": "10731", "scores": {}}, {"name": "Vugar Seyidov", "pos": "Polymerization Lead Operator", "shift": "D", "badge": "11037", "scores": {}}, {"name": "Umid Karimov", "pos": "HDPE Field  Process Operator", "shift": "D", "badge": "11236", "scores": {}}, {"name": "Elnur Fazilov", "pos": "Polymerization Compressor Operator", "shift": "D", "badge": "11398", "scores": {}}, {"name": "Ramil Abdullayev", "pos": "Polymerization General Field Operator", "shift": "D", "badge": "11479", "scores": {}}, {"name": "Anvar Abdullayev", "pos": "Extruder DCS Operator", "shift": "D", "badge": "10493", "scores": {}}, {"name": "Baylar Safarli", "pos": "Extruder Field Operator", "shift": "D", "badge": "11462", "scores": {}}, {"name": "Galamshah Gahramanov", "pos": "Extruder Field Operator", "shift": "D", "badge": "11485", "scores": {}}, {"name": "Vadim Ismayilov", "pos": "Utility & Offsite Operator", "shift": "D", "badge": "10790", "scores": {}}, {"name": "Aykhan Adigozalov", "pos": "Utility & Offsite Operator", "shift": "D", "badge": "10549", "scores": {}}]</script>
@@ -1489,9 +1614,109 @@ function renderUserBar(){
 // tabs each role is allowed to see; first entry becomes the default active tab
 const TAB_ACCESS = {
   global: ['overview','matrix','assess','history','report'],
-  shift:  ['overview','matrix','assess','history'],
-  self:   ['assess','topics']
+  shift:  ['overview','matrix','assess','history','report'],   // növbə rəhbəri 07-ni görür, amma yalnız öz növbəsi ilə
+  self:   ['assess','topics','report']   // işçi 07-ni görür, amma yalnız ÖZ nəticəsi ilə
 };
+// işçi (namizəd) hesabı: hesabatlarda yalnız özünə aid məlumat göstərilir
+function isOwnReportOnly(){ return !!currentUser && !isAdminUser() && !['global','shift'].includes(currentUser.scope); }
+// növbə rəhbəri hesabı: hesabatlarda yalnız öz növbəsinin işçiləri
+function isShiftReportOnly(){ return !!currentUser && !isAdminUser() && currentUser.scope==='shift'; }   // növbə bilinməsə belə ümumi hesabata düşmür
+function shiftLabelOf(sh){ return 'Növbə '+(SHIFT_LABELS[sh]||sh||'—'); }
+// 07 bölməsinin filtri (yalnız bütün növbələrə baxan hesablar: Senior Shift Supervisor, Unit Lead, Extruder Specialist, Direktor, Admin)
+let reportFilter = { mode:'all', shift:'A', badge:'' };
+// Arxivi kim yükləyə bilər: Admin və bütün növbələrə baxan hesablar (Senior Shift Supervisor, Unit/Team Lead,
+// Senior Process Engineer, Process Engineer, Extruder Specialist, Direktor) — hamısı; Shift Supervisor — yalnız öz növbəsi
+function canArchive(){ return !!currentUser && (isAdminUser() || currentUser.scope==='global' || currentUser.scope==='shift'); }
+function renderArchivePanel(){
+  const panel = document.getElementById('archive-panel'); if(!panel) return;
+  const ok = canArchive();
+  panel.style.display = ok ? '' : 'none';
+  if(!ok) return;
+  const shiftOnly = isShiftReportOnly();
+  const sel = document.getElementById('arch-shift'), fixed = document.getElementById('arch-shift-fixed');
+  if(sel) sel.style.display = shiftOnly ? 'none' : '';
+  if(fixed){ fixed.style.display = shiftOnly ? '' : 'none'; fixed.textContent = shiftOnly ? shiftLabelOf(currentUser.shift)+' (yalnız öz növbəniz)' : ''; }
+  const eb = document.getElementById('arch-eyebrow'); if(eb) eb.textContent = shiftOnly ? `${shiftLabelOf(currentUser.shift)} · kompüterə yüklənir` : 'Bütün növbələr · kompüterə yüklənir';
+}
+function canFilterReports(){ return !!currentUser && !isOwnReportOnly() && !isShiftReportOnly(); }
+function reportScope(){
+  if(isOwnReportOnly())   return { mode:'emp', badge: currentUser.badge, own:true };
+  if(isShiftReportOnly()) return { mode:'shift', shift: currentUser.shift, locked:true };
+  if(reportFilter.mode==='shift') return { mode:'shift', shift: reportFilter.shift };
+  if(reportFilter.mode==='emp')   return { mode:'emp', badge: reportFilter.badge };
+  return { mode:'all' };
+}
+function refreshReportView(){
+  renderReportFilter();
+  renderArchivePanel();
+  generateReport();
+  renderPerformanceOverview();
+  if(!isOwnReportOnly()) renderSupervisorApprovalReport();
+}
+
+// ---------- 07 filtri: interfeys ----------
+function azFold(t){ return String(t||'').toLocaleLowerCase('az').replace(/ə/g,'e').replace(/ı/g,'i').replace(/ş/g,'s').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ö/g,'o').replace(/ü/g,'u').replace(/\s+/g,' ').trim(); }
+// Azərbaycan yazılışını siyahıdakı latın (ingilis) transliterasiyasına çevirir: "Hacı Hacızadə" → "haji hajizada", "Ağayev" → "aghayev"
+function azTranslit(t){ return String(t||'').toLocaleLowerCase('az').replace(/ç/g,'ch').replace(/ş/g,'sh').replace(/ğ/g,'gh').replace(/c/g,'j').replace(/x/g,'kh').replace(/q/g,'g').replace(/ə/g,'a').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ü/g,'u').replace(/e/g,'a').replace(/\s+/g,' ').trim(); }
+let rfHl = -1;
+function rfSetMode(mode){
+  if(!canFilterReports()) return;
+  reportFilter.mode = mode;
+  if(mode==='emp') reportFilter.badge = reportFilter.badge || '';
+  refreshReportView();
+  if(mode==='emp' && !reportFilter.badge) setTimeout(()=> document.getElementById('rf-name')?.focus(), 30);
+}
+function rfSetShift(sh){ reportFilter.shift = sh; refreshReportView(); }
+function rfPickEmp(badge){ reportFilter.badge = badge; rfHl = -1; refreshReportView(); }
+function rfClearEmp(){ reportFilter.badge = ''; refreshReportView(); setTimeout(()=> document.getElementById('rf-name')?.focus(), 30); }
+function rfMatches(q){
+  const f = azFold(q); if(f.length < 2) return [];
+  return employees.filter(isCandidateEmployee)
+    .filter(e=> azFold(e.name).includes(f) || azTranslit(e.name).includes(azTranslit(q)) || String(e.badge||'').includes(f))
+    .sort((a,b)=> azFold(a.name).indexOf(f) - azFold(b.name).indexOf(f) || a.name.localeCompare(b.name))
+    .slice(0, 12);
+}
+function rfRenderSugg(){
+  const inp = document.getElementById('rf-name'), box = document.getElementById('rf-sugg');
+  if(!inp || !box) return;
+  const list = rfMatches(inp.value);
+  if(!inp.value.trim() || azFold(inp.value).length<2){ box.style.display='none'; box.innerHTML=''; return; }
+  box.style.display = '';
+  box.innerHTML = list.length ? list.map((e,i)=>`<button type="button" class="${i===rfHl?'hl':''}" onmousedown="event.preventDefault();rfPickEmp('${escapeHtml(e.badge)}')">${escapeHtml(e.name)}<span>#${escapeHtml(e.badge)} · ${escapeHtml(shiftLabelOf(e.shift))} · ${escapeHtml(e.pos||'')}</span></button>`).join('')
+    : '<div class="doc-meta" style="padding:10px 12px;">Uyğun işçi tapılmadı</div>';
+}
+function rfNameKey(e){
+  const list = rfMatches(e.target.value);
+  if(e.key==='ArrowDown'){ e.preventDefault(); rfHl = Math.min(list.length-1, rfHl+1); rfRenderSugg(); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); rfHl = Math.max(0, rfHl-1); rfRenderSugg(); }
+  else if(e.key==='Enter'){ e.preventDefault(); const pick = list[rfHl>=0?rfHl:0]; if(pick) rfPickEmp(pick.badge); }
+  else if(e.key==='Escape'){ e.target.value=''; rfHl=-1; rfRenderSugg(); }
+}
+function renderReportFilter(){
+  const panel = document.getElementById('report-filter-panel');
+  if(!panel) return;
+  const show = canFilterReports();
+  panel.style.display = show ? '' : 'none';
+  if(!show) return;
+  panel.querySelectorAll('.rf-mode').forEach(b=>{ const on = b.dataset.mode===reportFilter.mode; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
+  const extra = document.getElementById('rf-extra');
+  if(reportFilter.mode==='shift'){
+    const cnt = sh=> employees.filter(e=> isCandidateEmployee(e) && e.shift===sh).length;
+    extra.innerHTML = `<div class="rf-box"><label class="t">Növbəni seçin</label><div class="rf-shifts">
+      ${['A','B','C','D'].map(sh=>`<button type="button" class="rf-shift ${reportFilter.shift===sh?'active':''}" onclick="rfSetShift('${sh}')">${shiftLabelOf(sh)}<small>${cnt(sh)} işçi</small></button>`).join('')}
+    </div></div>`;
+  } else if(reportFilter.mode==='emp'){
+    const emp = reportFilter.badge ? employees.find(e=>e.badge===reportFilter.badge) : null;
+    extra.innerHTML = `<div class="rf-box"><label class="t" for="rf-name">İşçinin ad və soyadını yazın</label>
+      <div class="rf-search"><input type="text" id="rf-name" autocomplete="off" placeholder="Məs: Ad Soyad (ən azı 2 hərf)" oninput="rfHl=-1;rfRenderSugg()" onkeydown="rfNameKey(event)" onblur="setTimeout(()=>{const b=document.getElementById('rf-sugg'); if(b) b.style.display='none';},150)" onfocus="rfRenderSugg()">
+        <div class="rf-sugg" id="rf-sugg" style="display:none;"></div></div>
+      ${emp?`<div class="rf-chosen">Seçilib: <strong>${escapeHtml(emp.name)}</strong> <span class="doc-meta">#${escapeHtml(emp.badge)} · ${escapeHtml(shiftLabelOf(emp.shift))} · ${escapeHtml(emp.pos||'')}</span><button type="button" title="Seçimi ləğv et" onclick="rfClearEmp()">✕</button></div>`:''}
+    </div>`;
+  } else {
+    extra.innerHTML = '';
+  }
+}
+function ownEmployee(){ return currentUser ? employees.find(e=>e.badge===currentUser.badge) : null; }
 function applyTabVisibility(){
   if(!currentUser) return;
   const allowed = TAB_ACCESS[currentUser.scope] || TAB_ACCESS.self;
@@ -1508,13 +1733,14 @@ function applyTabVisibility(){
     const first = allowed[0];
     document.querySelector(`.tab[data-view="${first}"]`).classList.add('active');
     document.getElementById('view-'+first).classList.add('active');
-    if(first==='report') generateReport();
+    if(first==='report') refreshReportView();
   }
   const empMgmtTab = document.getElementById('tab-empmgmt');
   if(empMgmtTab) empMgmtTab.style.display = isAdminUser() ? '' : 'none';
   const siteCfgTab = document.getElementById('tab-sitecfg');
   if(siteCfgTab) siteCfgTab.style.display = isAdminUser() ? '' : 'none';
   applySiteConfig(siteCfgDraft || siteConfig);
+  renderArchivePanel();
 }
 
 
@@ -1585,7 +1811,7 @@ async function loadAll(){
   examRequests = (await dbGetList('data/examRequests')) || [];
   credentials = (await dbGetMap('data/credentials')) || {};
   siteConfig = normalizeSiteConfig(await dbGetMap('data/siteConfig'));
-  try{ const meta = await dbGetMap('data/meta'); dataEpoch = (meta && meta.epoch) || 0; goLiveInfo = (meta && meta.goLive) || null; }catch(e){}
+  try{ const meta = await dbGetMap('data/meta'); dataEpoch = (meta && meta.epoch) || 0; goLiveInfo = (meta && meta.goLive) || null; bkLastDeletion = (meta && meta.backupDeletions && meta.backupDeletions.slice(-1)[0]) || null; }catch(e){}
   applySiteConfig(siteConfig);
   await reconcileScoresFromExamRequests();
   const loginBtn = document.getElementById('login-btn');
@@ -1801,7 +2027,8 @@ document.querySelectorAll('.tab').forEach(t=>{
     document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
     document.getElementById('view-'+t.dataset.view).classList.add('active');
-    if(t.dataset.view==='report'){ generateReport(); renderPerformanceOverview(); renderSupervisorApprovalReport(); }
+    if(t.dataset.view==='report') refreshReportView();
+    if(t.dataset.view==='history') renderArchivePanel();
     if(t.dataset.view==='assess' && currentUser) renderAssessTab();
     if(t.dataset.view==='allevals' && currentUser && currentUser.role==='assessor'){ renderAssessLog(); renderGlobalHistPanel(); }
     if(t.dataset.view==='topics' && currentUser) renderCandTopicsList();
@@ -2279,14 +2506,22 @@ function populateCandTopicSelect(){
   }
 }
 
-const EVALUATOR_EMAILS = [
-  'edamirov@socarpolymer.az',
-  'v.n.nuraddin@socarpolymer.az',
-  'e.m.gayibov@socarpolymer.az',
-  'a.m.aladdinov@socarpolymer.az',
-  'neyvazov@socarpolymer.az',
-  'r.v.zamanov@socarpolymer.az'
+// "E-poçtla göndər" alıcıları — standart siyahı; Admin "Görünüş və Funksiyalar"da dəyişə bilər (siteConfig.emailRecipients)
+const DEFAULT_MAIL_RECIPIENTS = [
+  { name:'Emin Damirov',    email:'edamirov@socarpolymer.az' },
+  { name:'Vugar Nuraddin',  email:'v.n.nuraddin@socarpolymer.az' },
+  { name:'Elvin Gayibov',   email:'e.m.gayibov@socarpolymer.az' },
+  { name:'Ali Aladdinov',   email:'a.m.aladdinov@socarpolymer.az' },
+  { name:'Nabi Eyvazov',    email:'neyvazov@socarpolymer.az' },
+  { name:'Rahman Zamanov',  email:'r.v.zamanov@socarpolymer.az' },
+  { name:'Karam Karimov',   email:'k.s.karimov@socarpolymer.az' }
 ];
+function getMailRecipients(){
+  const c = (typeof siteCfgDraft!=='undefined' && siteCfgDraft) || (typeof siteConfig!=='undefined' && siteConfig) || {};
+  return (Array.isArray(c.emailRecipients) && c.emailRecipients.length) ? c.emailRecipients : DEFAULT_MAIL_RECIPIENTS;
+}
+function evaluatorEmails(){ return getMailRecipients().map(r=>r.email).filter(Boolean); }
+const EMAIL_RE = /^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]{2,}$/;
 function notifyEvaluatorsByEmail(req){
   const subject = 'Yeni mövzu sorğusu: ' + req.name + ' — ' + req.topicLabel;
   const body =
@@ -2295,7 +2530,7 @@ function notifyEvaluatorsByEmail(req){
     'Mövzu: ' + req.topicLabel + ' [' + req.topicCat + ']\n' +
     'Tarix: ' + new Date(req.requestedAt).toLocaleString('az-AZ') + '\n\n' +
     'Zəhmət olmasa sistemə daxil olub sorğunu təsdiqləyin.';
-  const mailto = 'mailto:' + EVALUATOR_EMAILS.join(',') +
+  const mailto = 'mailto:' + evaluatorEmails().join(',') +
     '?subject=' + encodeURIComponent(subject) +
     '&body=' + encodeURIComponent(body);
   const a = document.createElement('a');
@@ -3327,7 +3562,10 @@ function pctForEmpMonth(emp, monthKey, isCurrentMonth){
 function performanceOverviewRows(){
   const months = lastNMonthKeys(6);
   const curKey = getMonthKey(new Date());
-  const list = employees.filter(isCandidateEmployee).slice();
+  const sc = reportScope();
+  const list = sc.mode==='emp'   ? employees.filter(e=> sc.badge && e.badge===sc.badge)                 // bir işçi (işçinin özü və ya filtrlə seçilən)
+             : sc.mode==='shift' ? employees.filter(e=> isCandidateEmployee(e) && e.shift===sc.shift)   // bir növbə
+             : employees.filter(isCandidateEmployee).slice();
   list.sort((a,b)=> (a.shift||'').localeCompare(b.shift||'') || posRank(a.pos)-posRank(b.pos) || a.name.localeCompare(b.name));
   return { months, curKey, rows: list.map(emp=>({
     name: emp.name, pos: emp.pos, shift: emp.shift,
@@ -3335,6 +3573,16 @@ function performanceOverviewRows(){
   })) };
 }
 function renderPerformanceOverview(){
+  const own = isOwnReportOnly();
+  document.body.classList.toggle('own-report', own);
+  const sc = reportScope();
+  const selEmp = sc.mode==='emp' && !own ? employees.find(e=>e.badge===sc.badge) : null;
+  const eb = document.getElementById('perf-eyebrow'); if(eb) eb.textContent = own ? 'Yalnız sizin nəticəniz'
+    : sc.mode==='emp' ? (selEmp ? `İşçi: ${selEmp.name}` : 'İşçi seçilməyib')
+    : sc.mode==='shift' ? `Yalnız ${shiftLabelOf(sc.shift)} işçiləri` : 'Bütün operatorlar';
+  const hn = document.getElementById('perf-hint'); if(hn) hn.textContent = own
+    ? 'Son 6 ay üzrə topladığınız kompetensiya faiziniz. Cari ay hələ tamamlanmayıb, "canlı" rəqəm göstərilir.'
+    : 'Hər operatorun ad-soyadı, vəzifəsi və son 6 ay üzrə topladığı kompetensiya faizi. Cari ay hələ tamamlanmayıb, "canlı" rəqəm göstərilir.';
   const backupBtn = document.getElementById('backup-btn');
   if(backupBtn) backupBtn.style.display = isAdminUser() ? '' : 'none';
   const tableEl = document.getElementById('perf-overview-table');
@@ -3533,26 +3781,129 @@ async function pruneBackups(){
   }).catch(()=>{});
   for(const fid of purge) await dbDeleteFileChunked(fid);
 }
+let bkSelected = new Set();
 async function renderBackupList(){
   const el = document.getElementById('backup-list');
   if(!el || !isAdminUser()) return;
   try{ backupIndexCache = (await dbGetList('data/backupIndex')) || []; }catch(e){ backupIndexCache = []; }
   const ok = backupIndexCache.filter(b=>b.status==='ok').slice().reverse();
+  bkSelected = new Set([...bkSelected].filter(id=> ok.some(b=>b.id===id)));   // artıq olmayanları seçimdən çıxart
   renderDtp();
   const last = document.getElementById('gl-last');
   if(last) last.textContent = goLiveInfo ? `Son sıfırlama: ${fmtDateTime(goLiveInfo.at)} — ${goLiveInfo.by}` : '';
-  const lastFail = backupIndexCache.filter(b=>b.status==='failed').slice(-1)[0];
-  const failNote = lastFail ? `<div class="doc-meta" style="color:var(--red);margin-bottom:8px;">Son uğursuz cəhd: ${fmtDateTime(lastFail.createdAt)} · ${escapeHtml(lastFail.error||'')}</div>` : '';
+  const fails = backupIndexCache.filter(b=>b.status==='failed');
+  const lastFail = fails.slice(-1)[0];
+  const failNote = lastFail ? `<div class="doc-meta" style="color:var(--red);margin-bottom:8px;">Son uğursuz cəhd: ${fmtDateTime(lastFail.createdAt)} · ${escapeHtml(lastFail.error||'')}
+      · <a href="#" style="color:inherit;" onclick="event.preventDefault();deleteBackupsAsk(${escapeHtml(JSON.stringify(fails.map(f=>f.id)))})">uğursuz cəhdləri (${fails.length}) təmizlə</a></div>` : '';
   if(!ok.length){ el.innerHTML = failNote + '<div class="empty-state">Hələ bərpa nöqtəsi yoxdur. İlk avtomatik nöqtə bir neçə dəqiqəyə yaranacaq, və ya "İndi bərpa nöqtəsi yarat" basın.</div>'; return; }
-  el.innerHTML = failNote + `<div style="overflow-x:auto;"><table class="bk-table"><thead><tr><th>Tarix</th><th>Növ</th><th>Yaradan</th><th>Məzmun</th><th></th></tr></thead><tbody>
-    ${ok.slice(0,60).map(b=>`<tr>
+  const shown = ok.slice(0,60);
+  const allShownSel = shown.length && shown.every(b=>bkSelected.has(b.id));
+  const toolbar = bkSelected.size ? `<div class="bk-toolbar"><strong>${bkSelected.size} nöqtə seçilib</strong>
+      <button class="logout-btn bk-del" style="padding:5px 12px;" onclick="deleteBackupsAsk([...bkSelected])">🗑 Seçilmişləri sil</button>
+      <button class="logout-btn" style="padding:5px 12px;" onclick="bkSelected.clear();renderBackupList()">Seçimi ləğv et</button></div>` : '';
+  el.innerHTML = failNote + toolbar + `<div style="overflow-x:auto;"><table class="bk-table"><thead><tr>
+      <th style="width:28px;"><input type="checkbox" title="Görünənlərin hamısını seç" ${allShownSel?'checked':''} onchange="bkToggleAll(this.checked)"></th>
+      <th>Tarix</th><th>Növ</th><th>Yaradan</th><th>Məzmun</th><th></th></tr></thead><tbody>
+    ${shown.map(b=>`<tr class="${bkSelected.has(b.id)?'sel':''}">
+      <td><input type="checkbox" ${bkSelected.has(b.id)?'checked':''} onchange="bkToggle('${b.id}',this.checked)" aria-label="Seç"></td>
       <td class="mono" style="white-space:nowrap;">${fmtDateTime(b.createdAt)}</td>
       <td><span class="bk-kind ${b.kind}">${BK_KIND_LABEL[b.kind]||b.kind}</span></td>
       <td>${escapeHtml(b.createdBy||'')}${b.reason && b.kind!=='auto'?`<div class="doc-meta">${escapeHtml(b.reason)}</div>`:''}</td>
       <td class="doc-meta">${b.counts?`${b.counts.exams} sorğu · ${b.counts.done} nəticə · ${b.counts.icc} ICC · ${b.counts.creds} password`:''}</td>
-      <td style="text-align:right;"><button class="logout-btn" style="padding:4px 10px;font-size:11px;" onclick="restoreStep1('${b.id}')">Bərpa et</button></td>
+      <td style="text-align:right;white-space:nowrap;">
+        <button class="logout-btn" style="padding:4px 10px;font-size:11px;" onclick="restoreStep1('${b.id}')">Bərpa et</button>
+        <button class="logout-btn bk-del" style="padding:4px 10px;font-size:11px;" title="Bu bərpa nöqtəsini sil" onclick="deleteBackupsAsk(['${b.id}'])">🗑 Sil</button></td>
     </tr>`).join('')}
-  </tbody></table></div>${ok.length>60?`<div class="doc-meta" style="margin-top:6px;">Ən son 60 nöqtə göstərilir (cəmi ${ok.length}).</div>`:''}`;
+  </tbody></table></div>${ok.length>60?`<div class="doc-meta" style="margin-top:6px;">Ən son 60 nöqtə göstərilir (cəmi ${ok.length}).</div>`:''}
+  ${bkLastDeletion?`<div class="doc-meta" style="margin-top:6px;">Son silmə: ${fmtDateTime(bkLastDeletion.at)} — ${escapeHtml(bkLastDeletion.by)}, ${bkLastDeletion.count} nöqtə</div>`:''}`;
+}
+let bkLastDeletion = null;
+function bkToggle(id, on){ if(on) bkSelected.add(id); else bkSelected.delete(id); renderBackupList(); }
+function bkToggleAll(on){
+  const shown = backupIndexCache.filter(b=>b.status==='ok').slice().reverse().slice(0,60);
+  shown.forEach(b=> on ? bkSelected.add(b.id) : bkSelected.delete(b.id));
+  renderBackupList();
+}
+
+// ---------- bərpa nöqtələrinin silinməsi (yalnız Admin) ----------
+let bkDelPending = null;
+async function deleteBackupsAsk(ids){
+  if(!isAdminUser()) return;
+  ids = [...new Set(ids)];
+  const list = ids.map(id=> backupIndexCache.find(b=>b.id===id)).filter(Boolean);
+  if(!list.length) return;
+  const okAll = backupIndexCache.filter(b=>b.status==='ok');
+  const okDel = list.filter(b=>b.status==='ok');
+  const newest = okAll.slice().sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt))[0];
+  const warnings = [];
+  if(okDel.length && okDel.length === okAll.length) warnings.push('Bütün bərpa nöqtələri silinəcək — sistemi heç bir əvvəlki vəziyyətə qaytarmaq mümkün olmayacaq.');
+  const preResets = okDel.filter(b=>b.kind==='pre-reset');
+  if(preResets.length) warnings.push(`${preResets.length} "Sıfırlamadan əvvəl" nöqtəsi silinir — həmin sıfırlamanı geri qaytarmaq mümkün olmayacaq.`);
+  if(newest && okDel.some(b=>b.id===newest.id)) warnings.push('Ən son bərpa nöqtəsi silinir.');
+  const onlyFailed = !okDel.length;
+  // sadə hal: bir adi nöqtə (və ya yalnız uğursuz cəhdlər) — adi təsdiq kifayətdir
+  if((list.length===1 || onlyFailed) && !warnings.length){
+    const b = list[0];
+    const msg = onlyFailed ? `${list.length} uğursuz cəhdin qeydi silinsin?`
+      : `${fmtDateTime(b.createdAt)} tarixli "${BK_KIND_LABEL[b.kind]||b.kind}" bərpa nöqtəsi birdəfəlik silinsin? Bu əməliyyat geri qaytarıla bilməz.`;
+    if(!(await appConfirm(msg))) return;
+    return deleteBackupsExecute(ids);
+  }
+  // təhlükəli və ya toplu hal: SİL sözünü yazmaq tələb olunur
+  bkDelPending = ids;
+  glModal(`<div class="gl-steps">BƏRPA NÖQTƏLƏRİNİN SİLİNMƏSİ</div>
+    <h3>🗑 ${list.length} bərpa nöqtəsi silinəcək</h3>
+    <div style="max-height:180px;overflow:auto;margin:8px 0 10px;"><table class="bk-table"><tbody>
+      ${list.map(b=>`<tr><td class="mono">${fmtDateTime(b.createdAt)}</td><td><span class="bk-kind ${b.kind}">${b.status==='failed'?'Uğursuz':(BK_KIND_LABEL[b.kind]||b.kind)}</span></td></tr>`).join('')}
+    </tbody></table></div>
+    ${warnings.length?`<ul class="gl-list" style="color:var(--red);">${warnings.map(w=>`<li>${escapeHtml(w)}</li>`).join('')}</ul>`:''}
+    <div class="hint" style="margin-bottom:12px;">Silinmiş bərpa nöqtəsi geri qaytarıla bilməz. Sistemin indiki məlumatlarına (nəticələr, ICC faylları) toxunulmur.</div>
+    <div class="field"><label>Təsdiq üçün <strong style="color:var(--red);">SİL</strong> yazın</label><input type="text" id="bkdel-phrase" autocomplete="off" oninput="document.getElementById('bkdel-go').disabled = this.value.trim().toLocaleUpperCase('az')!=='SİL'"></div>
+    <div class="cm-err" id="bkdel-err" style="display:none;"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
+      <button class="logout-btn" onclick="glCloseModal()">Ləğv et</button>
+      <button class="btn" id="bkdel-go" style="background:var(--red);border-color:var(--red);color:#fff;" disabled onclick="deleteBackupsExecute(bkDelPending)">Birdəfəlik sil</button>
+    </div>`);
+  setTimeout(()=>document.getElementById('bkdel-phrase')?.focus(), 50);
+}
+async function deleteBackupsExecute(ids){
+  if(!isAdminUser() || !ids || !ids.length) return;
+  const btn = document.getElementById('bkdel-go'); if(btn){ btn.disabled = true; btn.textContent = 'Silinir...'; }
+  const removed = [];
+  try{
+    // 1) əvvəl siyahıdan çıxarılır (atomik) — yarımçıq silinmiş nöqtəyə heç kim bərpa edə bilməsin
+    await dbTransactLists(['data/backupIndex'], (idx)=>{
+      const set = new Set(ids);
+      const keep = idx.filter(b=>{ if(set.has(b.id) && b.status!=='writing'){ removed.push({...b}); return false; } return true; });
+      if(!removed.length) return { write:false };
+      idx.length = 0; keep.forEach(b=>idx.push(b));
+      return { write:true };
+    });
+  }catch(e){
+    const msg = 'Silmək alınmadı: '+bkErrorText({ stage:'index', code:(e&&e.code)||(e&&e.message) });
+    if(btn){ glShowErr('bkdel', msg); btn.disabled=false; btn.textContent='Birdəfəlik sil'; } else showToast(msg);
+    return;
+  }
+  // 2) sonra məzmun hissələri silinir
+  const db = await getDb();
+  let chunkErr = 0;
+  for(const b of removed){
+    for(let i=0;i<(b.chunkCount||0);i++){
+      try{ await db.doc(bkChunkPath(b.store, b.id, i)).delete(); }catch(e){ chunkErr++; }
+    }
+  }
+  // 3) audit: kim, nə vaxt, nəyi sildi
+  try{
+    const meta = (await dbGetMap('data/meta')) || {};
+    const entry = { at:new Date().toISOString(), by:currentUser.name, count:removed.length, points: removed.map(b=>({ createdAt:b.createdAt, kind:b.kind, status:b.status })) };
+    meta.backupDeletions = [...(meta.backupDeletions||[]), entry].slice(-50);
+    await dbSetMap('data/meta', meta);
+    bkLastDeletion = entry;
+  }catch(e){}
+  ids.forEach(id=> bkSelected.delete(id));
+  glCloseModal(); bkDelPending = null;
+  showToast(`${removed.length} bərpa nöqtəsi silindi${chunkErr?` (${chunkErr} məzmun hissəsi silinmədi — sonrakı təmizləmədə yenidən cəhd olunacaq)`:''}`);
+  renderBackupList();
 }
 async function manualBackupNow(){
   if(!isAdminUser()) return;
@@ -3881,6 +4232,20 @@ async function reloadSharedStateAfterBulkChange(){
 }
 
 // ---------- BƏRPA ----------
+const EMP_PROGRESS_FIELDS = ['scores','lastResult','checklist','pctHistory'];   // bərpa olunan hissə; qalanı (kimlik) indiki kimi qalır
+function mergeEmployeesForRestore(curList, oldList){
+  const byId = new Map(oldList.map(o=>[o.id, o])), byBadge = new Map(oldList.filter(o=>o.badge).map(o=>[String(o.badge), o]));
+  return curList.map(e=>{
+    const old = byId.get(e.id) || (e.badge ? byBadge.get(String(e.badge)) : null);
+    const out = { ...e };
+    EMP_PROGRESS_FIELDS.forEach(f=>{
+      if(old && old[f]!==undefined) out[f] = JSON.parse(JSON.stringify(old[f]));
+      else delete out[f];                         // bərpa nöqtəsində olmayan (sonradan əlavə olunmuş) işçi — irəliləyişi təmiz başlayır
+    });
+    if(!out.scores) out.scores = {};
+    return out;
+  });
+}
 let rsTarget = null;
 async function restoreStep1(id){
   if(!isAdminUser()) return;
@@ -3899,9 +4264,10 @@ async function restoreStep1(id){
       <tr><th>İmtahan sorğusu</th><td>${cur.exams} → <strong>${b.counts?.exams??'?'}</strong></td></tr>
       <tr><th>Tamamlanmış nəticə</th><td>${cur.done} → <strong>${b.counts?.done??'?'}</strong></td></tr>
       <tr><th>ICC faylı</th><td>${cur.icc} → <strong>${b.counts?.icc??'?'}</strong></td></tr>
-      <tr><th>Password</th><td>${cur.creds} → <strong>${b.counts?.creds??'?'}</strong></td></tr>
+      <tr><th>İşçi siyahısı</th><td><strong>dəyişmir</strong> (${employees.length} nəfər qalır)</td></tr>
+      <tr><th>Password</th><td><strong>dəyişmir</strong></td></tr>
     </tbody></table>
-    <div class="hint" style="margin-bottom:12px;">Bu nöqtədən sonra edilən bütün dəyişikliklər (nəticələr, ICC yükləmələri) qüvvədən düşəcək. Bərpadan əvvəl indiki vəziyyət də ayrıca saxlanılacaq — fikrinizi dəyişsəniz, ona qayıda bilərsiniz.</div>
+    <div class="hint" style="margin-bottom:12px;">Bu nöqtədən sonra daxil edilən nəticələr, təsdiqlər və ICC yükləmələri qüvvədən düşəcək, işçilərin balları həmin tarixə qayıdacaq. İşçi siyahısı (sonradan əlavə olunanlar da), passwordlar, görünüş tənzimləmələri və elanlar dəyişmir. Bərpadan əvvəl indiki vəziyyət də ayrıca saxlanılacaq — fikrinizi dəyişsəniz, ona qayıda bilərsiniz.</div>
     <div class="field"><label>Davam etmək üçün <strong style="color:var(--violet);">BƏRPA</strong> yazın</label><input type="text" id="rs-phrase" autocomplete="off" oninput="document.getElementById('rs-next').disabled = this.value.trim().toLocaleUpperCase('az')!=='BƏRPA'"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
       <button class="logout-btn" onclick="glCloseModal()">Ləğv et</button>
@@ -3933,10 +4299,21 @@ async function restoreExecute(){
     const pre = await createBackup('pre-restore', 'Bərpadan əvvəl → hədəf: '+fmtDateTime(target.createdAt));
     if(!pre) throw new Error('backup');
     btn.textContent = 'Bərpa olunur...';
-    for(const set of BACKUP_SETS){
-      const val = data[set.key] ?? (set.type==='map' ? {} : []);
-      const ok = set.type==='map' ? await dbSetMap(set.path, val) : await dbSetList(set.path, val);
-      if(!ok) throw new Error('write:'+set.path);
+    // Bərpa qaydası:
+    //  • İşçi SİYAHISI (kim var, ad, vəzifə, növbə, badge) — indiki kimi qalır; sonradan əlavə olunan işçilər də qalır
+    //  • İşçilərin İRƏLİLƏYİŞİ (ballar, son nəticələr, checklist, faiz tarixçəsi) — bərpa nöqtəsinə qayıdır
+    //  • İmtahan sorğuları/nəticələr, tarixi məlumat, rüblük sənəd qeydləri — bərpa nöqtəsinə qayıdır
+    //  • Passwordlar — DƏYİŞMİR
+    const current = await readBackupSets();
+    const merged = mergeEmployeesForRestore(current.employees, data.employees || []);
+    const writes = [
+      ['data/employees',    merged],
+      ['data/examRequests', data.examRequests || []],
+      ['data/history',      data.history || []],
+      ['data/documents',    data.documents || []]
+    ];
+    for(const [path, val] of writes){
+      if(!(await dbSetList(path, val))) throw new Error('write:'+path);
     }
     await bumpEpoch({ lastRestore: { at: new Date().toISOString(), by: currentUser.name, to: target.createdAt, backupId: target.id } });
     await reloadSharedStateAfterBulkChange();
@@ -4017,9 +4394,10 @@ function statusAz(r){
   return ({pending:'Təsdiq gözləyir', approved:'Təsdiqlənib (imtahan gözləyir)', rejected:'İmtahana buraxılmadı', done:'Tamamlanıb'})[r.status] || r.status || '';
 }
 async function adminExportArchive(){
-  if(!isAdminUser()) return;
+  if(!canArchive()) return;
   const btn = document.getElementById('arch-btn'), prog = document.getElementById('arch-progress');
-  const shift = document.getElementById('arch-shift').value;
+  // Shift Supervisor seçimdən asılı olmayaraq yalnız öz növbəsini yükləyə bilər
+  const shift = isShiftReportOnly() ? (currentUser.shift || '__none__') : document.getElementById('arch-shift').value;
   const fromV = document.getElementById('arch-from').value, toV = document.getElementById('arch-to').value;
   const withFiles = document.getElementById('arch-files').checked;
   const from = fromV ? new Date(fromV+'T00:00:00') : null, to = toV ? new Date(toV+'T23:59:59') : null;
@@ -4185,6 +4563,10 @@ async function exportPerformanceOverviewCsv(){ // ad köhnə qalıb (düymələr
   showToast('Excel (.xlsx) faylı yükləndi');
 }
 function generateReport(){
+  const sc = reportScope();
+  if(sc.mode==='emp')   return generateOwnReport(sc.badge, !!sc.own);
+  if(sc.mode==='shift') return generateShiftReport(sc.shift);
+  const qe = document.getElementById('qrep-eyebrow'); if(qe) qe.textContent = 'Avtomatik toplanır';
   const now = new Date();
   const q = getQuarter(now);
   document.getElementById('report-quarter').value = q;
@@ -4259,6 +4641,134 @@ Bu hesabat sistemdəki cari məlumatlar əsasında avtomatik yaradılıb.`;
   document.getElementById('report-body').textContent = text;
   window._reportText = text; window._reportQuarter = q;
 }
+// Növbə rəhbərinin rüblük hesabatı — yalnız öz növbəsinin işçiləri; digər növbələr və ümumi göstəricilər daxil edilmir
+function generateShiftReport(sh){
+  sh = sh || currentUser.shift;
+  const shName = shiftLabelOf(sh);
+  const viewerIsSup = isShiftReportOnly();
+  const qe = document.getElementById('qrep-eyebrow'); if(qe) qe.textContent = shName+' hesabatı';
+  const now = new Date();
+  const q = getQuarter(now);
+  document.getElementById('report-quarter').value = q;
+  const team = employees.filter(e=> isCandidateEmployee(e) && e.shift===sh);
+  const teamBadges = new Set(team.map(e=>e.badge));
+  const reqs = examRequests.filter(r=> r.shift===sh || teamBadges.has(r.badge));
+  const pctOf = e=> empTotals(e).pct;
+  const avg = team.length ? team.reduce((a,e)=>a+pctOf(e),0)/team.length : 0;
+  const gradeCounts = {'–':0,A:0,B:0,C:0,S:0};
+  team.forEach(e=>{ gradeCounts[gradeFor(pctOf(e)).g]++; });
+  const gradeLine = `Qiymətləndirilməyib:${gradeCounts['–']}  Awareness:${gradeCounts.A}  Basic Knowledge:${gradeCounts.B}  Competent:${gradeCounts.C}  Skilled:${gradeCounts.S}`;
+  const qAssess = reqs.filter(r=> r.status==='done' && r.evaluatedAt && getQuarter(new Date(r.evaluatedAt))===q)
+    .sort((a,b)=> new Date(b.evaluatedAt)-new Date(a.evaluatedAt));
+  const passN = qAssess.filter(r=>r.result==='pass').length;
+  const top = [...team].map(e=>({name:e.name,pct:pctOf(e)})).sort((a,b)=>b.pct-a.pct).slice(0,5)
+    .map(e=>`  · ${e.name} — ${Math.round(e.pct)}%`).join('\n') || '  · Məlumat yoxdur';
+  const perfLines = [...team].map(e=>({name:e.name, pos:e.pos, pct:(e.pctHistory && e.pctHistory.quarterly && e.pctHistory.quarterly[q]) ? e.pctHistory.quarterly[q].pct : pctOf(e)}))
+    .sort((a,b)=>b.pct-a.pct).map(e=>`  · ${e.name} (${e.pos||'—'}) — ${Math.round(e.pct)}%`).join('\n') || '  · İşçi yoxdur';
+  const assessLines = qAssess.map(r=>`  · ${fmtDate(r.evaluatedAt)} — ${r.name} — ${r.topicLabel} — ${r.result==='pass'?'Keçdi':'Keçmədi'} (qiymətləndirici: ${r.assessorName||'—'})`).join('\n') || '  · Bu rüb qiymətləndirmə aparılmayıb';
+  const pending = reqs.filter(r=> r.status==='pending' || r.status==='approved');
+  const pendingLines = pending.map(r=>`  · ${r.name} — ${r.topicLabel} — ${r.status==='pending'?(viewerIsSup?'sizin təsdiqinizi gözləyir':'növbə rəhbərinin təsdiqini gözləyir'):'imtahan gözləyir'}`).join('\n') || '  · Gözləyən sorğu yoxdur';
+  // növbənin rüblər üzrə orta balı — işçilərin öz rüblük qeydlərindən hesablanır (ümumi tarixçə istifadə edilmir)
+  const qKeys = new Set(); team.forEach(e=> Object.keys((e.pctHistory&&e.pctHistory.quarterly)||{}).forEach(k=>qKeys.add(k)));
+  const histLines = [...qKeys].sort().map(k=>{
+    const vals = team.map(e=> e.pctHistory && e.pctHistory.quarterly && e.pctHistory.quarterly[k]).filter(Boolean).map(v=>v.pct);
+    return `  · ${k}: orta bal ${Math.round(vals.reduce((a,b)=>a+b,0)/vals.length)}% (${vals.length} işçi)`;
+  }).join('\n') || '  · Hələ ötən rüblər üzrə qeyd yoxdur';
+  const text =
+`SOCAR POLYMER — HDPE OPS KOMPETENSIYA MATRİSİ
+${shName.toUpperCase()} — RÜBLÜK HESABAT: ${q}
+Hazırlayan: ${currentUser.name} · Yaradılma tarixi: ${now.toLocaleDateString('az-AZ')}
+
+1) NÖVBƏNİN ÜMUMİ VƏZİYYƏTİ
+  · İşçi sayı: ${team.length}
+  · Orta kompetensiya balı (${TASKS.length} mövzu üzrə): ${Math.round(avg)}%
+  · Bal bölgüsü: ${gradeLine}
+  · Bu rüb aparılan qiymətləndirmə: ${qAssess.length} (Keçdi: ${passN}, Keçmədi: ${qAssess.length-passN})
+
+2) NÖVBƏDƏ ƏN YÜKSƏK BALA SAHİB İŞÇİLƏR
+${top}
+
+3) PERFORMANCE OVERVIEW — ${q} FAİZ BALI
+${perfLines}
+
+4) BU RÜB APARILAN QİYMƏTLƏNDİRMƏLƏR
+${assessLines}
+
+5) GÖZLƏYƏN SORĞULAR
+${pendingLines}
+
+6) NÖVBƏNİN RÜBLƏR ÜZRƏ ORTA BALI
+${histLines}
+
+---
+Bu hesabat yalnız ${shName} işçilərinin məlumatları əsasında avtomatik yaradılıb.`;
+  document.getElementById('report-body').textContent = text;
+  window._reportText = text; window._reportQuarter = q+' — '+shName;
+}
+// İşçinin şəxsi rüblük hesabatı — başqa heç bir işçinin adı və ya nəticəsi daxil edilmir
+function generateOwnReport(badge, own){
+  if(own) document.body.classList.add('own-report');
+  const Y = (a,b)=> own ? a : b;          // "sizin" / üçüncü şəxs ifadələri
+  const qe = document.getElementById('qrep-eyebrow'); if(qe) qe.textContent = Y('Şəxsi hesabatınız','İşçinin rüblük hesabatı');
+  const now = new Date();
+  const q = getQuarter(now);
+  document.getElementById('report-quarter').value = q;
+  const emp = badge ? employees.find(e=>e.badge===badge) : null;
+  let text;
+  if(!emp){
+    text = own ? 'Hesabınız işçi siyahısında tapılmadı. Admin ilə əlaqə saxlayın.'
+               : 'İşçi seçilməyib. Yuxarıdakı filtrdə işçinin ad və soyadını yazıb siyahıdan seçin.';
+  } else {
+    const tot = empTotals(emp);
+    const gr = gradeFor(tot.pct);
+    const lr = emp.lastResult || {};
+    const passed = Object.values(lr).filter(v=>v==='pass').length;
+    const failed = Object.entries(lr).filter(([,v])=>v==='fail').map(([id])=> (TASKS.find(t=>t.id===id)||{}).label).filter(Boolean);
+    const months = lastNMonthKeys(6), curKey = getMonthKey(now);
+    const monthLines = months.map(mk=>{ const v = pctForEmpMonth(emp, mk, mk===curKey); return `  · ${monthKeyLabel(mk)}${mk===curKey?' (canlı)':''}: ${v!=null?Math.round(v)+'%':'—'}`; }).join('\n');
+    const mine = examRequests.filter(r=> r.badge===emp.badge);
+    const qAssess = mine.filter(r=> r.status==='done' && r.evaluatedAt && getQuarter(new Date(r.evaluatedAt))===q)
+      .sort((a,b)=> new Date(b.evaluatedAt)-new Date(a.evaluatedAt));
+    const assessLines = qAssess.map(r=>`  · ${fmtDate(r.evaluatedAt)} — ${r.topicLabel} — ${r.result==='pass'?'Keçdi':'Keçmədi'} (qiymətləndirici: ${r.assessorName||'—'})`).join('\n') || Y('  · Bu rüb qiymətləndirməniz olmayıb','  · Bu rüb qiymətləndirmə olmayıb');
+    const pending = mine.filter(r=> r.status==='pending' || r.status==='approved');
+    const pendingLines = pending.map(r=>`  · ${r.topicLabel} — ${r.status==='pending'?'növbə rəhbərinin təsdiqini gözləyir':'imtahan gözləyir'}`).join('\n') || Y('  · Gözləyən sorğunuz yoxdur','  · Gözləyən sorğu yoxdur');
+    const qHist = (emp.pctHistory && emp.pctHistory.quarterly) ? Object.entries(emp.pctHistory.quarterly).sort(([a],[b])=> a.localeCompare(b)) : [];
+    const histLines = qHist.length ? qHist.map(([k,v])=>`  · ${k}: ${Math.round(v.pct)}%`).join('\n') : '  · Hələ ötən rüblər üzrə qeyd yoxdur';
+    text =
+`SOCAR POLYMER — HDPE OPS KOMPETENSIYA MATRİSİ
+${Y('ŞƏXSİ RÜBLÜK HESABAT','İŞÇİNİN RÜBLÜK HESABATI')}: ${q}
+Yaradılma tarixi: ${now.toLocaleDateString('az-AZ')}
+
+1) İŞÇİ
+  · Ad Soyad: ${emp.name}
+  · Badge: ${emp.badge}
+  · Vəzifə: ${emp.pos||'—'}
+  · Növbə: ${SHIFT_LABELS[emp.shift]||emp.shift||'—'}
+
+2) CARİ VƏZİYYƏT
+  · Kompetensiya balı (${TASKS.length} mövzu üzrə): ${Math.round(tot.pct)}%
+  · Səviyyə: ${gr.label}
+  · ${Y('Keçdiyiniz','Keçdiyi')} mövzu sayı: ${passed}
+  · Son nəticəsi "Keçmədi" olan mövzular: ${failed.length ? failed.join(', ') : 'yoxdur'}
+
+3) PERFORMANCE OVERVIEW — SON 6 AY
+${monthLines}
+
+4) ${Y('BU RÜB QİYMƏTLƏNDİRMƏLƏRİNİZ','BU RÜB QİYMƏTLƏNDİRMƏLƏRİ')}
+${assessLines}
+
+5) ${Y('GÖZLƏYƏN SORĞULARINIZ','GÖZLƏYƏN SORĞULARI')}
+${pendingLines}
+
+6) ${Y('RÜBLƏR ÜZRƏ BALINIZ','RÜBLƏR ÜZRƏ BALI')}
+${histLines}
+
+---
+${Y('Bu hesabat yalnız sizin məlumatlarınız əsasında avtomatik yaradılıb.','Bu hesabat yalnız həmin işçinin məlumatları əsasında avtomatik yaradılıb. Hazırlayan: '+currentUser.name)}`;
+  }
+  document.getElementById('report-body').textContent = text;
+  window._reportText = text; window._reportQuarter = q + (emp && !own ? ' — '+emp.name : '');
+}
 function buildSupervisorStats(list){
   const byPerson = {};
   list.forEach(r=>{
@@ -4284,13 +4794,20 @@ function renderSupervisorApprovalReport(){
   const now = new Date();
   const monthKey = getMonthKey(now);
   const quarterKey = getQuarter(now);
-  const monthList = examRequests.filter(r=> getMonthKey(new Date(r.approvedAt||r.rejectedAt||r.requestedAt))===monthKey && (r.approvedAt||r.rejectedAt));
-  const quarterList = examRequests.filter(r=> getQuarter(new Date(r.approvedAt||r.rejectedAt||r.requestedAt))===quarterKey && (r.approvedAt||r.rejectedAt));
+  const sc = reportScope();
+  const src = sc.mode==='shift' ? examRequests.filter(r=> r.shift===sc.shift)
+            : sc.mode==='emp'   ? examRequests.filter(r=> r.badge===sc.badge)
+            : examRequests;
+  const scopeEmp = sc.mode==='emp' ? employees.find(e=>e.badge===sc.badge) : null;
+  const scopeLine = sc.mode==='shift' ? '\n'+shiftLabelOf(sc.shift).toUpperCase()+' ÜZRƏ'
+                  : sc.mode==='emp' ? '\nİŞÇİ: '+(scopeEmp ? scopeEmp.name.toUpperCase()+' (#'+scopeEmp.badge+')' : 'SEÇİLMƏYİB') : '';
+  const monthList = src.filter(r=> getMonthKey(new Date(r.approvedAt||r.rejectedAt||r.requestedAt))===monthKey && (r.approvedAt||r.rejectedAt));
+  const quarterList = src.filter(r=> getQuarter(new Date(r.approvedAt||r.rejectedAt||r.requestedAt))===quarterKey && (r.approvedAt||r.rejectedAt));
   const monthStats = buildSupervisorStats(monthList);
   const quarterStats = buildSupervisorStats(quarterList);
   const text =
 `SOCAR POLYMER — HDPE OPS
-NÖVBƏ RƏHBƏRLƏRİNİN İMTAHANA BURAXILMA HESABATI (1-ci mərhələ)
+NÖVBƏ RƏHBƏRLƏRİ TƏRƏFİNDƏN İLKİN QİYMƏTLƏNDİRMƏ - İMTAHANA BURAXILMA HESABATI${scopeLine}
 Yaradılma tarixi: ${now.toLocaleDateString('az-AZ')}
 
 AYLIQ (${monthKeyLabel(monthKey)}):
@@ -4306,19 +4823,144 @@ Qeyd: "İmtahana buraxıldı" = növbə rəhbəri işçini yoxlayıb təsdiqləy
 }
 function sendSupervisorApprovalReport(){
   if(!window._supervisorReportText) renderSupervisorApprovalReport();
-  const subject = encodeURIComponent(`Növbə Rəhbərləri İmtahana Buraxılma Hesabatı — ${window._supervisorReportMonth} — HDPE OPS`);
-  const body = encodeURIComponent(window._supervisorReportText);
-  window.location.href = `mailto:${EVALUATOR_EMAILS.join(',')}?subject=${subject}&body=${body}`;
-  showToast('Mail proqramı açılır...');
+  emailCompose(evaluatorEmails().join(','), `Növbə Rəhbərləri Tərəfindən İlkin Qiymətləndirmə - İmtahana Buraxılma Hesabatı — ${window._supervisorReportMonth} — HDPE OPS`, window._supervisorReportText);
 }
 function sendReport(){
   if(!window._reportText) generateReport();
-  const email = document.getElementById('report-email').value.trim();
-  const subject = encodeURIComponent(`Rüblük Hesabat — ${window._reportQuarter} — HDPE OPS Kompetensiya Matrisi`);
-  const body = encodeURIComponent(window._reportText);
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  showToast('Mail proqramı açılır...');
+  const email = document.getElementById('report-email').value.trim() || evaluatorEmails().join(',');   // sahə boşdursa — standart alıcılar
+  emailCompose(email, `Rüblük Hesabat — ${window._reportQuarter} — HDPE OPS Kompetensiya Matrisi`, window._reportText);
 }
+
+// ---------- E-POÇT: etibarlı göndərmə ----------
+// Problem: "mailto:" linkinin uzunluğu Windows-da ~2000 simvolla məhduddur. Azərbaycan hərfləri kodlaşdırılanda
+// hər biri 6 simvol olur (ə → %C9%99), ona görə tam hesabat bu həddi dəfələrlə aşır və Outlook ümumiyyətlə açılmır.
+// Həll: tam mətn panoya (clipboard) kopyalanır, mail proqramı qısa link ilə açılır; açılmasa — kömək pəncərəsi.
+const MAILTO_MAX = 1800;
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
+    try{
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return ok;
+    }catch(_){ return false; }
+  }
+}
+function mailtoUrl(to, subject, body){
+  return `mailto:${encodeURIComponent(to||'').replace(/%2C/gi,',').replace(/%40/g,'@')}?subject=${encodeURIComponent(subject)}${body?`&body=${encodeURIComponent(body)}`:''}`;
+}
+function outlookWebUrl(to, subject, body){
+  return `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to||'')}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+let _mailCtx = null;
+async function emailCompose(to, subject, text){
+  _mailCtx = { to, subject, text };
+  const copied = await copyText(text);
+  const full = mailtoUrl(to, subject, text);
+  const fits = full.length <= MAILTO_MAX;
+  const shortBody = copied
+    ? 'Hesabat mətni panoya kopyalanıb.\nBuraya klikləyib Ctrl + V basın.\n\n— HDPE OPS Kompetensiya Matrisi'
+    : 'Hesabat mətnini Kompetensiya Matrisindən kopyalayıb buraya yapışdırın.';
+  const url = fits ? full : mailtoUrl(to, subject, shortBody);
+  _mailCtx.fits = fits; _mailCtx.copied = copied;
+  // mail proqramının açılıb-açılmadığını yoxlayırıq: açılsa, brauzer pəncərəsi fokusu itirir
+  // Outlook bəzən 5–10 saniyəyə açılır: 6 saniyə gözləyirik; kömək pəncərəsi açıldıqdan sonra mail proqramı açılsa — pəncərə özü bağlanır
+  let left = false, helpShown = false;
+  const onBlur = ()=>{ left = true; if(helpShown){ const o=document.getElementById('gl-overlay'); if(o && o.dataset.mailHelp) glCloseModal(); } };
+  window.addEventListener('blur', onBlur);
+  document.addEventListener('visibilitychange', onBlur);
+  setTimeout(()=>{ window.removeEventListener('blur', onBlur); document.removeEventListener('visibilitychange', onBlur); }, 30000);
+  const a = document.createElement('a'); a.href = url; a.style.display='none';
+  document.body.appendChild(a); a.click(); a.remove();
+  showToast(fits ? 'Mail proqramı açılır...' : (copied ? 'Hesabat panoya kopyalandı — mail proqramında Ctrl + V basın' : 'Mail proqramı açılır...'));
+  setTimeout(()=>{
+    if(!left && document.hasFocus() && document.visibilityState==='visible'){ helpShown = true; mailHelpModal(); }   // yalnız proqram açılmayıbsa
+  }, 6000);
+}
+function mailHelpModal(){
+  const c = _mailCtx; if(!c) return;
+  glModal(`<div class="gl-steps">E-POÇT</div>
+    <h3 style="color:var(--text-primary);">Mail proqramı açılmadı</h3>
+    <div style="font-size:13px;line-height:1.6;">Kompüterdə <strong>defolt mail proqramı</strong> təyin olunmayıb və ya brauzer onu aça bilmədi.
+      ${c.copied?'Hesabat mətni artıq <strong>panoya kopyalanıb</strong> — istənilən mail pəncərəsində <strong>Ctrl + V</strong> ilə yapışdıra bilərsiniz.':''}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;">
+      <button class="btn" onclick="window.open(outlookWebUrl(_mailCtx.to,_mailCtx.subject,_mailCtx.text),'_blank','noopener');glCloseModal();">Outlook Web-də aç</button>
+      <button class="btn secondary" onclick="copyText(_mailCtx.text).then(ok=>showToast(ok?'Mətn panoya kopyalandı':'Kopyalamaq alınmadı'))">Mətni yenidən kopyala</button>
+      <button class="btn secondary" onclick="glCloseModal();emailCompose(_mailCtx.to,_mailCtx.subject,_mailCtx.text)">Yenidən cəhd et</button>
+    </div>
+    <details><summary class="doc-meta" style="cursor:pointer;">Outlook-u defolt mail proqramı etmək (Windows)</summary>
+      <ol class="hint" style="margin:8px 0 0;padding-left:18px;line-height:1.8;">
+        <li><strong>Başlat → Parametrlər → Proqramlar → Defolt proqramlar</strong> açın.</li>
+        <li>Axtarışa <strong>MAILTO</strong> yazın (və ya "Protokola görə defolt seçin").</li>
+        <li>MAILTO üçün <strong>Outlook</strong>-u seçin.</li>
+        <li>Brauzeri bağlayıb yenidən açın və "E-poçtla göndər"i təkrar basın.</li>
+      </ol></details>
+    <div style="display:flex;justify-content:flex-end;margin-top:14px;"><button class="logout-btn" onclick="glCloseModal()">Bağla</button></div>`);
+  const o = document.getElementById('gl-overlay'); if(o) o.dataset.mailHelp = '1';
+}
+
+
+
+// ---------- Tarix sahələrinin təqvim işarəsi ----------
+// İşarə SVG kimi çəkilir və rəngi temanın vurğu rənginə bərabərdir; açılan təqvim pəncərəsi də temaya görə tünd/açıq olur
+function updateDateInputTheme(){
+  const cs = getComputedStyle(document.documentElement);
+  const accent = (cs.getPropertyValue('--amber').trim() || '#f0a93c');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><rect x="7" y="13" width="3" height="3" rx=".5" fill="${accent}" stroke="none"/></svg>`;
+  document.documentElement.style.setProperty('--cal-icon', `url("data:image/svg+xml,${encodeURIComponent(svg)}")`);
+  // fonun parlaqlığına görə brauzerin öz təqvim pəncərəsinin rəngi
+  const bg = (cs.getPropertyValue('--bg-panel').trim() || '#121d2c').replace('#','');
+  const [r,g,b] = [0,2,4].map(i=> parseInt(bg.length===3 ? bg[i/2]+bg[i/2] : bg.slice(i,i+2), 16) || 0);
+  document.documentElement.style.colorScheme = (0.299*r + 0.587*g + 0.114*b) < 140 ? 'dark' : 'light';
+}
+// sahənin istənilən yerinə klik — təqvim açılır (yalnız kiçik işarəyə yox)
+document.addEventListener('click', e=>{
+  const el = e.target;
+  if(el && el.matches && el.matches('input[type=date],input[type=datetime-local]') && typeof el.showPicker==='function'){
+    try{ el.showPicker(); }catch(_){}
+  }
+});
+
+// ---------- Səhifədə sürətli keçid: ən yuxarı / ən aşağı ----------
+// 01 Ümumi Baxış, 03 Qiymətləndirmə Forması, 04 Bütün Qiymətləndirmələr və 07 Rüblük Hesabat-da hər klik bir ekran qədər sürüşdürür, digər bölmələrdə — ən yuxarı/aşağı
+const SCROLL_PAGE_VIEWS = ['overview','assess','allevals','report'];
+const SCROLL_PAGE_OVERLAP = 60;   // px — əvvəlki ekranın son sətirləri görünsün ki, oxuyarkən yer itməsin
+function scrollPageMode(){ const a = document.querySelector('.tab.active'); return !!a && SCROLL_PAGE_VIEWS.includes(a.dataset.view); }
+function scrollToEdge(where){
+  const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const behavior = smooth ? 'smooth' : 'auto';
+  if(scrollPageMode()){
+    const step = Math.max(200, window.innerHeight - SCROLL_PAGE_OVERLAP);
+    window.scrollBy({ top: where==='top' ? -step : step, behavior });
+    return;
+  }
+  const top = where==='top' ? 0 : Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+  window.scrollTo({ top, behavior });
+}
+(function initScrollNav(){
+  const up = document.getElementById('scroll-top'), down = document.getElementById('scroll-bottom');
+  if(!up || !down) return;
+  let ticking = false;
+  const update = ()=>{
+    ticking = false;
+    const y = window.scrollY || document.documentElement.scrollTop;
+    const max = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+    const paged = scrollPageMode();
+    up.classList.toggle('show', paged ? y > 5 : y > 300);              // yuxarı düyməsi
+    down.classList.toggle('show', paged ? max - y > 5 : max - y > 300); // aşağı düyməsi
+    const mode = paged ? 'page' : 'edge';
+    if(up.dataset.mode !== mode){
+      up.dataset.mode = down.dataset.mode = mode;
+      up.title   = paged ? 'Bir ekran yuxarı (Page Up)'  : 'Ən yuxarı (Home)';
+      down.title = paged ? 'Bir ekran aşağı (Page Down)' : 'Ən aşağı (End)';
+      up.setAttribute('aria-label', up.title); down.setAttribute('aria-label', down.title);
+    }
+  };
+  const req = ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', req, { passive:true });
+  window.addEventListener('resize', req);
+  new MutationObserver(req).observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['class','style'] }); // tab dəyişəndə səhifə hündürlüyü dəyişir
+  update();
+})();
 
 // ---------- CLOCK ----------
 function tickClock(){ document.getElementById('clock').textContent = new Date().toLocaleString('az-AZ',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
@@ -4326,19 +4968,63 @@ setInterval(tickClock,1000); tickClock();
 
 
 // ================= SAYT TƏNZİMLƏMƏLƏRİ (yalnız Admin redaktə edir, hamıya tətbiq olunur) =================
-const THEME_VARS = ['--bg-deep','--bg-panel','--bg-raised','--bg-raised-2','--border','--border-soft','--text-primary','--text-secondary','--text-dim','--amber','--amber-dim','--teal','--teal-dim','--green','--green-dim','--red','--red-dim','--violet','--violet-dim'];
+const THEME_VARS = ['--bg-deep','--bg-panel','--bg-raised','--bg-raised-2','--border','--border-soft','--text-primary','--text-secondary','--text-dim','--amber','--amber-dim','--teal','--teal-dim','--green','--green-dim','--red','--red-dim','--violet','--violet-dim','--on-amber','--on-teal','--on-violet'];
+// Standart (tünd) temanın dəyərləri — önizləmə kartları üçün
+const THEME_BASE = {'--bg-deep':'#0c141f','--bg-panel':'#121d2c','--bg-raised':'#1a2636','--bg-raised-2':'#223144','--border':'#2b394d','--border-soft':'#1e2b3c',
+  '--text-primary':'#e8eef5','--text-secondary':'#8b9bb0','--text-dim':'#5c6c81','--amber':'#f0a93c','--amber-dim':'#7a5a24','--teal':'#3fb8ac','--teal-dim':'#1f4a46',
+  '--green':'#4fb87e','--green-dim':'#1e3d2c','--red':'#e2584c','--red-dim':'#4a231f','--violet':'#9b8cf0','--violet-dim':'#332c5c','--on-amber':'#1a1305','--on-teal':'#08201d','--on-violet':'#18122f'};
+// Bütün açıq temalar WCAG AA kontrast tələbinə uyğun yoxlanılıb (əsas mətn ≥ 10:1, ikinci dərəcəli ≥ 6:1, düymə yazısı ≥ 4.5:1)
 const THEME_PRESETS = {
-  dark:  { label:'Tünd (standart)', vars:{} },
-  light: { label:'Açıq', vars:{
+  dark:  { label:'Tünd (standart)', note:'Klassik tünd görünüş', vars:{} },
+  graphite: { label:'Qrafit', note:'Yumşaq tünd, az parıltı · gecə növbəsi üçün, göz üçün rahat', eye:true, vars:{
+    '--bg-deep':'#1d2023','--bg-panel':'#25282c','--bg-raised':'#2d3135','--bg-raised-2':'#353a3f','--border':'#41464c','--border-soft':'#2f3337',
+    '--text-primary':'#d7dadd','--text-secondary':'#a0a6ad','--text-dim':'#727880',
+    '--amber':'#cba66b','--amber-dim':'#3e3628','--on-amber':'#1f1a10','--teal':'#71b4ac','--teal-dim':'#263b39','--on-teal':'#0f2220',
+    '--green':'#82b48c','--green-dim':'#27372b','--red':'#dc877c','--red-dim':'#3e2a27','--violet':'#a59dd8','--violet-dim':'#322f43','--on-violet':'#1b1830' } },
+  blue:  { label:'Korporativ', note:'Çox açıq, təmiz ofis görünüşü', eye:true, vars:{
+    '--bg-deep':'#edf2f8','--bg-panel':'#fbfdff','--bg-raised':'#f2f6fb','--bg-raised-2':'#e6edf6','--border':'#d3dde9','--border-soft':'#e4eaf2',
+    '--text-primary':'#1b2a3d','--text-secondary':'#4a5b70','--text-dim':'#7b8ba0',
+    '--amber':'#1d6fb0','--amber-dim':'#dcebf8','--on-amber':'#ffffff','--teal':'#13807f','--teal-dim':'#d5efee','--on-teal':'#ffffff',
+    '--green':'#1f7a46','--green-dim':'#d9f0e2','--red':'#b8352b','--red-dim':'#f8dfdc','--violet':'#5650c4','--violet-dim':'#e6e5fa','--on-violet':'#ffffff' } },
+  gray:  { label:'Korporativ boz', note:'Neytral, parlaq ağı olmayan boz · göz üçün rahat', eye:true, vars:{
+    '--bg-deep':'#e3e5e8','--bg-panel':'#f0f1f3','--bg-raised':'#e8eaed','--bg-raised-2':'#dcdfe3','--border':'#c8ccd2','--border-soft':'#d9dce1',
+    '--text-primary':'#24282e','--text-secondary':'#525963','--text-dim':'#7d838c',
+    '--amber':'#46607a','--amber-dim':'#d9e1ea','--on-amber':'#ffffff','--teal':'#2b7471','--teal-dim':'#d3e6e4','--on-teal':'#ffffff',
+    '--green':'#2b7350','--green-dim':'#d6e9dd','--red':'#a83d33','--red-dim':'#f1dbd7','--violet':'#5a559e','--violet-dim':'#e2e1f0','--on-violet':'#ffffff' } },
+  green: { label:'Korporativ yaşıl', note:'Açıq yaşıl çalarlar · göz üçün rahat', eye:true, vars:{
+    '--bg-deep':'#e6f2e8','--bg-panel':'#f5fbf6','--bg-raised':'#ecf6ee','--bg-raised-2':'#ddeee0','--border':'#c3ddc8','--border-soft':'#d8eadb',
+    '--text-primary':'#1c2b21','--text-secondary':'#485d4e','--text-dim':'#768d7c',
+    '--amber':'#2a7d4f','--amber-dim':'#d2ecdb','--on-amber':'#ffffff','--teal':'#1d7570','--teal-dim':'#d2ecea','--on-teal':'#ffffff',
+    '--green':'#1f7040','--green-dim':'#cfead7','--red':'#b03f2c','--red-dim':'#f5dcd5','--violet':'#56529f','--violet-dim':'#e3e2f3','--on-violet':'#ffffff' } },
+  sepia: { label:'Sepiya — kağız', note:'İsti, kağıza bənzər fon · uzun oxu üçün', eye:true, vars:{
+    '--bg-deep':'#ede4d2','--bg-panel':'#f8f2e5','--bg-raised':'#f1e9d7','--bg-raised-2':'#e6dbc4','--border':'#d5c8ad','--border-soft':'#e4d9c3',
+    '--text-primary':'#3a3125','--text-secondary':'#655742','--text-dim':'#93836b',
+    '--amber':'#975814','--amber-dim':'#efdcbd','--on-amber':'#ffffff','--teal':'#346f68','--teal-dim':'#d6e7e1','--on-teal':'#ffffff',
+    '--green':'#4a6f2c','--green-dim':'#e0e9cd','--red':'#a23f2a','--red-dim':'#f1d8cd','--violet':'#625392','--violet-dim':'#e4dcee','--on-violet':'#ffffff' } },
+  light: { label:'Açıq (ağ)', note:'Maksimum parlaqlıq və kontrast', vars:{
     '--bg-deep':'#eef1f5','--bg-panel':'#ffffff','--bg-raised':'#f3f5f8','--bg-raised-2':'#e6ebf1','--border':'#d3dae4','--border-soft':'#e3e8ee',
     '--text-primary':'#18212e','--text-secondary':'#4c5a6d','--text-dim':'#7f8c9d',
-    '--amber':'#c27a12','--amber-dim':'#fbe8c8','--teal':'#1f8e84','--teal-dim':'#d3efeb','--green':'#23864f','--green-dim':'#d7f1e1',
-    '--red':'#c6392d','--red-dim':'#f9dbd7','--violet':'#6a58d6','--violet-dim':'#e7e3fb' } },
-  blue:  { label:'Korporativ mavi', vars:{
-    '--bg-deep':'#061a33','--bg-panel':'#0b2445','--bg-raised':'#11305a','--bg-raised-2':'#183b6b','--border':'#24497c','--border-soft':'#0f2a50',
-    '--text-primary':'#e9f1fb','--text-secondary':'#94acc9','--text-dim':'#62799a',
-    '--amber':'#38a3ff','--amber-dim':'#123e6e' } }
+    '--amber':'#a9660d','--amber-dim':'#fbe8c8','--on-amber':'#ffffff','--teal':'#1a7d74','--teal-dim':'#d3efeb','--on-teal':'#ffffff',
+    '--green':'#1f7a46','--green-dim':'#d7f1e1','--red':'#b8352b','--red-dim':'#f9dbd7','--violet':'#5b4ac8','--violet-dim':'#e7e3fb','--on-violet':'#ffffff' } }
 };
+function themeCardHtml(key, p, active){
+  const v = { ...THEME_BASE, ...p.vars };
+  return `<button type="button" class="theme-card ${active?'active':''}" onclick="cfgSetPreset('${key}')" aria-pressed="${active}" title="${escapeHtml(p.note||'')}">
+    <div class="theme-prev" style="background:${v['--bg-deep']};border-color:${v['--border']};">
+      <div class="tp-panel" style="background:${v['--bg-panel']};border-color:${v['--border']};">
+        <div class="tp-line" style="background:${v['--text-primary']};width:62%;"></div>
+        <div class="tp-line" style="background:${v['--text-secondary']};width:84%;opacity:.8;"></div>
+        <div class="tp-row">
+          <span class="tp-btn" style="background:${v['--amber']};color:${v['--on-amber']};">Aa</span>
+          <span class="tp-pill" style="background:${v['--green-dim']};color:${v['--green']};">Keçdi</span>
+          <span class="tp-pill" style="background:${v['--red-dim']};color:${v['--red']};">Keçmədi</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-name">${escapeHtml(p.label)}${active?' <span class="tc-check">✓</span>':''}</div>
+    <div class="tc-note">${p.eye?'👁 ':''}${escapeHtml(p.note||'')}</div>
+  </button>`;
+}
 // istifadəçinin söndürə biləcəyi bölmələr (03 Qiymətləndirmə, 08/09 admin bölmələri həmişə açıqdır)
 const CFG_TABS = [
   {view:'overview', label:'01 Ümumi Baxış'},
@@ -4366,9 +5052,14 @@ const SITE_CONFIG_DEFAULT = {
   theme: { preset:'dark', overrides:{}, grid:true, zoom:100 },
   tabs: {},        // {view:false} — söndürülmüş bölmə
   features: {},    // {key:false}  — söndürülmüş funksiya
-  announce: { text:'', style:'info' },
+  announce: { mode:'off', activeId:null, items:[], startAt:null },   // elanlar kitabxanası + yayım rejimi
   customTabs: [],     // [{id,title,audience,enabled,code}]
   customWidgets: [],  // [{id,title,audience,placement,enabled,code}]
+  tabNames: {}, tabOrder: [],          // bölmələrin adları və sırası (admin dəyişir, hamıya tətbiq olunur)
+  featureNames: {}, featureOrder: [],  // funksiyaların adları və sırası
+  featureHints: {},                    // funksiyaların izah mətni (siyahıda)
+  textOverrides: {},                   // bölmə/funksiya daxilindəki mətnlər: { açar: {orig, text} }
+  emailRecipients: null,               // null — standart siyahı (DEFAULT_MAIL_RECIPIENTS)
   updatedBy:'', updatedAt:''
 };
 let siteConfig = normalizeSiteConfig(null);
@@ -4381,9 +5072,16 @@ function normalizeSiteConfig(raw){
     theme: { ...d.theme, ...(raw.theme||{}), overrides: { ...((raw.theme||{}).overrides||{}) } },
     tabs: { ...(raw.tabs||{}) },
     features: { ...(raw.features||{}) },
-    announce: { ...d.announce, ...(raw.announce||{}) },
+    announce: normalizeAnnounce(raw.announce),
     customTabs: Array.isArray(raw.customTabs) ? raw.customTabs.map(x=>({...x})) : [],
     customWidgets: Array.isArray(raw.customWidgets) ? raw.customWidgets.map(x=>({...x})) : [],
+    tabNames: (raw.tabNames && typeof raw.tabNames==='object') ? { ...raw.tabNames } : {},
+    tabOrder: Array.isArray(raw.tabOrder) ? raw.tabOrder.filter(x=>typeof x==='string') : [],
+    featureNames: (raw.featureNames && typeof raw.featureNames==='object') ? { ...raw.featureNames } : {},
+    featureHints: (raw.featureHints && typeof raw.featureHints==='object') ? { ...raw.featureHints } : {},
+    textOverrides: (raw.textOverrides && typeof raw.textOverrides==='object') ? JSON.parse(JSON.stringify(raw.textOverrides)) : {},
+    emailRecipients: Array.isArray(raw.emailRecipients) ? raw.emailRecipients.filter(r=>r && typeof r.email==='string').map(r=>({ name:String(r.name||''), email:r.email })) : null,
+    featureOrder: Array.isArray(raw.featureOrder) ? raw.featureOrder.filter(x=>typeof x==='string') : [],
     updatedBy: raw.updatedBy||'', updatedAt: raw.updatedAt||''
   };
 }
@@ -4399,6 +5097,7 @@ function applySiteConfig(cfg){
   Object.entries(preset).forEach(([k,v])=> root.style.setProperty(k,v));
   Object.entries(cfg.theme.overrides||{}).forEach(([k,v])=>{ if(THEME_VARS.includes(k) && isHexColor(v)) root.style.setProperty(k,v); });
   document.body.classList.toggle('no-grid', cfg.theme.grid===false);
+  updateDateInputTheme();
   const z = Math.min(125, Math.max(80, Number(cfg.theme.zoom)||100));
   document.body.style.zoom = z===100 ? '' : (z/100);
   // brend mətnləri (textContent — HTML kimi şərh olunmur)
@@ -4443,15 +5142,19 @@ function applySiteConfig(cfg){
       if(firstVisible) firstVisible.click();
     }
   }
-  // elan zolağı
+  // elan zolağı — rejimə görə (əl ilə / həftəlik / aylıq) hazırkı elan
   const an = document.getElementById('site-announce');
   if(an){
-    const txt = (cfg.announce.text||'').trim();
+    const cur = currentAnnouncement(cfg);
+    const txt = cur ? (cur.text||'').trim() : '';
     an.style.display = txt ? '' : 'none';
-    an.className = 'site-announce ' + (['info','warn','alert'].includes(cfg.announce.style)?cfg.announce.style:'info');
+    an.className = 'site-announce ' + (cur && ['info','warn','alert'].includes(cur.style) ? cur.style : 'info');
     an.textContent = txt;
   }
   renderCustomModules(cfg);
+  applyTabLayout(cfg);
+  applyFeatureLayout(cfg);
+  applyTextOverrides(cfg);
 }
 function currentVarValue(name){
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -4493,7 +5196,8 @@ function renderSiteCfgPanel(){
     <div class="panel-head" style="margin-top:14px;"><div><div class="eyebrow">2</div><h2 style="font-size:13px;">Rəng və görünüş</h2></div></div>
     <div class="form-grid" style="margin-bottom:10px;">
       <div class="field"><label>Tema</label>
-        <select onchange="cfgSetPreset(this.value)">${Object.entries(THEME_PRESETS).map(([k,p])=>`<option value="${k}" ${c.theme.preset===k?'selected':''}>${p.label}</option>`).join('')}</select></div>
+        <select onchange="cfgSetPreset(this.value)">${Object.entries(THEME_PRESETS).map(([k,p])=>`<option value="${k}" ${(c.theme.preset||'dark')===k?'selected':''}>${p.label}</option>`).join('')}</select>
+        <div class="doc-meta" style="margin-top:5px;">${(THEME_PRESETS[c.theme.preset]||THEME_PRESETS.dark).eye?'👁 ':''}${escapeHtml((THEME_PRESETS[c.theme.preset]||THEME_PRESETS.dark).note||'')}</div></div>
       <div class="field"><label>Miqyas: <span id="cfg-zoom-val">${c.theme.zoom}%</span></label>
         <input type="range" min="80" max="125" step="5" value="${c.theme.zoom}" oninput="document.getElementById('cfg-zoom-val').textContent=this.value+'%';cfgSet('theme','zoom',Number(this.value))"></div>
       <label class="cfg-check" style="align-self:end;"><input type="checkbox" ${c.theme.grid!==false?'checked':''} onchange="cfgSet('theme','grid',this.checked)"><span>Fonda şəbəkə naxışı</span></label>
@@ -4511,27 +5215,15 @@ function renderSiteCfgPanel(){
     </div>
 
     <div class="panel-head" style="margin-top:14px;"><div><div class="eyebrow">3</div><h2 style="font-size:13px;">Bölmələr</h2></div></div>
-    <div class="hint" style="margin-bottom:8px;">Söndürülmüş bölmə digər istifadəçilərə görünmür. Siz onu ⦸ işarəsi ilə solğun görürsünüz. "03 Qiymətləndirmə Forması" və admin bölmələri söndürülə bilməz.</div>
-    <div class="cfg-grid">${CFG_TABS.map(t=>`
-      <label class="cfg-check"><input type="checkbox" ${c.tabs[t.view]!==false?'checked':''} onchange="cfgSet('tabs','${t.view}',this.checked?null:false)"><span>${escapeHtml(t.label)}</span></label>`).join('')}
-    </div>
+    <div class="hint" style="margin-bottom:8px;"><strong>Sətrə iki dəfə klikləyin</strong> (və ya ☰) — bölmənin daxilindəki başlıq, izah, düymə və sahə adlarını redaktə etmək üçün. <strong>⋮⋮</strong> tutacağından siçanla tutub sürüşdürərək sıranı dəyişin; ✎ ilə adı dəyişin. Söndürülmüş bölmə digər istifadəçilərə görünmür (sizdə ⦸ ilə solğun görünür). 🔒 — söndürülə bilməyən bölmələr.</div>
+    ${sortTabsListHtml(c)}
 
     <div class="panel-head" style="margin-top:14px;"><div><div class="eyebrow">4</div><h2 style="font-size:13px;">Funksiyalar</h2></div></div>
-    <div class="cfg-grid">${CFG_FEATURES.map(f=>`
-      <label class="cfg-check"><input type="checkbox" ${c.features[f.key]!==false?'checked':''} onchange="cfgSet('features','${f.key}',this.checked?null:false)"><span>${escapeHtml(f.label)}<small>${escapeHtml(f.hint)}</small></span></label>`).join('')}
-    </div>
+    <div class="hint" style="margin-bottom:8px;"><strong>Sətrə iki dəfə klikləyin</strong> (və ya ☰) — funksiyanın adını, izahını və daxilindəki mətnləri redaktə etmək üçün. Ad dəyişikliyi səhifədəki başlığa / düyməyə də tətbiq olunur. Sıra eyni bölmədəki panellərin yerləşməsini dəyişir (məs. 07 Rüblük Hesabat-dakı hesabat panelləri).</div>
+    ${sortFeaturesListHtml(c)}
 
     <div class="panel-head" style="margin-top:14px;"><div><div class="eyebrow">5</div><h2 style="font-size:13px;">Elan zolağı</h2></div></div>
-    <div class="form-grid">
-      <div class="field" style="grid-column:1/-1;"><label>Mətn (boş qalsa, zolaq görünmür)</label>
-        <textarea maxlength="500" placeholder="Məs: 30 sentyabrda sistem 14:00–15:00 arası yenilənəcək." oninput="cfgSet('announce','text',this.value)">${escapeHtml(c.announce.text)}</textarea></div>
-      <div class="field"><label>Növ</label>
-        <select onchange="cfgSet('announce','style',this.value)">
-          <option value="info" ${c.announce.style==='info'?'selected':''}>Məlumat (yaşılımtıl)</option>
-          <option value="warn" ${c.announce.style==='warn'?'selected':''}>Diqqət (sarı)</option>
-          <option value="alert" ${c.announce.style==='alert'?'selected':''}>Vacib (qırmızı)</option>
-        </select></div>
-    </div>
+    ${annPanelHtml(c)}
 
     <div class="panel-head" style="margin-top:18px;"><div><div class="eyebrow">6</div><h2 style="font-size:13px;">Əlavə bölmələr (öz kodunuzla)</h2></div>
       <button class="btn teal" style="padding:6px 12px;font-size:11px;" onclick="cmStartEdit('customTabs',null)">+ Yeni bölmə əlavə et</button></div>
@@ -4541,7 +5233,7 @@ function renderSiteCfgPanel(){
     <div class="panel-head" style="margin-top:18px;"><div><div class="eyebrow">7</div><h2 style="font-size:13px;">Əlavə funksiyalar (panel / widget)</h2></div>
       <button class="btn teal" style="padding:6px 12px;font-size:11px;" onclick="cmStartEdit('customWidgets',null)">+ Yeni funksiya əlavə et</button></div>
     <div class="hint" style="margin-bottom:8px;">Mövcud bölmənin yuxarısına öz hesablamanızı, cədvəlinizi və ya düymənizi əlavə edir (01 Ümumi Baxış və ya 03 Qiymətləndirmə Forması).</div>
-    ${cmListHtml('customWidgets', c)}
+    <div class="sort-list" data-kind="customWidgets" style="gap:0;">${cmListHtml('customWidgets', c)}</div>
 
     <div class="cfg-actions">
       <button class="btn violet" onclick="saveSiteConfig()">Yadda saxla — hamıya tətbiq et</button>
@@ -4550,6 +5242,7 @@ function renderSiteCfgPanel(){
       <span class="cfg-dirty">${siteCfgDraft?'● Yadda saxlanılmamış dəyişikliklər var (yalnız sizdə önizləmə)':''}</span>
     </div>
     ${siteConfig.updatedBy?`<div class="doc-meta" style="margin-top:8px;">Son dəyişiklik: ${escapeHtml(siteConfig.updatedBy)}, ${fmtDateTime(siteConfig.updatedAt)}</div>`:''}`;
+  initSortables();
 }
 
 async function cfgUploadLogo(input){
@@ -4581,6 +5274,578 @@ async function cfgUploadLogo(input){
     showToast('Loqo önizləmədə tətbiq olundu — hamı üçün "Yadda saxla" basın');
   }catch(e){ showToast('Şəkli oxumaq mümkün olmadı'); }
 }
+
+// ================= BÖLMƏ VƏ FUNKSİYALARIN ADI / SIRASI (yalnız Admin) =================
+const DEFAULT_TAB_NAMES = { overview:'Ümumi Baxış', matrix:'Kompetensiya Matrisi', assess:'Qiymətləndirmə Forması', allevals:'Bütün Qiymətləndirmələr',
+  topics:'Mövzular', history:'Tarixi Məlumat', report:'Rüblük Hesabat', empmgmt:'İşçi İdarəetməsi', sitecfg:'Görünüş və Funksiyalar' };
+const TAB_LOCKED = { assess:'Söndürülə bilməz', empmgmt:'Yalnız Admin', sitecfg:'Yalnız Admin' };
+// funksiyanın səhifədəki görünən mətni harada yazılır
+const FEATURE_TARGETS = {
+  histEntry:     { sel:'#global-hist-panel .panel-head h2' },
+  perfOverview:  { sel:'.panel[data-feat="perfOverview"] .panel-head h2' },
+  csvExport:     { sel:'button[data-feat="csvExport"]', prefix:'⬇ ' },
+  supReport:     { sel:'.panel[data-feat="supReport"] .panel-head h2' },
+  quarterReport: { sel:'.panel[data-feat="quarterReport"] .panel-head h2' },
+  emailSend:     { sel:'button[data-feat="emailSend"]', all:true },
+  headerStatus:  { sel:'#hs-text' },
+  passwordOffer: null      // səhifədə başlığı yoxdur — ad yalnız bu siyahıda görünür
+};
+function tabKeysInOrder(cfg){
+  cfg = cfg || siteCfgDraft || siteConfig;
+  const base = Object.keys(DEFAULT_TAB_NAMES);
+  const customs = (cfg.customTabs||[]).map(m=>'cm-'+m.id);
+  const all = [...base, ...customs];
+  const ordered = (cfg.tabOrder||[]).filter(k=> all.includes(k));
+  all.forEach(k=>{ if(!ordered.includes(k)) ordered.push(k); });   // yeni bölmələr sona əlavə olunur
+  return ordered;
+}
+function tabDisplayName(key, cfg){
+  cfg = cfg || siteCfgDraft || siteConfig;
+  if(key.startsWith('cm-')){ const m=(cfg.customTabs||[]).find(x=>'cm-'+x.id===key); return (m && m.title) || 'Yeni bölmə'; }
+  return (cfg.tabNames && cfg.tabNames[key]) || DEFAULT_TAB_NAMES[key] || key;
+}
+function featureKeysInOrder(cfg){
+  cfg = cfg || siteCfgDraft || siteConfig;
+  const all = CFG_FEATURES.map(f=>f.key);
+  const ordered = (cfg.featureOrder||[]).filter(k=> all.includes(k));
+  all.forEach(k=>{ if(!ordered.includes(k)) ordered.push(k); });
+  return ordered;
+}
+function applyTabLayout(cfg){
+  const bar = document.querySelector('.tabs'); if(!bar) return;
+  const order = tabKeysInOrder(cfg);
+  order.forEach((key,i)=>{
+    const btn = bar.querySelector(`.tab[data-view="${CSS.escape(key)}"]`);
+    if(!btn) return;
+    bar.appendChild(btn);                                  // sıraya görə yerləşdir
+    let n = btn.querySelector('.n');
+    if(!n){ n = document.createElement('span'); n.className='n'; btn.prepend(n); }
+    n.textContent = String(i+1).padStart(2,'0');
+    // yalnız mətn hissəsini dəyiş (nömrə və digər elementlərə toxunmadan)
+    [...btn.childNodes].filter(x=> x.nodeType===3).forEach(x=> x.remove());
+    btn.appendChild(document.createTextNode(tabDisplayName(key, cfg)));
+  });
+}
+function applyFeatureLayout(cfg){
+  // 1) adlar
+  Object.entries(FEATURE_TARGETS).forEach(([key,t])=>{
+    if(!t) return;
+    const els = t.all ? [...document.querySelectorAll(t.sel)] : [document.querySelector(t.sel)].filter(Boolean);
+    els.forEach(el=>{
+      if(el.dataset.origText===undefined) el.dataset.origText = el.textContent;     // standart mətni yadda saxla
+      const custom = cfg.featureNames && cfg.featureNames[key];
+      el.textContent = custom ? (t.prefix||'') + custom : el.dataset.origText;
+    });
+  });
+  // 2) sıra: eyni valideyndə olan panellər konfiqurasiyadakı sıraya düzülür
+  const order = featureKeysInOrder(cfg);
+  const groups = new Map();
+  order.forEach(key=>{
+    document.querySelectorAll(`.panel[data-feat="${key}"]`).forEach(el=>{
+      if(!el.parentElement) return;
+      if(!groups.has(el.parentElement)) groups.set(el.parentElement, []);
+      groups.get(el.parentElement).push(el);
+    });
+  });
+  groups.forEach((els, parent)=>{
+    if(els.length < 2) return;
+    const current = [...parent.children].filter(ch=> els.includes(ch));          // indiki DOM sırası = "yuvalar"
+    if(current.every((el,i)=> el===els[i])) return;                              // artıq düzgündür
+    const marks = current.map(el=>{ const m=document.createComment('slot'); parent.insertBefore(m, el); return m; });
+    els.forEach(el=> el.remove());
+    marks.forEach((m,i)=> m.replaceWith(els[i]));
+  });
+}
+function sortTabsListHtml(c){
+  const order = tabKeysInOrder(c);
+  return `<div class="sort-list" id="sort-tabs" data-kind="tabs">${order.map((key,i)=>{
+    const custom = key.startsWith('cm-');
+    const cm = custom ? (c.customTabs||[]).find(x=>'cm-'+x.id===key) : null;
+    const locked = TAB_LOCKED[key];
+    const enabled = custom ? (cm && cm.enabled!==false) : c.tabs[key]!==false;
+    const name = tabDisplayName(key, c);
+    const renamed = !custom && c.tabNames && c.tabNames[key];
+    const editing = sortEditing && sortEditing.kind==='tabs' && sortEditing.key===key;
+    return `<div class="sort-item ${enabled||locked?'':'off'}" data-key="${escapeHtml(key)}" ondblclick="txRowDbl(event,'tabs','${escapeHtml(key)}')" title="Daxili məlumatları redaktə etmək üçün iki dəfə klikləyin">
+      <span class="sort-handle" title="Tutub sürüşdürün" aria-label="Sıranı dəyiş">⋮⋮</span>
+      <span class="sort-no">${String(i+1).padStart(2,'0')}</span>
+      ${locked ? `<span title="${escapeHtml(locked)}">🔒</span>` : `<input type="checkbox" ${enabled?'checked':''} title="Aktiv / söndürülüb" onchange="${custom?`cmToggle('customTabs','${cm.id}')`:`cfgSet('tabs','${key}',this.checked?null:false);renderSiteCfgPanel()`}">`}
+      <div class="sort-name">${editing
+        ? `<input type="text" id="sort-edit" maxlength="40" value="${escapeHtml(name)}" onkeydown="sortEditKey(event)" onblur="sortEditCommit()">`
+        : `<b>${escapeHtml(name)}</b>${custom?'<span class="sort-tag">Əlavə</span>':''}${renamed?`<small>Standart ad: ${escapeHtml(DEFAULT_TAB_NAMES[key])}</small>`:''}`}</div>
+      ${editing?'':`<button type="button" class="sort-btn" title="Adı dəyiş" onclick="sortEditStart('tabs','${key}')">✎</button><button type="button" class="sort-btn" title="Daxili məlumatları redaktə et" onclick="txOpen('tabs','${key}')">☰</button>`}
+      ${renamed && !editing?`<button type="button" class="sort-btn" title="Standart ada qaytar" onclick="cfgSet('tabNames','${key}',null);renderSiteCfgPanel()">↺</button>`:''}
+      <button type="button" class="sort-btn" title="Yuxarı" ${i===0?'disabled':''} onclick="sortMove('tabs','${key}',-1)">↑</button>
+      <button type="button" class="sort-btn" title="Aşağı" ${i===order.length-1?'disabled':''} onclick="sortMove('tabs','${key}',1)">↓</button>
+    </div>`;
+  }).join('')}</div>`;
+}
+function sortFeaturesListHtml(c){
+  const order = featureKeysInOrder(c);
+  return `<div class="sort-list" id="sort-features" data-kind="features">${order.map((key,i)=>{
+    const f = CFG_FEATURES.find(x=>x.key===key);
+    const enabled = c.features[key]!==false;
+    const custom = c.featureNames && c.featureNames[key];
+    const editing = sortEditing && sortEditing.kind==='features' && sortEditing.key===key;
+    return `<div class="sort-item ${enabled?'':'off'}" data-key="${key}" ondblclick="txRowDbl(event,'features','${key}')" title="Daxili məlumatları redaktə etmək üçün iki dəfə klikləyin">
+      <span class="sort-handle" title="Tutub sürüşdürün" aria-label="Sıranı dəyiş">⋮⋮</span>
+      <input type="checkbox" ${enabled?'checked':''} title="Aktiv / söndürülüb" onchange="cfgSet('features','${key}',this.checked?null:false);renderSiteCfgPanel()">
+      <div class="sort-name">${editing
+        ? `<input type="text" id="sort-edit" maxlength="40" value="${escapeHtml(custom||f.label)}" onkeydown="sortEditKey(event)" onblur="sortEditCommit()">`
+        : `<b>${escapeHtml(custom||f.label)}</b><small>${custom?`Standart ad: ${escapeHtml(f.label)} · `:''}${escapeHtml((c.featureHints&&c.featureHints[key])||f.hint)}</small>`}</div>
+      ${editing?'':`<button type="button" class="sort-btn" title="Adı dəyiş" onclick="sortEditStart('features','${key}')">✎</button><button type="button" class="sort-btn" title="Daxili məlumatları redaktə et" onclick="txOpen('features','${key}')">☰</button>`}
+      ${custom && !editing?`<button type="button" class="sort-btn" title="Standart ada qaytar" onclick="cfgSet('featureNames','${key}',null);renderSiteCfgPanel()">↺</button>`:''}
+      <button type="button" class="sort-btn" title="Yuxarı" ${i===0?'disabled':''} onclick="sortMove('features','${key}',-1)">↑</button>
+      <button type="button" class="sort-btn" title="Aşağı" ${i===order.length-1?'disabled':''} onclick="sortMove('features','${key}',1)">↓</button>
+    </div>`;
+  }).join('')}</div>`;
+}
+// --- ad redaktəsi ---
+let sortEditing = null;
+function sortEditStart(kind, key){
+  if(!isAdminUser()) return;
+  sortEditing = { kind, key };
+  renderSiteCfgPanel();
+  setTimeout(()=>{ const el=document.getElementById('sort-edit'); if(el){ el.focus(); el.select(); } }, 20);
+}
+function sortEditKey(e){
+  if(e.key==='Enter'){ e.preventDefault(); sortEditCommit(); }
+  else if(e.key==='Escape'){ e.preventDefault(); sortEditing=null; renderSiteCfgPanel(); }
+}
+function sortEditCommit(){
+  if(!sortEditing) return;
+  const el = document.getElementById('sort-edit');
+  const { kind, key } = sortEditing; sortEditing = null;
+  const val = el ? el.value.replace(/\s+/g,' ').trim().slice(0,40) : '';
+  if(kind==='tabs'){
+    if(key.startsWith('cm-')){
+      if(val){ const d=ensureSiteCfgDraft(); const m=d.customTabs.find(x=>'cm-'+x.id===key); if(m) m.title = val; applySiteConfig(d); markSiteCfgDirty(); }
+    } else {
+      cfgSet('tabNames', key, (!val || val===DEFAULT_TAB_NAMES[key]) ? null : val);
+    }
+  } else {
+    const f = CFG_FEATURES.find(x=>x.key===key);
+    cfgSet('featureNames', key, (!val || (f && val===f.label)) ? null : val);
+  }
+  renderSiteCfgPanel();
+}
+// --- sıra: düymə ilə ---
+function sortMove(kind, key, dir){
+  const d = ensureSiteCfgDraft();
+  const order = kind==='tabs' ? tabKeysInOrder(d) : featureKeysInOrder(d);
+  const i = order.indexOf(key), j = i+dir;
+  if(i<0 || j<0 || j>=order.length) return;
+  [order[i], order[j]] = [order[j], order[i]];
+  sortSaveOrder(kind, order);
+}
+function sortSaveOrder(kind, order){
+  const d = ensureSiteCfgDraft();
+  if(kind==='tabs') d.tabOrder = order; else if(kind==='features') d.featureOrder = order;
+  else if(kind==='customWidgets'){ d.customWidgets = order.map(id=> d.customWidgets.find(m=>m.id===id)).filter(Boolean); }
+  applySiteConfig(d);
+  renderSiteCfgPanel();
+}
+// --- sıra: siçan / toxunma ilə sürüşdürmə (Pointer Events — siçan, planşet və telefonda işləyir) ---
+function initSortables(){
+  document.querySelectorAll('#sitecfg-body .sort-list').forEach(list=>{
+    if(list.dataset.sortInit) return; list.dataset.sortInit = '1';
+    list.addEventListener('pointerdown', e=>{
+      const handle = e.target.closest('.sort-handle'); if(!handle) return;
+      const item = handle.closest('.sort-item'); if(!item || sortEditing) return;
+      e.preventDefault();
+      const kind = list.dataset.kind;
+      const before = [...list.querySelectorAll(':scope > .sort-item')].map(x=>x.dataset.key).join('|');
+      item.classList.add('dragging'); document.body.classList.add('sorting');
+      const move = ev=>{
+        const items = [...list.querySelectorAll(':scope > .sort-item')].filter(x=>x!==item);
+        let placed = false;
+        for(const sib of items){
+          const r = sib.getBoundingClientRect();
+          if(ev.clientY < r.top + r.height/2){ if(item.nextElementSibling!==sib) list.insertBefore(item, sib); placed = true; break; }
+        }
+        if(!placed && items.length && list.lastElementChild!==item){
+          const lastItem = items[items.length-1];
+          lastItem.after(item);
+        }
+        // siyahı uzundursa, kənara yaxınlaşanda səhifə sürüşsün
+        if(ev.clientY < 60) window.scrollBy(0,-12); else if(ev.clientY > window.innerHeight-60) window.scrollBy(0,12);
+      };
+      const up = ()=>{
+        window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up);
+        item.classList.remove('dragging'); document.body.classList.remove('sorting');
+        const after = [...list.querySelectorAll(':scope > .sort-item')].map(x=>x.dataset.key);
+        if(after.join('|')!==before) sortSaveOrder(kind, after);
+      };
+      // pəncərəyə bağlanır: element DOM-da yer dəyişəndə "pointer capture" itir, pəncərə dinləyicisi isə itmir
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+      window.addEventListener('pointercancel', up);
+    });
+  });
+}
+
+// ================= BÖLMƏ VƏ FUNKSİYALARIN DAXİLİ MƏTNLƏRİ (yalnız Admin, iki klik ilə) =================
+// Səhifə yüklənəndə statik mətn elementlərinə sabit açar verilir (məs. "view-report#7").
+// Dəyişiklik {orig, text} kimi saxlanılır və yalnız element hələ də eyni orijinal mətnə malikdirsə tətbiq olunur —
+// gələcəkdə səhifə quruluşu dəyişsə, səhv yerə mətn yazılmır.
+const TX_SELECTOR = 'h2, h3, .eyebrow, .hint, .field > label, label.t, button, .rf-mode b, .rf-mode small, .empty-state, p';
+const TX_KIND = el=>{
+  if(el.matches('h2')) return 'Başlıq'; if(el.matches('h3')) return 'Alt başlıq';
+  if(el.matches('.eyebrow')) return 'Üst yazı'; if(el.matches('.hint')) return 'İzah';
+  if(el.matches('label')) return 'Sahə adı'; if(el.matches('button')) return 'Düymə';
+  if(el.matches('.rf-mode b')) return 'Seçim adı'; if(el.matches('.rf-mode small')) return 'Seçim izahı';
+  if(el.matches('.empty-state')) return 'Boş vəziyyət'; return 'Mətn';
+};
+let txTagged = false;
+function tagEditableTexts(){
+  if(txTagged) return; txTagged = true;
+  const featTargets = Object.values(FEATURE_TARGETS).filter(Boolean).map(t=>t.sel);
+  document.querySelectorAll('.view[id^="view-"]').forEach(view=>{
+    if(view.id==='view-sitecfg') return;           // admin paneli öz-özünü redaktə etmir
+    let i = 0;
+    view.querySelectorAll(TX_SELECTOR).forEach(el=>{
+      if(el.id || el.closest('[id]')!==view && el.closest('[id]') && el.closest('[id]').matches('#report-body,#supervisor-report-body,#rf-extra,#cm-slot-overview,#cm-slot-assess,#hist-list,#backup-list,#sitecfg-body')) return;
+      if(el.id) return;
+      if(featTargets.some(sel=> el.matches(sel))) return;          // bunların adı "✎ ad" ilə dəyişir
+      const kids = [...el.children];
+      if(kids.some(k=> !k.matches('strong,b,em,u,i,br,code'))) return;   // yalnız "yarpaq" mətn elementləri
+      const txt = el.textContent.replace(/\s+/g,' ').trim();
+      if(!txt || txt.length > 600) return;
+      el.dataset.tx = view.id+'#'+(i++);
+      el.dataset.txOrig = txt;
+      el.dataset.txHtml = el.innerHTML;                 // orijinal format (qalın yazı və s.) bərpa üçün
+    });
+  });
+}
+function applyTextOverrides(cfg){
+  tagEditableTexts();
+  const ov = (cfg && cfg.textOverrides) || {};
+  document.querySelectorAll('[data-tx]').forEach(el=>{
+    const o = ov[el.dataset.tx];
+    if(o && o.orig===el.dataset.txOrig && typeof o.text==='string'){
+      if(el.textContent!==o.text){ el.textContent = o.text; el.dataset.txOn = '1'; }
+    } else if(el.dataset.txOn){
+      el.innerHTML = el.dataset.txHtml; delete el.dataset.txOn;
+    }
+  });
+}
+function txElementsFor(kind, key){
+  tagEditableTexts();
+  let roots = [];
+  if(kind==='tabs') roots = [document.getElementById('view-'+key)].filter(Boolean);
+  else roots = [...document.querySelectorAll(`[data-feat="${CSS.escape(key)}"]`)];
+  const seen = new Set(), out = [];
+  roots.forEach(r=>{
+    const list = r.matches('[data-tx]') ? [r] : [];
+    list.concat([...r.querySelectorAll('[data-tx]')]).forEach(el=>{ if(!seen.has(el.dataset.tx)){ seen.add(el.dataset.tx); out.push(el); } });
+  });
+  return out;
+}
+function txRowDbl(e, kind, key){
+  if(e.target.closest('button,input,.sort-handle,a')) return;   // düymə/qutucuq üzərində iki klik — redaktor açılmır
+  txOpen(kind, key);
+}
+let txCtx = null;
+function txOpen(kind, key){
+  if(!isAdminUser()) return;
+  if(sortEditing){ sortEditing=null; renderSiteCfgPanel(); }
+  if(kind==='tabs' && key.startsWith('cm-')){ cmStartEdit('customTabs', key.slice(3)); return; }  // öz bölmənizin kodu
+  const c = siteCfgDraft || siteConfig;
+  const els = txElementsFor(kind, key);
+  txCtx = { kind, key, els: els.map(el=>({ tx: el.dataset.tx, orig: el.dataset.txOrig, kind: TX_KIND(el), section: (el.closest('.panel')?.querySelector('.panel-head h2')?.textContent || '').trim() })) };
+  let nameField = '', hintField = '';
+  if(kind==='tabs'){
+    nameField = `<div class="field"><label>Bölmənin adı (tabda)</label><input type="text" id="tx-name" maxlength="40" value="${escapeHtml(tabDisplayName(key, c))}"><div class="doc-meta">Standart: ${escapeHtml(DEFAULT_TAB_NAMES[key]||'')}</div></div>`;
+  } else {
+    const f = CFG_FEATURES.find(x=>x.key===key);
+    nameField = `<div class="field"><label>Funksiyanın adı</label><input type="text" id="tx-name" maxlength="40" value="${escapeHtml((c.featureNames&&c.featureNames[key])||f.label)}"><div class="doc-meta">Standart: ${escapeHtml(f.label)}${FEATURE_TARGETS[key]?' · səhifədəki başlığa / düyməyə də yazılır':''}</div></div>`;
+    hintField = `<div class="field"><label>İzah (siyahıda görünən)</label><input type="text" id="tx-hint" maxlength="120" value="${escapeHtml((c.featureHints&&c.featureHints[key])||f.hint)}"><div class="doc-meta">Standart: ${escapeHtml(f.hint)}</div></div>`;
+  }
+  const mailEditor = (kind==='features' && key==='emailSend') ? mrEditorHtml(getMailRecipients()) : '';
+  let lastSec = null;
+  const rows = txCtx.els.map((x,i)=>{
+    const o = c.textOverrides && c.textOverrides[x.tx];
+    const cur = (o && o.orig===x.orig) ? o.text : x.orig;
+    const changed = cur!==x.orig;
+    const sep = (x.section && x.section!==lastSec) ? `<div class="tx-sep">${escapeHtml(x.section)}</div>` : '';
+    lastSec = x.section || lastSec;
+    const field = (x.orig.length > 60)
+      ? `<textarea data-i="${i}" maxlength="600" oninput="txMark(this)">${escapeHtml(cur)}</textarea>`
+      : `<input type="text" data-i="${i}" maxlength="200" value="${escapeHtml(cur)}" oninput="txMark(this)">`;
+    return `${sep}<div class="tx-row ${changed?'changed':''}"><div class="tx-kind">${x.kind}</div>${field}
+      <button type="button" class="sort-btn" title="Standart mətnə qaytar" onclick="txResetOne(${i})">↺</button>
+      ${changed?`<div class="tx-orig">Standart: ${escapeHtml(x.orig)}</div>`:''}</div>`;
+  }).join('');
+  const title = kind==='tabs' ? `Bölmə: ${tabDisplayName(key, c)}` : `Funksiya: ${(c.featureNames&&c.featureNames[key])||CFG_FEATURES.find(x=>x.key===key).label}`;
+  glModal(`<div class="gl-steps">DAXİLİ MƏLUMATLARIN REDAKTƏSİ · YALNIZ ADMIN</div>
+    <h3>✎ ${escapeHtml(title)}</h3>
+    <div class="form-grid">${nameField}${hintField}</div>
+    ${mailEditor}
+    ${txCtx.els.length ? `<div class="doc-meta" style="margin-top:8px;">Daxildəki mətnlər (${txCtx.els.length}) — avtomatik yaranan cədvəl və hesabat məzmunu buraya daxil deyil:</div><div class="tx-rows">${rows}</div>`
+      : (mailEditor ? '' : '<div class="hint" style="margin:10px 0;">Bu elementin daxilində redaktə olunan sabit mətn yoxdur — yalnız adı və izahı dəyişdirilə bilər.</div>')}
+    <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:12px;">
+      ${mailEditor ? '<span></span>' : '<button class="logout-btn" style="color:var(--red);" onclick="txResetAll()">Hamısını standarta qaytar</button>'}
+      <div style="display:flex;gap:8px;"><button class="logout-btn" onclick="glCloseModal();txCtx=null;">Ləğv et</button>
+      <button class="btn" onclick="txApply()">Tətbiq et (önizləmə)</button></div>
+    </div>`, 'tx-box');
+  document.querySelector('.gl-box')?.classList.add('tx-box');
+  setTimeout(()=> document.getElementById('tx-name')?.focus(), 30);
+}
+// ---------- e-poçt alıcıları redaktoru ----------
+function mrRowHtml(r){
+  return `<div class="mr-row"><input type="text" class="mr-name" maxlength="60" placeholder="Ad Soyad" value="${escapeHtml(r.name||'')}">
+    <input type="email" class="mr-email" maxlength="120" placeholder="ad@socarpolymer.az" value="${escapeHtml(r.email||'')}" oninput="this.classList.remove('bad')">
+    <button type="button" class="sort-btn" title="Sil" style="color:var(--red);" onclick="this.closest('.mr-row').remove();mrCount()">✕</button></div>`;
+}
+function mrListHtml(list){ return `<div id="mr-list" class="mr-list">${list.map(mrRowHtml).join('')}</div>`; }
+function mrEditorHtml(list){
+  return `<div class="mr-box"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+      <div><div class="tx-sep" style="border:0;margin:0;padding:0;">E-mail qəbul edənlər</div>
+      <div class="doc-meta">"E-poçtla göndər" basılanda məktub bu ünvanlara gedir (<span id="mr-count">${list.length}</span> nəfər). Bu siyahı standart kimi saxlanılır — "standarta qaytar" əmrləri ona toxunmur. Yeni mövzu sorğusu bildirişləri də bu siyahıya göndərilir.</div></div>
+      <button type="button" class="btn teal" style="padding:6px 12px;font-size:11px;" onclick="mrAdd()">+ E-mail qəbul edən</button></div>
+    ${mrListHtml(list)}
+    <div class="cm-err" id="mr-err" style="display:none;"></div></div>`;
+}
+function mrCount(){ const n=document.querySelectorAll('#mr-list .mr-row').length; const c=document.getElementById('mr-count'); if(c) c.textContent=n; }
+function mrAdd(){
+  const l = document.getElementById('mr-list'); if(!l) return;
+  l.insertAdjacentHTML('beforeend', mrRowHtml({name:'',email:''}));
+  mrCount(); l.lastElementChild.querySelector('.mr-name').focus();
+}
+function mrCollect(){
+  const out = [], seen = new Set(); let bad = 0;
+  document.querySelectorAll('#mr-list .mr-row').forEach(row=>{
+    const name = row.querySelector('.mr-name').value.replace(/\s+/g,' ').trim();
+    const emEl = row.querySelector('.mr-email');
+    const email = emEl.value.trim().toLowerCase();
+    if(!name && !email) return;                              // boş sətir — nəzərə alınmır
+    if(!EMAIL_RE.test(email)){ emEl.classList.add('bad'); bad++; return; }
+    if(seen.has(email)){ emEl.classList.add('bad'); bad++; return; }
+    seen.add(email); out.push({ name, email });
+  });
+  const err = document.getElementById('mr-err');
+  if(bad){ if(err){ err.textContent = `${bad} ünvan yanlışdır və ya təkrarlanır — qırmızı çərçivəli sahələri düzəldin.`; err.style.display=''; } return null; }
+  if(!out.length){ if(err){ err.textContent = 'Ən azı bir e-mail qəbul edən olmalıdır.'; err.style.display=''; } return null; }
+  if(err) err.style.display='none';
+  return out;
+}
+function txMark(el){
+  const x = txCtx && txCtx.els[+el.dataset.i]; if(!x) return;
+  el.closest('.tx-row').classList.toggle('changed', el.value.replace(/\s+/g,' ').trim()!==x.orig);
+}
+function txResetOne(i){
+  const el = document.querySelector(`.tx-rows [data-i="${i}"]`); if(!el || !txCtx) return;
+  el.value = txCtx.els[i].orig; txMark(el);
+}
+function txResetAll(){
+  if(!txCtx) return;
+  document.querySelectorAll('.tx-rows [data-i]').forEach(el=>{ el.value = txCtx.els[+el.dataset.i].orig; txMark(el); });
+  const n = document.getElementById('tx-name');
+  if(n){ n.value = txCtx.kind==='tabs' ? (DEFAULT_TAB_NAMES[txCtx.key]||n.value) : CFG_FEATURES.find(x=>x.key===txCtx.key).label; }
+  const h = document.getElementById('tx-hint'); if(h){ h.value = CFG_FEATURES.find(x=>x.key===txCtx.key).hint; }
+}
+function txApply(){
+  if(!isAdminUser() || !txCtx) return;
+  const d = ensureSiteCfgDraft();
+  const { kind, key } = txCtx;
+  // ad və izah
+  const nameV = (document.getElementById('tx-name')?.value||'').replace(/\s+/g,' ').trim().slice(0,40);
+  if(kind==='tabs'){
+    if(!nameV || nameV===DEFAULT_TAB_NAMES[key]) delete d.tabNames[key]; else d.tabNames[key] = nameV;
+  } else {
+    const f = CFG_FEATURES.find(x=>x.key===key);
+    if(!nameV || nameV===f.label) delete d.featureNames[key]; else d.featureNames[key] = nameV;
+    const hintV = (document.getElementById('tx-hint')?.value||'').replace(/\s+/g,' ').trim().slice(0,120);
+    if(!hintV || hintV===f.hint) delete d.featureHints[key]; else d.featureHints[key] = hintV;
+  }
+  // e-poçt alıcıları (yalnız "E-poçtla göndər" funksiyasında)
+  if(document.getElementById('mr-list')){
+    const list = mrCollect();
+    if(list===null) return;                                  // səhv ünvan — pəncərə açıq qalır
+    d.emailRecipients = list;                                // siyahı həmişə olduğu kimi saxlanılır — o, "standart"dır
+  }
+  // daxili mətnlər
+  let changed = 0;
+  document.querySelectorAll('.tx-rows [data-i]').forEach(el=>{
+    const x = txCtx.els[+el.dataset.i];
+    const v = el.value.replace(/\s+/g,' ').trim();
+    if(!v || v===x.orig) delete d.textOverrides[x.tx];
+    else { d.textOverrides[x.tx] = { orig: x.orig, text: v.slice(0,600) }; changed++; }
+  });
+  glCloseModal(); txCtx = null;
+  applySiteConfig(d);
+  renderSiteCfgPanel();
+  showToast(`Tətbiq olundu (önizləmə)${changed?` · ${changed} mətn dəyişdirilib`:''} — hamı üçün "Yadda saxla" basın`);
+}
+
+// ================= ELAN ZOLAĞI: kitabxana + əl ilə / həftəlik / aylıq yayım (yalnız Admin idarə edir) =================
+// Elanlar silinmir, yeni elan əlavə olunanda köhnələr siyahıda qalır. Avtomatik rejimdə hazırkı elan tarixə görə
+// hesablanır (bazar ertəsindən başlayan həftə və ya təqvim ayı) — server tələb olunmur, hamı eyni elanı görür.
+const ANN_STYLES = { info:'Məlumat', warn:'Diqqət', alert:'Vacib' };
+const ANN_MODES = {
+  off:     { label:'Söndürülüb',          note:'Heç bir elan göstərilmir' },
+  manual:  { label:'Əl ilə seç',          note:'Seçdiyiniz elan göstərilir' },
+  weekly:  { label:'Avtomatik — həftəlik', note:'Hər bazar ertəsi növbəti elan' },
+  monthly: { label:'Avtomatik — aylıq',    note:'Hər ayın 1-i növbəti elan' }
+};
+let annEditing = null;
+function normalizeAnnounce(raw){
+  const a = { mode:'off', activeId:null, items:[], startAt:null };
+  if(!raw || typeof raw!=='object') return a;
+  if(Array.isArray(raw.items)){
+    a.items = raw.items.filter(x=>x && typeof x.text==='string').map(x=>({
+      id: String(x.id||uid()), text: x.text.slice(0,500), style: ANN_STYLES[x.style] ? x.style : 'info',
+      inRotation: x.inRotation!==false, createdAt: x.createdAt||null, createdBy: x.createdBy||'', updatedAt: x.updatedAt||null, updatedBy: x.updatedBy||'' }));
+    a.mode = ANN_MODES[raw.mode] ? raw.mode : 'off';
+    a.activeId = raw.activeId || null;
+    a.startAt = raw.startAt || null;
+  } else if(typeof raw.text==='string' && raw.text.trim()){
+    // köhnə format (bir mətn) → kitabxanaya köçürülür və əl ilə yayımda qalır
+    const id = uid();
+    a.items = [{ id, text: raw.text.slice(0,500), style: ANN_STYLES[raw.style] ? raw.style : 'info', inRotation:true, createdAt:null, createdBy:'', updatedAt:null, updatedBy:'' }];
+    a.mode = 'manual'; a.activeId = id;
+  }
+  return a;
+}
+function weekStart(d){ const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); const wd = (x.getDay()+6)%7; x.setDate(x.getDate()-wd); return x; }
+function annPeriod(mode, date){
+  if(mode==='weekly'){ const s = weekStart(date); const e = new Date(s); e.setDate(s.getDate()+6); return { start:s, end:e }; }
+  const s = new Date(date.getFullYear(), date.getMonth(), 1), e = new Date(date.getFullYear(), date.getMonth()+1, 0); return { start:s, end:e };
+}
+function annRotation(cfg, date){
+  const a = cfg.announce; const pool = a.items.filter(x=>x.inRotation!==false && x.text.trim());
+  if(!pool.length) return { item:null, pool };
+  const anchor = a.startAt ? new Date(a.startAt) : date;
+  let idx;
+  if(a.mode==='weekly') idx = Math.round((weekStart(date) - weekStart(anchor)) / (7*864e5));
+  else idx = (date.getFullYear()*12 + date.getMonth()) - (anchor.getFullYear()*12 + anchor.getMonth());
+  idx = ((idx % pool.length) + pool.length) % pool.length;
+  return { item: pool[idx], pool, idx };
+}
+function currentAnnouncement(cfg, date){
+  const a = cfg && cfg.announce; if(!a) return null;
+  date = date || new Date();
+  if(a.mode==='manual') return a.items.find(x=>x.id===a.activeId) || null;
+  if(a.mode==='weekly' || a.mode==='monthly') return annRotation(cfg, date).item;
+  return null;
+}
+function fmtD(d){ return `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`; }
+function annPanelHtml(c){
+  const a = c.announce;
+  const now = new Date();
+  const cur = currentAnnouncement(c, now);
+  let nowBox = '';
+  if(a.mode==='off') nowBox = 'Hazırda heç bir elan göstərilmir.';
+  else if(a.mode==='manual') nowBox = cur ? `Hazırda göstərilir: <strong>«${escapeHtml(cur.text.slice(0,90))}${cur.text.length>90?'…':''}»</strong>` : '«Əl ilə seç» rejimi seçilib, amma yayımlanan elan yoxdur — siyahıdan <strong>📢 Yayımla</strong> basın.';
+  else {
+    const p = annPeriod(a.mode, now);
+    const nextDate = new Date(p.end); nextDate.setDate(nextDate.getDate()+1);
+    const nxt = annRotation(c, nextDate).item;
+    nowBox = cur
+      ? `${a.mode==='weekly'?'Bu həftə':'Bu ay'} (${fmtD(p.start)}–${fmtD(p.end)}): <strong>«${escapeHtml(cur.text.slice(0,80))}${cur.text.length>80?'…':''}»</strong><br>
+         Növbəti (${fmtD(nextDate)}-dən): «${escapeHtml(nxt ? nxt.text.slice(0,80) : '—')}${nxt && nxt.text.length>80?'…':''}» · dövriyyədə ${annRotation(c, now).pool.length} elan`
+      : 'Avtomatik rejim seçilib, amma dövriyyədə elan yoxdur — siyahıda "Dövriyyədə" qutucuğunu işarələyin.';
+  }
+  const items = a.items.map((x,i)=>{
+    const live = cur && cur.id===x.id;
+    const out = (a.mode==='weekly'||a.mode==='monthly') && x.inRotation===false;
+    if(annEditing===x.id){
+      return `<div class="ann-item ${live?'live':''}"><span class="ann-dot ${x.style}"></span>
+        <div><textarea id="ann-edit-text" maxlength="500" style="width:100%;min-height:60px;">${escapeHtml(x.text)}</textarea>
+          <select id="ann-edit-style" style="margin-top:6px;max-width:200px;">${Object.entries(ANN_STYLES).map(([k,v])=>`<option value="${k}" ${x.style===k?'selected':''}>${v}</option>`).join('')}</select></div>
+        <div class="ann-acts"><button class="btn teal" style="padding:5px 10px;font-size:11px;" onclick="annEditSave('${x.id}')">Saxla</button>
+          <button class="logout-btn" style="padding:5px 10px;font-size:11px;" onclick="annEditing=null;renderSiteCfgPanel()">Ləğv et</button></div></div>`;
+    }
+    return `<div class="ann-item ${live?'live':''} ${out?'out':''}">
+      <span class="ann-dot ${x.style}" title="${ANN_STYLES[x.style]}"></span>
+      <div><div class="ann-text">${escapeHtml(x.text)}${live?'<span class="ann-badge">● Hazırda göstərilir</span>':''}</div>
+        <div class="ann-meta">${ANN_STYLES[x.style]}${x.createdAt?` · əlavə: ${fmtDateTime(x.createdAt)}${x.createdBy?' — '+escapeHtml(x.createdBy):''}`:''}${x.updatedAt?` · dəyişdirilib: ${fmtDateTime(x.updatedAt)}`:''}</div></div>
+      <div class="ann-acts">
+        ${(a.mode==='weekly'||a.mode==='monthly') ? `<label title="Avtomatik dövriyyəyə daxildir"><input type="checkbox" ${x.inRotation!==false?'checked':''} onchange="annToggleRot('${x.id}',this.checked)">Dövriyyədə</label>` : ''}
+        ${a.mode!=='weekly' && a.mode!=='monthly' && !live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" title="Bu elanı indi göstər" onclick="annPublish('${x.id}')">📢 Yayımla</button>` : ''}
+        ${a.mode==='manual' && live ? `<button class="logout-btn" style="padding:4px 9px;font-size:11px;" title="Yayımı dayandır" onclick="annUnpublish()">⏸ Dayandır</button>` : ''}
+        <button class="sort-btn" title="Yuxarı" ${i===0?'disabled':''} onclick="annMove('${x.id}',-1)">↑</button>
+        <button class="sort-btn" title="Aşağı" ${i===a.items.length-1?'disabled':''} onclick="annMove('${x.id}',1)">↓</button>
+        <button class="sort-btn" title="Redaktə et" onclick="annEditing='${x.id}';renderSiteCfgPanel()">✎</button>
+        <button class="sort-btn" title="Sil" style="color:var(--red);" onclick="annDelete('${x.id}')">🗑</button>
+      </div></div>`;
+  }).join('');
+  return `
+    <div class="hint" style="margin-bottom:8px;">Yazdığınız hər elan aşağıdakı siyahıda saxlanılır — yeni elan əlavə etdikdə köhnələr silinmir. Yayım rejimini seçin: elanı əl ilə yayımlayın və ya sistem onları <strong>hər həftə</strong> / <strong>hər ay</strong> avtomatik növbə ilə göstərsin. <strong>Elanlar dərhal yadda saxlanılır və hamıya tətbiq olunur</strong> — "Standart görünüşə qaytar", "Dəyişiklikləri ləğv et" və bərpa nöqtəsinə qayıtma onlara toxunmur.</div>
+    <div class="ann-modes">${Object.entries(ANN_MODES).map(([k,m])=>`<button type="button" class="ann-mode ${a.mode===k?'active':''}" onclick="annSetMode('${k}')"><b>${m.label}</b><small>${m.note}</small></button>`).join('')}</div>
+    <div class="ann-now">${nowBox}</div>
+    <div class="ann-compose">
+      <textarea id="ann-new-text" maxlength="500" placeholder="Yeni elanın mətni… Məs: Rüblük qiymətləndirmələr 25 dekabra qədər tamamlanmalıdır."></textarea>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <select id="ann-new-style">${Object.entries(ANN_STYLES).map(([k,v])=>`<option value="${k}">${v} (${k==='info'?'yaşılımtıl':k==='warn'?'sarı':'qırmızı'})</option>`).join('')}</select>
+        <button class="btn teal" style="padding:7px 10px;font-size:11px;" onclick="annAdd(false)">+ Siyahıya əlavə et</button>
+        ${a.mode==='weekly'||a.mode==='monthly' ? '' : `<button class="btn" style="padding:7px 10px;font-size:11px;" onclick="annAdd(true)">📢 Əlavə et və yayımla</button>`}
+      </div>
+    </div>
+    <div class="ann-list">${items || '<div class="empty-state">Hələ elan yoxdur.</div>'}</div>
+    ${(a.mode==='weekly'||a.mode==='monthly') ? '<div class="doc-meta" style="margin-top:6px;">Dövriyyə siyahıdakı sıra ilə gedir (↑↓ ilə dəyişin). Söndürülmüş ("Dövriyyədə" işarələnməyən) elanlar keçilir.</div>' : ''}`;
+}
+// Elanlar ümumi önizləmə qaralamasından (draft) asılı deyil: hər dəyişiklik dərhal Firestore-a yazılır.
+// Ona görə "Standart görünüşə qaytar", "Dəyişiklikləri ləğv et" və bərpa nöqtəsi onları silə bilməz.
+let _annWork = null;
+function annDraft(){ if(!_annWork) _annWork = JSON.parse(JSON.stringify((siteConfig && siteConfig.announce) || normalizeAnnounce(null))); return _annWork; }
+async function annCommit(){
+  const a = _annWork; _annWork = null; if(!a) return;
+  const clone = ()=> JSON.parse(JSON.stringify(a));
+  siteConfig.announce = clone(); if(siteCfgDraft) siteCfgDraft.announce = clone();
+  applySiteConfig(siteCfgDraft || siteConfig); renderSiteCfgPanel();
+  try{
+    const saved = (await dbGetMap('data/siteConfig')) || {};
+    saved.announce = clone();                                  // yalnız elan hissəsi yenilənir, digər tənzimləmələrə toxunulmur
+    if(!(await dbSetMap('data/siteConfig', saved))) throw new Error('write');
+  }catch(e){ showToast('Elan yadda saxlanılmadı — internet bağlantısını yoxlayın'); }
+}
+function annSetMode(mode){
+  if(!isAdminUser() || !ANN_MODES[mode]) return;
+  const a = annDraft();
+  if((mode==='weekly'||mode==='monthly') && a.mode!==mode) a.startAt = new Date().toISOString();  // dövriyyə bu həftədən/aydan, siyahının əvvəlindən başlayır
+  if(mode==='manual' && !a.activeId && a.items.length) a.activeId = a.items[0].id;
+  a.mode = mode; annEditing = null;
+  annCommit();
+}
+function annAdd(publish){
+  if(!isAdminUser()) return;
+  const t = (document.getElementById('ann-new-text')?.value||'').trim();
+  if(!t){ showToast('Elanın mətnini yazın'); return; }
+  const a = annDraft();
+  if(a.items.length >= 100){ showToast('Ən çox 100 elan saxlanıla bilər — köhnələrdən bəzilərini silin'); return; }
+  const item = { id: uid(), text: t.slice(0,500), style: document.getElementById('ann-new-style').value, inRotation:true,
+                 createdAt: new Date().toISOString(), createdBy: currentUser.name, updatedAt:null, updatedBy:'' };
+  a.items.unshift(item);                                       // ən yeni — siyahının başında
+  if(publish){ a.mode = 'manual'; a.activeId = item.id; }
+  annCommit();
+  showToast(publish ? 'Elan yayımlandı və hamıya tətbiq olundu' : 'Elan siyahıya əlavə olundu və yadda saxlanıldı');
+}
+function annPublish(id){ const a = annDraft(); a.mode = 'manual'; a.activeId = id; annCommit(); }
+function annUnpublish(){ const a = annDraft(); a.activeId = null; a.mode = 'off'; annCommit(); showToast('Elan dayandırıldı — rejim "Söndürülüb"'); }   // elan siyahıda qalır
+function annToggleRot(id, on){ const a = annDraft(); const x = a.items.find(i=>i.id===id); if(x){ x.inRotation = !!on; annCommit(); } }
+function annMove(id, dir){
+  const a = annDraft(); const i = a.items.findIndex(x=>x.id===id), j = i+dir;
+  if(i<0 || j<0 || j>=a.items.length) return;
+  [a.items[i], a.items[j]] = [a.items[j], a.items[i]]; annCommit();
+}
+function annEditSave(id){
+  const a = annDraft(); const x = a.items.find(i=>i.id===id); if(!x) return;
+  const t = (document.getElementById('ann-edit-text')?.value||'').trim();
+  if(!t){ showToast('Mətn boş ola bilməz — elanı silmək üçün 🗑 istifadə edin'); return; }
+  x.text = t.slice(0,500); x.style = document.getElementById('ann-edit-style').value;
+  x.updatedAt = new Date().toISOString(); x.updatedBy = currentUser.name;
+  annEditing = null; annCommit();
+}
+async function annDelete(id){
+  const a0 = (siteCfgDraft||siteConfig).announce; const x = a0.items.find(i=>i.id===id); if(!x) return;
+  if(!(await appConfirm(`Bu elan siyahıdan silinsin?\n\n«${x.text.slice(0,120)}${x.text.length>120?'…':''}»`))) return;
+  const a = annDraft();
+  a.items = a.items.filter(i=>i.id!==id);
+  if(a.activeId===id) a.activeId = null;
+  if(annEditing===id) annEditing = null;
+  annCommit();
+}
 function ensureSiteCfgDraft(){ if(!siteCfgDraft) siteCfgDraft = normalizeSiteConfig(JSON.parse(JSON.stringify(siteConfig))); return siteCfgDraft; }
 function markSiteCfgDirty(){ const d=document.querySelector('#sitecfg-body .cfg-dirty'); if(d) d.textContent='● Yadda saxlanılmamış dəyişikliklər var (yalnız sizdə önizləmə)'; }
 function cfgSet(section, key, value){
@@ -4610,6 +5875,7 @@ async function saveSiteConfig(){
   if(!siteCfgDraft){ showToast('Dəyişiklik yoxdur'); return; }
   if(!(await appConfirm('Görünüş və funksiya dəyişiklikləri bütün istifadəçilərə tətbiq olunsun?'))) return;
   const toSave = normalizeSiteConfig(siteCfgDraft);
+  toSave.announce = JSON.parse(JSON.stringify(siteConfig.announce || toSave.announce));   // elanlar ayrıca saxlanılır — ən son vəziyyət
   toSave.updatedBy = currentUser.name; toSave.updatedAt = new Date().toISOString();
   if(!(await dbSetMap('data/siteConfig', toSave))){ showToast('Yadda saxlama xətası — dəyişikliklər tətbiq olunmadı'); return; }
   siteConfig = toSave; siteCfgDraft = null;
@@ -4625,8 +5891,13 @@ function discardSiteCfgDraft(){
 }
 async function resetSiteConfigToDefault(){
   if(!isAdminUser()) return;
-  if(!(await appConfirm('Bütün görünüş və funksiya tənzimləmələri standart vəziyyətə qaytarılsın? Bu, hamıya tətbiq olunacaq.'))) return;
+  if(!(await appConfirm('Bütün görünüş və funksiya tənzimləmələri standart vəziyyətə qaytarılsın? Bu, hamıya tətbiq olunacaq. (Sizin əlavə etdiyiniz bölmə və funksiyalar, elanlar, həmçinin e-mail qəbul edənlər siyahısı dəyişmir.)'))) return;
   const def = normalizeSiteConfig(null);
+  // Admin-in yaratdığı məzmun "standart"ın bir hissəsidir — yalnız açıq "Sil" / "Redaktə" əmri ilə dəyişir
+  def.emailRecipients = siteConfig.emailRecipients || null;                                     // e-mail qəbul edənlər
+  def.customTabs      = (siteConfig.customTabs||[]).map(x=>({...x}));                          // əlavə bölmələr (kodu, adı, auditoriyası, aktivliyi ilə)
+  def.customWidgets   = (siteConfig.customWidgets||[]).map(x=>({...x}));                       // əlavə funksiyalar
+  def.announce        = normalizeAnnounce(JSON.parse(JSON.stringify(siteConfig.announce||{}))); // elanlar və onların yayım rejimi
   def.updatedBy = currentUser.name; def.updatedAt = new Date().toISOString();
   if(!(await dbSetMap('data/siteConfig', def))){ showToast('Yadda saxlama xətası'); return; }
   siteConfig = def; siteCfgDraft = null;
@@ -4685,7 +5956,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px;} th,td{padding:7px 8
 th{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;color:var(--text-secondary);font-weight:500;}
 .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10.5px;}
 .pass{background:var(--green-dim);color:var(--green);} .fail{background:var(--red-dim);color:var(--red);} .warn{background:var(--amber-dim);color:var(--amber);}
-button{font-family:var(--font-mono);font-size:11.5px;padding:7px 12px;border-radius:5px;border:1px solid var(--amber);background:var(--amber);color:#111;cursor:pointer;}
+button{font-family:var(--font-mono);font-size:11.5px;padding:7px 12px;border-radius:5px;border:1px solid var(--amber);background:var(--amber);color:var(--on-amber);cursor:pointer;}
 button.secondary{background:var(--bg-raised);color:var(--text-primary);border-color:var(--border);}
 input,select,textarea{background:var(--bg-raised);color:var(--text-primary);border:1px solid var(--border);border-radius:5px;padding:6px 8px;font-family:inherit;}
 .kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
@@ -4874,8 +6145,9 @@ function cmListHtml(kind, c){
   return list.map((m,i)=>{
     const editing = cmEditing && cmEditing.kind===kind && cmEditing.id===m.id;
     const meta = [CM_AUDIENCES[m.audience]||'Hamı', kind==='customWidgets'?(CM_PLACEMENTS[m.placement]||CM_PLACEMENTS.overview):null, (m.code||'').length+' simvol'].filter(Boolean).join(' · ');
-    return `<div class="cm-item ${m.enabled===false?'cm-off':''}">
-      <div><div class="doc-name">${escapeHtml(m.title||'(adsız)')}</div><div class="doc-meta">${escapeHtml(meta)}${m.enabled===false?' · söndürülüb':''}</div></div>
+    return `<div class="cm-item ${m.enabled===false?'cm-off':''} ${kind==='customWidgets'?'sort-item':''}" data-key="${m.id}" style="${kind==='customWidgets'?'display:flex;':''}">
+      ${kind==='customWidgets' && !cmEditing?'<span class="sort-handle" title="Tutub sürüşdürün">⋮⋮</span>':''}
+      <div style="flex:1;"><div class="doc-name">${escapeHtml(m.title||'(adsız)')}</div><div class="doc-meta">${escapeHtml(meta)}${m.enabled===false?' · söndürülüb':''}</div></div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;">
         <button class="logout-btn" style="padding:4px 8px;font-size:11px;" ${i===0?'disabled':''} onclick="cmMove('${kind}','${m.id}',-1)">↑</button>
         <button class="logout-btn" style="padding:4px 8px;font-size:11px;" ${i===list.length-1?'disabled':''} onclick="cmMove('${kind}','${m.id}',1)">↓</button>
@@ -4963,6 +6235,7 @@ async function cmDelete(kind, id){
   applySiteConfig(d); renderSiteCfgPanel();
 }
 
+try{ tagEditableTexts(); }catch(e){}         // statik mətnlərə açar ver (heç nə render olunmazdan əvvəl)
 try{ applySiteConfig(siteConfig); }catch(e){}  // loqo və başlıq ilk anda görünsün
 function render(){
   renderOverview();
