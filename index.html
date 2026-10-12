@@ -1106,22 +1106,85 @@ function populateGlobalHistTopicSelect(){
     return `<option value="${t.id}" ${already?'disabled':''}>${escapeHtml(label)}</option>`;
   }).join('');
 }
+// ═══ Köhnə nəticələrin genişləndirilmiş idarəsi — YALNIZ bu siyahıdakı işçi(lər) üçün ═══
+// Səbəb: bu işçinin köhnə nəticələri standart "tarixi qeyd" formatında saxlanılmayıb (bayraq yoxdur, badge fərqli yazılıb
+// və ya nəticə yalnız matrisdə qalıb), ona görə "Düzəliş/Sil" düymələri görünmürdü. Digər işçilərə heç bir təsiri yoxdur.
+const HIST_EXTRA_BADGES = ['10450'];   // Ragif Alishov
+let editingOrphan = null;
+function badgeEq(a, b){ return String(a ?? '').trim() === String(b ?? '').trim() && String(a ?? '').trim() !== ''; }
+function histExtraEmp(emp){ return !!emp && HIST_EXTRA_BADGES.includes(String(emp.badge ?? '').trim()); }
+function histExtraReq(req){ return !!req && req.status==='done' && HIST_EXTRA_BADGES.includes(String(req.badge ?? '').trim()); }
+function adminEditOrphanResult(empId, topicId){
+  if(!canManageHistoricalEntries()) return;
+  const emp = employees.find(e=>e.id===empId); if(!histExtraEmp(emp)) return;
+  editingHistoricalReqId = null;
+  editingOrphan = { empId, topicId };
+  renderModalBody();
+}
+async function adminSaveOrphanAsHistorical(empId){
+  // matrisdəki qeydsiz nəticəni tam tarixi qeydə çevirir (mövzu, tarix, şərh ilə) — sonra standart qayda ilə idarə olunur
+  if(!canManageHistoricalEntries() || !editingOrphan) return;
+  const emp = employees.find(e=>e.id===empId); if(!histExtraEmp(emp)) return;
+  const oldTopicId = editingOrphan.topicId;
+  const newTopicId = document.getElementById('hist-topic-'+empId)?.value;
+  const dateVal = document.getElementById('hist-date-'+empId)?.value;
+  const comment = (document.getElementById('hist-comment-'+empId)?.value||'').trim();
+  const task = TASKS.find(t=>t.id===newTopicId);
+  if(!task){ showToast('Mövzu seçin'); return; }
+  if(!dateVal){ showToast('Tarixi seçin'); return; }
+  if(!(await appConfirm(`"${emp.name}" üçün "${task.label}" nəticəsini ${dateVal} tarixli qeyd kimi yeniləmək istədiyinizə əminsiniz?`))) return;
+  const chosenDate = new Date(dateVal+'T00:00:00').toISOString();
+  if(!emp.scores) emp.scores = {};
+  if(!emp.lastResult) emp.lastResult = {};
+  if(oldTopicId !== newTopicId){ delete emp.scores[oldTopicId]; delete emp.lastResult[oldTopicId]; }
+  examRequests.unshift({
+    id: uid(), badge: emp.badge, name: emp.name, pos: emp.pos, shift: emp.shift,
+    topicId: task.id, topicLabel: task.label, topicCat: task.cat, status: 'done', result: 'pass',
+    requestedAt: chosenDate, approvedAt: chosenDate, evaluatedAt: chosenDate,
+    approvedBy: currentUser.name, assessorName: currentUser.name, assessorBadge: currentUser.badge,
+    comments: comment || 'Tarixi qeyd — admin tərəfindən sistemə əlavə edilib.',
+    approvalComment: `Tarixi qeyd (${dateVal}) — admin tərəfindən düzəldilib.`, isHistoricalEntry: true
+  });
+  await saveExamRequests();
+  emp.lastResult[task.id] = 'pass';
+  emp.scores[task.id] = passScoreFor(emp, task.cat);
+  await snapshotEmpProgress(emp);
+  await saveEmployees();
+  editingOrphan = null;
+  renderMatrixList(); renderOverview(); renderModalBody();
+  showToast('Köhnə nəticə yeniləndi: '+task.label);
+}
+async function adminDeleteOrphanResult(empId, topicId){
+  if(!canManageHistoricalEntries()) return;
+  const emp = employees.find(e=>e.id===empId); if(!histExtraEmp(emp)) return;
+  const t = TASKS.find(x=>x.id===topicId);
+  if(!(await appConfirm(`"${emp.name}" — "${t ? t.label : topicId}" nəticəsini silmək istədiyinizə əminsiniz? Bu, işçinin bu mövzu üzrə balını da geri götürəcək.`))) return;
+  if(emp.scores) delete emp.scores[topicId];
+  if(emp.lastResult) delete emp.lastResult[topicId];
+  await snapshotEmpProgress(emp);
+  await saveEmployees();
+  if(editingOrphan && editingOrphan.topicId===topicId) editingOrphan = null;
+  renderMatrixList(); renderOverview(); renderModalBody();
+  showToast('Nəticə silindi: '+(t ? t.label : topicId));
+}
 function adminEditHistoricalEntry(reqId){
   if(!canManageHistoricalEntries()) return;
   const req = examRequests.find(r=>r.id===reqId);
-  if(!req || !req.isHistoricalEntry) return;
+  if(!req || !(req.isHistoricalEntry || histExtraReq(req))) return;
+  editingOrphan = null;
   editingHistoricalReqId = reqId;
   renderModalBody();
 }
 function adminCancelHistoricalEdit(){
   editingHistoricalReqId = null;
+  editingOrphan = null;
   renderModalBody();
 }
 async function adminUpdateHistoricalEntry(empId){
   if(!canManageHistoricalEntries()) return;
   const emp = employees.find(e=>e.id===empId);
   if(!emp) return;
-  const req = examRequests.find(r=>r.id===editingHistoricalReqId && r.badge===emp.badge);
+  const req = examRequests.find(r=>r.id===editingHistoricalReqId && (histExtraEmp(emp) ? badgeEq(r.badge, emp.badge) : r.badge===emp.badge));
   if(!req){ editingHistoricalReqId = null; renderModalBody(); return; }
   const newTopicId = document.getElementById('hist-topic-'+empId)?.value;
   const dateVal = document.getElementById('hist-date-'+empId)?.value;
@@ -1143,6 +1206,7 @@ async function adminUpdateHistoricalEntry(empId){
   req.requestedAt = chosenDate; req.approvedAt = chosenDate; req.evaluatedAt = chosenDate;
   req.comments = comment || 'Tarixi qeyd — admin tərəfindən sistemə əlavə edilib.';
   req.approvalComment = `Tarixi qeyd (${dateVal}) — admin tərəfindən yenilənib.`;
+  if(histExtraEmp(emp)) req.isHistoricalEntry = true;   // düzəldilmiş qeyd bundan sonra standart tarixi qeyd kimi idarə olunur
   await saveExamRequests();
   if(!emp.scores) emp.scores = {};
   if(!emp.lastResult) emp.lastResult = {};
@@ -1159,8 +1223,8 @@ async function adminUpdateHistoricalEntry(empId){
 async function adminDeleteHistoricalEntry(reqId){
   if(!canManageHistoricalEntries()) return;
   const req = examRequests.find(r=>r.id===reqId);
-  if(!req || !req.isHistoricalEntry) return;
-  const emp = employees.find(e=>e.badge===req.badge);
+  if(!req || !(req.isHistoricalEntry || histExtraReq(req))) return;
+  const emp = employees.find(e=>e.badge===req.badge) || (histExtraReq(req) ? employees.find(e=>badgeEq(e.badge, req.badge)) : null);
   if(!(await appConfirm(`"${req.name}" — "${req.topicLabel}" tarixi qeydini silmək istədiyinizə əminsiniz? Bu, işçinin bu mövzu üzrə balını da geri götürəcək.`))) return;
   examRequests = examRequests.filter(r=>r.id!==reqId);
   await saveExamRequests();
@@ -2255,13 +2319,31 @@ function renderModalBody(){
   if(histEl){
     if(canManageHistoricalEntries()){
       histEl.style.display = '';
-      const editing = editingHistoricalReqId ? examRequests.find(r=>r.id===editingHistoricalReqId && r.badge===emp.badge) : null;
-      const formTitle = editing ? 'Köhnə Qeydi Düzəlt' : 'Keçmiş Nəticəni Qeydə Al';
-      const submitLabel = editing ? 'Yenilə' : 'Keçdi kimi qəbul et';
-      const submitAction = editing ? `adminUpdateHistoricalEntry('${emp.id}')` : `adminGrantHistoricalPass('${emp.id}')`;
-      const cancelBtn = editing ? `<button class="logout-btn" style="margin-left:8px;" onclick="adminCancelHistoricalEdit('${emp.id}')">Ləğv et</button>` : '';
-      const myHistorical = examRequests.filter(r=> r.badge===emp.badge && r.isHistoricalEntry && r.status==='done').sort((a,b)=> new Date(b.evaluatedAt||0) - new Date(a.evaluatedAt||0));
-      const listHtml = myHistorical.length ? myHistorical.map(r=>`
+      const extra = histExtraEmp(emp);   // yalnız HIST_EXTRA_BADGES siyahısındakı işçi(lər) üçün genişləndirilmiş rejim
+      const editing = editingHistoricalReqId ? examRequests.find(r=>r.id===editingHistoricalReqId && (extra ? badgeEq(r.badge, emp.badge) : r.badge===emp.badge)) : null;
+      const editingOrph = (extra && editingOrphan && editingOrphan.empId===emp.id) ? editingOrphan : null;
+      const formTitle = (editing || editingOrph) ? 'Köhnə Qeydi Düzəlt' : 'Keçmiş Nəticəni Qeydə Al';
+      const submitLabel = (editing || editingOrph) ? 'Yenilə' : 'Keçdi kimi qəbul et';
+      const submitAction = editing ? `adminUpdateHistoricalEntry('${emp.id}')` : editingOrph ? `adminSaveOrphanAsHistorical('${emp.id}')` : `adminGrantHistoricalPass('${emp.id}')`;
+      const cancelBtn = (editing || editingOrph) ? `<button class="logout-btn" style="margin-left:8px;" onclick="adminCancelHistoricalEdit('${emp.id}')">Ləğv et</button>` : '';
+      const myHistorical = (extra
+        ? examRequests.filter(r=> badgeEq(r.badge, emp.badge) && r.status==='done' && (r.isHistoricalEntry || r.result==='pass'))
+        : examRequests.filter(r=> r.badge===emp.badge && r.isHistoricalEntry && r.status==='done')
+      ).sort((a,b)=> new Date(b.evaluatedAt||0) - new Date(a.evaluatedAt||0));
+      // matrisdə "Keçdi" olan, amma heç bir qeydə bağlı olmayan nəticələr (yalnız genişləndirilmiş rejimdə)
+      const orphans = extra ? Object.entries(emp.lastResult||{}).filter(([tid,v])=> v==='pass' && !myHistorical.some(r=>r.topicId===tid))
+        .map(([tid])=>{ const t = TASKS.find(x=>x.id===tid); return { tid, label: t ? t.label : tid, cat: t ? t.cat : '' }; }) : [];
+      const orphanHtml = orphans.map(o=>`
+        <div class="doc-row">
+          <div><div class="doc-name">${escapeHtml(o.label)}</div><div class="doc-meta">${escapeHtml(o.cat)} · matrisdə "Keçdi" (tarixi qeydi yoxdur)</div></div>
+          <div class="doc-meta">—</div>
+          <div></div><div></div>
+          <div style="display:flex;gap:6px;">
+            <button class="logout-btn" style="padding:4px 8px;font-size:11px;" onclick="adminEditOrphanResult('${emp.id}','${o.tid}')">✎ Düzəliş</button>
+            <button class="logout-btn" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="adminDeleteOrphanResult('${emp.id}','${o.tid}')">✕ Sil</button>
+          </div>
+        </div>`).join('');
+      const listHtml = (myHistorical.length || orphanHtml) ? orphanHtml + myHistorical.map(r=>`
         <div class="doc-row">
           <div><div class="doc-name">${escapeHtml(r.topicLabel)}</div><div class="doc-meta">${escapeHtml(r.topicCat||'')}${r.comments?(' · '+escapeHtml(r.comments)):''}</div></div>
           <div class="doc-meta">${fmtDate(r.evaluatedAt)}</div>
@@ -2277,10 +2359,10 @@ function renderModalBody(){
         <div class="field" style="margin-bottom:10px;">
           <label>Mövzu</label>
           <select id="hist-topic-${emp.id}">${TASKS.map(t=>{
-            const isEditingThis = editing && editing.topicId===t.id;
+            const isEditingThis = (editing && editing.topicId===t.id) || (editingOrph && editingOrph.topicId===t.id);
             const already = emp.lastResult && emp.lastResult[t.id]==='pass' && !isEditingThis;
             const label = already ? `${t.label} (${t.cat}) — Keçdi (artıq verilib)` : `${t.label} (${t.cat})`;
-            return `<option value="${t.id}" ${already?'disabled':''} ${editing && editing.topicId===t.id?'selected':''}>${escapeHtml(label)}</option>`;
+            return `<option value="${t.id}" ${already?'disabled':''} ${isEditingThis?'selected':''}>${escapeHtml(label)}</option>`;
           }).join('')}</select>
         </div>
         <div class="field" style="margin-bottom:10px;">
