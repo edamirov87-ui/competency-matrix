@@ -2139,11 +2139,42 @@ document.querySelectorAll('.tab').forEach(t=>{
 });
 
 // ---------- SCORING ----------
+// ═══ Faiz hesablama qaydası ═══
+// Mövzunun çəkisi (məs. 2%) işçiyə TAM verilir, əgər:
+//   • adi imtahan: mövzu "Keçdi" + ICC "Düz hazırlanıb";
+//   • "Keçmiş Nəticəni Qeydə Al": mövzu qeydə alınıbsa — ICC tələb olunmur.
+// Ümumi faiz = qazanılan çəkilərin cəmi / bütün mövzuların çəki cəmi (ilkin siyahıda 62 mövzu = 100%).
+// İmtahan qeydi olmayan, yalnız matrisdə əl ilə yazılmış bal (0–4) əvvəlki kimi mütənasib hesablanır.
+function topicCreditMap(emp){
+  const extra = (typeof histExtraEmp==='function') && histExtraEmp(emp);
+  const latest = {};
+  examRequests.forEach(r=>{
+    if(r.status!=='done') return;
+    if(!(r.badge===emp.badge || (extra && badgeEq(r.badge, emp.badge)))) return;
+    const prev = latest[r.topicId];
+    if(!prev || new Date(r.evaluatedAt||0) > new Date(prev.evaluatedAt||0)) latest[r.topicId] = r;
+  });
+  const out = {};
+  TASKS.forEach(t=>{
+    const rec = latest[t.id];
+    let f = 0;
+    if(rec){
+      if(rec.result==='pass' && (rec.isHistoricalEntry || rec.iccCorrect==='yes')) f = 1;   // tam çəki
+    } else {
+      const sc = (emp.scores||{})[t.id] || 0;
+      if(sc > 0) f = Math.min(4, sc) / 4;                                                    // yalnız əl ilə yazılmış bal
+    }
+    out[t.id] = f;
+  });
+  return out;
+}
+function fmtPts(v){ const r = Math.round(v*10)/10; return Number.isInteger(r) ? String(r) : r.toFixed(1); }
 function empTotals(emp){
-  let sum=0;
-  TASKS.forEach(t=>{ sum += (emp.scores[t.id]||0)*t.weight; });
-  const pct = MAX_SCORE ? (sum/MAX_SCORE*100) : 0;
-  return {sum, pct};
+  const credit = topicCreditMap(emp);
+  let sum = 0, max = 0;
+  TASKS.forEach(t=>{ max += t.weight; sum += t.weight * (credit[t.id]||0); });
+  const pct = max ? (sum/max*100) : 0;
+  return { sum: Math.round(sum*10)/10, pct, max };
 }
 function gradeFor(pct){
   if(pct>=100) return {g:'S', color:'var(--green)', label:'Skilled'};
@@ -2231,7 +2262,7 @@ function renderMatrixList(){
           <span class="ec-grade" style="background:${gr.color}22;color:${gr.color};border:1px solid ${gr.color};">${Math.round(pct)}%</span>
         </div>
         <div class="ec-track"><div class="ec-fill" style="width:${pctClamped}%;background:${gr.color}"></div></div>
-        <div class="ec-pct">${sum} / ${MAX_SCORE}</div>
+        <div class="ec-pct">${fmtPts(sum)}% / ${fmtPts(empTotals(emp).max)}%</div>
       </div>`;
     }).join('') : '<div class="empty-state">Uyğun işçi tapılmadı.</div>';
     return `<div class="shift-col">
@@ -2386,7 +2417,7 @@ function renderModalBody(){
   const gr = gradeFor(pct);
   document.getElementById('m-pct').textContent = Math.round(pct)+'%';
   document.getElementById('m-pct').style.color = gr.color;
-  document.getElementById('m-score').textContent = sum+' / '+MAX_SCORE;
+  document.getElementById('m-score').textContent = fmtPts(sum)+'% / '+fmtPts(empTotals(emp).max)+'%';
   document.getElementById('m-shift').textContent = SHIFT_LABELS[emp.shift] || emp.shift || '—';
 
   const checklist = emp.checklist || {};
@@ -2425,9 +2456,9 @@ function renderModalBody(){
 
   document.getElementById('m-categories').innerHTML = CATEGORIES.map(cat=>{
     const catTasks = TASKS.filter(t=>t.cat===cat);
+    const credit = topicCreditMap(emp);
     let catSum=0, catMax=0;
-    catTasks.forEach(t=>{ catSum += (emp.scores[t.id]||0)*t.weight; catMax += t.weight*4; });
-    const catPct = catMax? (catSum/catMax*100):0;
+    catTasks.forEach(t=>{ catSum += t.weight*(credit[t.id]||0); catMax += t.weight; });   // ümumi faizə verdiyi pay
     const isOpen = openCats[cat];
     const rows = catTasks.map(t=>{
       const v = emp.scores[t.id]!=null ? emp.scores[t.id] : '';
@@ -2440,7 +2471,7 @@ function renderModalBody(){
     return `<div class="cat-block ${isOpen?'open':''}">
       <div class="cat-header" onclick="toggleCat('${cat.replace(/'/g,"\\'")}')">
         <h3>${escapeHtml(cat)} <span style="color:var(--text-dim);font-weight:400;">(${catTasks.length})</span></h3>
-        <div style="display:flex;align-items:center;gap:10px;"><span class="cat-avg">${catPct.toFixed(0)}%</span><span class="chev">▸</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span class="cat-avg" title="Bu bölmədən ümumi faizə qazanılan pay">${fmtPts(catSum)}% / ${fmtPts(catMax)}%</span><span class="chev">▸</span></div>
       </div>
       <div class="cat-body">${rows}</div>
     </div>`;
